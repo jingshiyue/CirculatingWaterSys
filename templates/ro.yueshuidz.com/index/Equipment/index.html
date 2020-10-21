@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>设备管理</title>
+<meta name="Keywords" content="设备管理" >
+<meta name="Description" content="设备管理" >
+<link href="../../public/static/css/style2/style.css" rel="stylesheet" type="text/css">
+<script src="../../public/static/js/jquery.min.js" type="text/javascript"></script>
+<script src="../../public/static/js/login.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+    <div class="warp">
+		
+        <div class="ej_bt">设备管理<a href="javascript:history.back(-1)" class="fh"><img src="/public/static/images/fanhui.png" /></a><a href="http://ro.yueshuidz.com/index/Equipment/pclist.html?maxDeviceID=3999999&page=1" class="bx" style="color:#6d08ff">大屏展示</a></div>
+         
+         <div class="ej_cx">
+             <div class="cx_l">设备列表（总量:6台；在线:0台；故障:0台）</div>
+             <div class="cx_r login-header"><a href="javascript:void(0);">查询<img src="/public/static/images/x.png" /></a></div>
+             <div class=" clear"></div>
+         </div>
+        
+                <div class="login">
+				<form method="get" action="/index/equipment/index.html">
+                    <div class="login-title"><span><a href="javascript:void(0);" class="close-login">关闭</a></span></div>
+                    <div class="login-input-content">
+                        <div class="login-input">
+                            <label>控制器编号：</label>
+                            <input type="text" placeholder="请输入主板编号"  name="DeviceID" id="DeviceID" class="list-input"/>
+                        </div>
+                        
+                        <div class="login-input">
+                            <label>网络状态：</label>
+                            <span><input name="NetState" type="radio" value="0"  class="zx" style="width:30px;height:30px"/>在线  </span>
+                            <span><input name="NetState" type="radio" value="1" class="zx"  style="width:30px;height:30px"/>离线 </span>
+                        </div>
+                        <div class="login-input">
+                            <label>设备状态：</label>
+                           
+                         <select style="padding: 5px 10px;width:260px; font-size:2em;" name="DeviceState">
+                                <option></option>
+                                 
+                                <option value="0"  selected>出厂</option> 
+                                 
+                                <option value="1"  >正常制水</option> 
+                                 
+                                <option value="2"  >冲洗</option> 
+                                 
+                                <option value="3"  >水满</option> 
+                                 
+                                <option value="4"  >缺水</option> 
+                                 
+                                <option value="5"  >臭氧</option> 
+                                 
+                                <option value="6"  >清洗前置罐</option> 
+                                 
+                                <option value="10"  >参数设置失败</option> 
+                                 
+                                <option value="11"  >正常制水</option> 
+                                 
+                                <option value="12"  >冲洗</option> 
+                                 
+                                <option value="13"  >水满</option> 
+                                 
+                                <option value="14"  >缺水</option> 
+                                 
+                                <option value="15"  >臭氧</option> 
+                                 
+                                <option value="16"  >清洗前置罐</option> 
+                                 
+                                <option value="20"  >无原水</option> 
+                                 
+                                <option value="21"  >低压</option> 
+                                 
+                                <option value="30"  >无原水</option> 
+                                 
+                                <option value="31"  >低压</option> 
+                                                                 <option selected></option>
+                                                                <!-- <option value="" selected>请选择状态</option> -->
+                          
+                            </select>
+                           
+                           
+                        </div>
+                    </div>
+                    <div class="login-button">
+					
+					 <button  class="btn_confirm" type="submit" id="login-button-submit">查询</button>
+					
+					</div>
+					</form>
+                </div>
+
+
+
+
+        <div class="login-bg"></div>        
+        <div class="er_main">
+        	   
+        	<div class="er_1">
+            	<dl>
+                <dt>设备ID：3000012</dt>
+                <dd>备注名称：临鼎</dd>
+                <div class=" clear"></div>
+                </dl>
+                
+                <ul class="er_2">
+                    <li>离线</li> 
+					                     <li></li>     
+                                        <li>2℃</li>
+                    <li>信号 23</li>
+                 <div class=" clear"></div>
+                </ul>
+                
+                <ul class="er_3">
+
+					                    <li><button type="button"  onclick="power(2,'f0311c1e-e289-ea11-b0df-87120c3b66e0','关机');" class="kgj">关机</button></li>      
+                                                                 
+                    <li><a href="/index/setting/sell/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">参数设置</a></li>
+                    <li><a href="/index/Equipment/statetu/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">设备运行状态</a></li>
+                    <li><a href="/index/Equipment/edit/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">修改</a></li>
+                    <li><a href="/index/Equipment/info/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">更多</a></li>
+                    <div class=" clear"></div>
+                </ul>
+                
+                
+            </div>
+
+			  
+        	<div class="er_1">
+            	<dl>
+                <dt>设备ID：3000011</dt>
+                <dd>备注名称：</dd>
+                <div class=" clear"></div>
+                </dl>
+                
+                <ul class="er_2">
+                    <li>离线</li> 
+					                     <li>参数设置失败</li>     
+                                        <li>2℃</li>
+                    <li>信号 20</li>
+                 <div class=" clear"></div>
+                </ul>
+                
+                <ul class="er_3">
+
+					                    <li><button type="button"  onclick="power(2,'975efb4b-c689-ea11-b0df-87120c3b66e0','关机');" class="kgj">关机</button></li>      
+                                                                 
+                    <li><a href="/index/setting/sell/Id/975efb4b-c689-ea11-b0df-87120c3b66e0.html">参数设置</a></li>
+                    <li><a href="/index/Equipment/statetu/Id/975efb4b-c689-ea11-b0df-87120c3b66e0.html">设备运行状态</a></li>
+                    <li><a href="/index/Equipment/edit/Id/975efb4b-c689-ea11-b0df-87120c3b66e0.html">修改</a></li>
+                    <li><a href="/index/Equipment/info/Id/975efb4b-c689-ea11-b0df-87120c3b66e0.html">更多</a></li>
+                    <div class=" clear"></div>
+                </ul>
+                
+                
+            </div>
+
+			  
+        	<div class="er_1">
+            	<dl>
+                <dt>设备ID：3000007</dt>
+                <dd>备注名称：</dd>
+                <div class=" clear"></div>
+                </dl>
+                
+                <ul class="er_2">
+                    <li>离线</li> 
+					                     <li></li>     
+                                        <li>2℃</li>
+                    <li>信号 21</li>
+                 <div class=" clear"></div>
+                </ul>
+                
+                <ul class="er_3">
+
+					                    <li><button type="button"  onclick="power(2,'a706fc26-e289-ea11-b0df-87120c3b66e0','关机');" class="kgj">关机</button></li>      
+                                                                 
+                    <li><a href="/index/setting/sell/Id/a706fc26-e289-ea11-b0df-87120c3b66e0.html">参数设置</a></li>
+                    <li><a href="/index/Equipment/statetu/Id/a706fc26-e289-ea11-b0df-87120c3b66e0.html">设备运行状态</a></li>
+                    <li><a href="/index/Equipment/edit/Id/a706fc26-e289-ea11-b0df-87120c3b66e0.html">修改</a></li>
+                    <li><a href="/index/Equipment/info/Id/a706fc26-e289-ea11-b0df-87120c3b66e0.html">更多</a></li>
+                    <div class=" clear"></div>
+                </ul>
+                
+                
+            </div>
+
+			  
+        	<div class="er_1">
+            	<dl>
+                <dt>设备ID：3000006</dt>
+                <dd>备注名称：控制器1</dd>
+                <div class=" clear"></div>
+                </dl>
+                
+                <ul class="er_2">
+                    <li>离线</li> 
+					                     <li>参数设置失败</li>     
+                                        <li>12℃</li>
+                    <li>信号 17</li>
+                 <div class=" clear"></div>
+                </ul>
+                
+                <ul class="er_3">
+
+					                    <li><button type="button"  onclick="power(2,'24af3680-c486-ea11-b0df-87120c3b66e0','关机');" class="kgj">关机</button></li>      
+                                                                 
+                    <li><a href="/index/setting/sell/Id/24af3680-c486-ea11-b0df-87120c3b66e0.html">参数设置</a></li>
+                    <li><a href="/index/Equipment/statetu/Id/24af3680-c486-ea11-b0df-87120c3b66e0.html">设备运行状态</a></li>
+                    <li><a href="/index/Equipment/edit/Id/24af3680-c486-ea11-b0df-87120c3b66e0.html">修改</a></li>
+                    <li><a href="/index/Equipment/info/Id/24af3680-c486-ea11-b0df-87120c3b66e0.html">更多</a></li>
+                    <div class=" clear"></div>
+                </ul>
+                
+                
+            </div>
+
+			  
+        	<div class="er_1">
+            	<dl>
+                <dt>设备ID：3000003</dt>
+                <dd>备注名称：测试</dd>
+                <div class=" clear"></div>
+                </dl>
+                
+                <ul class="er_2">
+                    <li>离线</li> 
+					                     <li>正常制水</li>     
+                                        <li>17℃</li>
+                    <li>信号 22</li>
+                 <div class=" clear"></div>
+                </ul>
+                
+                <ul class="er_3">
+
+					                    <li><button type="button"  onclick="power(2,'066f5e72-3c84-ea11-b0df-87120c3b66e0','关机');" class="kgj">关机</button></li>      
+                                                                 
+                    <li><a href="/index/setting/sell/Id/066f5e72-3c84-ea11-b0df-87120c3b66e0.html">参数设置</a></li>
+                    <li><a href="/index/Equipment/statetu/Id/066f5e72-3c84-ea11-b0df-87120c3b66e0.html">设备运行状态</a></li>
+                    <li><a href="/index/Equipment/edit/Id/066f5e72-3c84-ea11-b0df-87120c3b66e0.html">修改</a></li>
+                    <li><a href="/index/Equipment/info/Id/066f5e72-3c84-ea11-b0df-87120c3b66e0.html">更多</a></li>
+                    <div class=" clear"></div>
+                </ul>
+                
+                
+            </div>
+
+			  
+        	<div class="er_1">
+            	<dl>
+                <dt>设备ID：3000000</dt>
+                <dd>备注名称：反渗透控制器</dd>
+                <div class=" clear"></div>
+                </dl>
+                
+                <ul class="er_2">
+                    <li>离线</li> 
+					                     <li>参数设置失败</li>     
+                                        <li>1℃</li>
+                    <li>信号 26</li>
+                 <div class=" clear"></div>
+                </ul>
+                
+                <ul class="er_3">
+
+					                    <li><button type="button"  onclick="power(2,'47f09cf7-272d-ea11-b0de-fdb4983a349f','关机');" class="kgj">关机</button></li>      
+                                                                 
+                    <li><a href="/index/setting/sell/Id/47f09cf7-272d-ea11-b0de-fdb4983a349f.html">参数设置</a></li>
+                    <li><a href="/index/Equipment/statetu/Id/47f09cf7-272d-ea11-b0de-fdb4983a349f.html">设备运行状态</a></li>
+                    <li><a href="/index/Equipment/edit/Id/47f09cf7-272d-ea11-b0de-fdb4983a349f.html">修改</a></li>
+                    <li><a href="/index/Equipment/info/Id/47f09cf7-272d-ea11-b0de-fdb4983a349f.html">更多</a></li>
+                    <div class=" clear"></div>
+                </ul>
+                
+                
+            </div>
+
+			        </div>
+        
+ 
+        <div id="pagination1" class="page fl">
+            <div class="ui-pagination-container">
+				                <a href="javascript:void(0);" class="ui-pagination-page-item" data-current="2">第1页</a>
+
+                <a href="javascript:void(0);" class="ui-pagination-page-item" data-current="2">共1页</a>
+            </div>
+        </div>            
+                
+            <div class="footer"></div>
+			
+        <div class="footerdb">
+            <ul>
+                <li><a href="../../index/index/index.html"><div class="tp1"></div><div class="tp4">首页</div><div class="clear"></div></a> </li>
+                <li class="list"><a href="../../index/Equipment/index.html"><div class="tp2"></div><div class="tp4">设备</div><div class="clear"></div></a></li>
+                <li><a href="../../index/index/my.html"><div class="tp3"></div><div class="tp4">我的</div><div class="clear"></div></a></li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+    </div><!--warp-->
+    
+</body>
+ <script src="../../public/static/js/layer/mobile/layer.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../public/static/js/mdialog.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    function power(status,id,title){
+        layer.open({
+            content: '您确定要'+title+'吗？',
+            btn: ['确认', '取消'],
+            yes: function(index){
+                layer.close(index);
+                var url = "/index/equipment/power.html";
+                data = {};
+                data['Id'] = id;
+                data['status'] = status;
+                $.post(url,data,function(res){
+                    if (res.status == '1') {
+                       // dialog.success(res.message,res.url);
+						location.reload();
+                    }else if(res.status == '0'){
+                        dialog.error(res.message,res.url);
+                    }
+                },"JSON");
+				
+            }
+			
+        });
+		
+    }
+    </script>
+</html>
