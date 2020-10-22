@@ -19,7 +19,7 @@ services:
         build:
           context: .
           dockerfile: ./Dockerfile
-        command: python manage.py runserver 0.0.0.0:8000
+        # command: python manage.py runserver 0.0.0.0:8000
         image: circulating_water_sys
         container_name: circulating_water_sys
         working_dir: /myapp

@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
+
 """
 
 from pathlib import Path
@@ -27,7 +28,8 @@ SECRET_KEY = 'mfg_baq)zv_@n90a#@j!-0+no6r4*izt!*wib&u!a_&ky$#zia'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["192.168.99.100"]
+# ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -87,7 +89,7 @@ DATABASES = {
         'NAME': 'CirculatingWaterSys',        #数据库名字
         'USER': 'root',          #账号
         'PASSWORD': '123456',    #密码
-        'HOST': '192.168.99.100',     #IP
+        'HOST': '172.18.0.2',     #IP
         'PORT': '3306',          #端口
         #这里引擎用innodb（默认myisam）
         #因为后面第三方登录时，要求引擎为INNODB
