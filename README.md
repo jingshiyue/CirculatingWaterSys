@@ -27,3 +27,5 @@ http://ro.yueshuidz.com/Index/index/index.html
     
 	pip freeze > requirements.txt
 	pip install -r requirements.txt
+
+export COMPOSE_TLS_VERSION=TLSv1_2
