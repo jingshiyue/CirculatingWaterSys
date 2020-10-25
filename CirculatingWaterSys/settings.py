@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'device',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -94,7 +96,10 @@ DATABASES = {
         #这里引擎用innodb（默认myisam）
         #因为后面第三方登录时，要求引擎为INNODB
         # 'OPTIONS':{'init_command': 'SET storage_engine=INNODB'}, #这样设置会报错，改为
-        "OPTIONS":{"init_command":"SET default_storage_engine=INNODB;"}
+        "OPTIONS":{"init_command":"SET default_storage_engine=INNODB;",
+                #    'charset': 'utf8mb4',
+                   'charset': 'utf8',
+        }
     }
 }
 

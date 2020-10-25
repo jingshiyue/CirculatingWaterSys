@@ -46,4 +46,5 @@ compose文件里的容器间通信，用172.18.0.2，用 docker network inspect 
     docker-compose -f local.yml up  前台运行
     docker-compose -f local.yml -d up  后台运行
 
-    
+## 常用到的命令
+    pip install -i http://mirrors.aliyun.com/pypi/simple/
