@@ -1,5 +1,8 @@
 # CirculatingWaterSys
 
+192.168.99.100:8000/login
+
+
 config:
     https://www.cnblogs.com/xueweihan/p/11649630.html
    
@@ -48,3 +51,19 @@ compose文件里的容器间通信，用172.18.0.2，用 docker network inspect 
 
 ## 常用到的命令
     pip install -i http://mirrors.aliyun.com/pypi/simple/
+
+    save 和 export区别：
+        1）save 保存镜像所有的信息-包含历史
+        2）export 只导出当前的信息
+
+    镜像导入和容器导入的区别：
+    1）容器导入 是将当前容器 变成一个新的镜像 export-import
+    2）镜像导入 是复制的过程 save-load
+
+    
+    docker save 9045 > tomcat8-apr.tar
+    docker export 7ec802bdcfe3> mysql.tar  #7ec802bdcfe3 容器id
+    docker load < tomcat8-apr.tar
+    docker import tomcat80824.tar
+    docker tag 9045 tomcat8-apr:3.0  #修改镜像名字， 9045是镜像id
+    

@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import sys
+import time
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0,BASE_DIR)
@@ -91,7 +92,7 @@ DATABASES = {
         'NAME': 'CirculatingWaterSys',        #数据库名字
         'USER': 'root',          #账号
         'PASSWORD': '123456',    #密码
-        'HOST': '172.18.0.2',     #IP
+        'HOST': '172.18.0.2',     #docker 内网ip
         'PORT': '3306',          #端口
         #这里引擎用innodb（默认myisam）
         #因为后面第三方登录时，要求引擎为INNODB
@@ -122,17 +123,24 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+REST_FRAMEWORK = {
+"DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.AutoSchema",
+'DEFAULT_AUTHENTICATION_CLASSES':(
+    'rest_framework.authentication.BasicAuthentication',
+    'rest_framework.authentication.SessionAuthentication',
+    'rest_framework_jwt.authentication.JSONWebTokenAuthentication', #JWT
+    ),
+# 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+# 'PAGE_SIZE': 10,  后头自定义了页分类
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+LANGUAGE_CODE = 'zh-hans'
+TIME_ZONE = 'Asia/Shanghai'
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -140,3 +148,64 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'root': {
+        'level': 'INFO',
+        'handlers': ['console', 'log_file'],
+    },
+    'formatters': {
+        'verbose': {
+            # 'format': '[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d %(module)s] %(message)s',
+            'format': '[%(asctime)s] %(levelname)s [%(name)s:%(lineno)d] %(message)s',
+        }
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'log_file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join("./log/", 'CirculatingWaterSys_{}.log'.format(time.strftime('%Y-%m-%d'))),
+            'maxBytes': 1024*1024*100,   #按日志文件大小切割
+            'backupCount': 5,
+            'formatter': 'verbose'
+        },
+
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        'null': {
+            'class': 'logging.NullHandler',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'djangoblog': {
+            'handlers': ['log_file', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        }
+    }
+}

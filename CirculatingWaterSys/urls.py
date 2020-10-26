@@ -20,13 +20,15 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 from django.views.generic import TemplateView
 from django.views.static import serve
+from device.views import DeviceViewset
+
 
 router = DefaultRouter()
-# router.register(r'goods', GoodsListViewSet,base_name='goods')
-
+router.register('device', DeviceViewset,basename='device')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/',include_docs_urls(title='水处理智能控制系统')),
     path('api-auth/',include('rest_framework.urls')),
     path('login/', obtain_jwt_token ),
+    re_path('^', include(router.urls)),
 ]

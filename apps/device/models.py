@@ -58,6 +58,12 @@ class Device_args_set(models.Model):
     _3d = models.IntegerField(verbose_name='TDS修正数据3D(0-255)')
     _4d = models.IntegerField(verbose_name='洗膜方式4D(1低压 2高压)')
 
+    def __str__(self):
+        return self.device_id
+
+    class Meta:
+        verbose_name = '设备参数设置'
+        verbose_name_plural = verbose_name
     
 class Device_run_state(models.Model):
     """
@@ -161,7 +167,7 @@ class RepairDeviceAdd(models.Model):
         return self.deviceID
 
     class Meta:
-        verbose_name = '添加报修单'
+        verbose_name = '报修单添加'
         verbose_name_plural = verbose_name
 
 
@@ -226,3 +232,7 @@ class AfterSaleManageSet(BaseModel):
 
     def __str__(self):
         return self.deviceID
+
+    class Meta:
+        verbose_name = '售后提醒单添加'
+        verbose_name_plural = verbose_name

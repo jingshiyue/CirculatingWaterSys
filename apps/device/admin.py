@@ -16,12 +16,18 @@ class Device_args_setAdmin(admin.ModelAdmin):
 class Device_run_stateAdmin(admin.ModelAdmin):
     list_per_page = 20
     
-class RepairDeviceAdmin(admin.ModelAdmin):
+class RepairDeviceAddAdmin(admin.ModelAdmin):
     list_per_page = 20
+
+class AfterSaleManageSetAdmin(admin.ModelAdmin):
+    list_per_page = 20
+
 
 
 admin.site.register(Device,DeviceAdmin)
 admin.site.register(Device_args_set,Device_args_setAdmin)
 admin.site.register(Device_run_state,Device_run_stateAdmin)
-admin.site.register(RepairDevice,RepairDeviceAdmin)
+admin.site.register(RepairDeviceAdd,RepairDeviceAddAdmin)
+admin.site.register(AfterSaleManageSet,AfterSaleManageSetAdmin)
+
 
