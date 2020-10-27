@@ -6,7 +6,6 @@ class BaseModel(models.Model):
     '''模型抽象基类'''
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
     update_time = models.DateTimeField(auto_now=True, verbose_name='更新时间')
-    # user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='创建人')
     class Meta:
         abstract = True
 
@@ -20,16 +19,21 @@ class Device(BaseModel):
         (1, '在线'),
         (2, '未知'),
     )
-    device_id = models.CharField(max_length=50, verbose_name='设备ID')
-    remarks = models.CharField(max_length=50, verbose_name='备注名称',blank=True)
-    online = models.IntegerField(verbose_name='是否离线',choices=lineStates,default="未知")
-    arg_set_state = models.CharField(max_length=50, verbose_name='参数设置是否成功',blank=True)
-    temperature = models.FloatField(max_length=10, verbose_name='温度',blank=True)
-    signal = models.FloatField(max_length=10, verbose_name='信号',blank=True)
-    chunShui = models.IntegerField(verbose_name='纯水',default=0)
-    yuanShui = models.IntegerField(verbose_name='原水',default=0)
-    zhiShuiTime = models.IntegerField(verbose_name='制水时间',default=0)  #单位 分钟
-    zhiShuiTotalTime = models.IntegerField(verbose_name='制水累计',default=0)  #单位 天
+    ifArgsSet = (
+        (0,'失败'),
+        (1,'成功'),
+        (2,'未知'),
+    )
+    device_id = models.CharField(max_length=50, verbose_name='设备ID',help_text="设备ID",primary_key=True)
+    remarks = models.CharField(max_length=50, verbose_name='备注名称',blank=True,null=True,help_text="备注名称")
+    online = models.IntegerField(verbose_name='是否离线',choices=lineStates,default=2,help_text="是否离线")
+    arg_set_state = models.IntegerField(verbose_name='参数设置是否成功',choices=ifArgsSet,default=2,help_text="参数设置是否成功")
+    temperature = models.FloatField(max_length=10, verbose_name='温度',blank=True,null=True,help_text="温度")
+    signal = models.FloatField(max_length=10, verbose_name='信号',blank=True,null=True,help_text="信号")
+    chunShui = models.IntegerField(verbose_name='纯水',default=0,help_text="纯水")
+    yuanShui = models.IntegerField(verbose_name='原水',default=0,help_text="原水")
+    zhiShuiTime = models.IntegerField(verbose_name='制水时间',default=0,help_text="制水时间")  #单位 分钟
+    zhiShuiTotalTime = models.IntegerField(verbose_name='制水累计',default=0,help_text="制水累计")  #单位 天
    
     def __str__(self):
         return self.device_id
@@ -93,7 +97,7 @@ class Device_run_state(models.Model):
     
     device_id = models.OneToOneField(Device, on_delete=models.SET_NULL,verbose_name='设备ID',null=True)
     wenKongSwitch = models.IntegerField(verbose_name='温控开关')
-    dev_state = models.CharField(max_length=2, verbose_name='设备状态',choices=dev_states,blank=True)
+    dev_state = models.CharField(max_length=2, verbose_name='设备状态',choices=dev_states,blank=True,null=True)
 
     yuanShuibeng = models.IntegerField(verbose_name='原水泵')
     jinShuiFa = models.IntegerField(verbose_name='进水阀')
@@ -124,16 +128,16 @@ class RepairDevice(models.Model):
         (4,"非常不满意"),
     )
     repairID = models.CharField(max_length=20, verbose_name='报修编号') #设备号-序号
-    repair = models.CharField(max_length=20, verbose_name='报修状态',blank=True)
-    reportMan = models.CharField(max_length=20, verbose_name='报修人员',blank=True)
-    Phone = models.CharField(max_length=20, verbose_name='联系电话',blank=True)
+    repair = models.CharField(max_length=20, verbose_name='报修状态',blank=True,null=True)
+    reportMan = models.CharField(max_length=20, verbose_name='报修人员',blank=True,null=True)
+    Phone = models.CharField(max_length=20, verbose_name='联系电话',blank=True,null=True)
     # dev_state = models.ForeignKey(Device, on_delete=models.SET_NULL, null=True,verbose_name='设备号') #一对多关系
     dev_state = models.CharField(max_length=40,verbose_name='设备号') #一对多关系
-    repairAddr = models.CharField(max_length=20, verbose_name='维修地点',blank=True)
-    descErorr = models.CharField(max_length=20, verbose_name='故障简述',blank=True)
+    repairAddr = models.CharField(max_length=20, verbose_name='维修地点',blank=True,null=True)
+    descErorr = models.CharField(max_length=20, verbose_name='故障简述',blank=True,null=True)
     runErrorTime = models.DateTimeField(verbose_name='故障日期')
-    repairMan = models.CharField(max_length=20, verbose_name='上门维修人员',blank=True)
-    repairManPhone = models.CharField(max_length=20, verbose_name='维修人员电话',blank=True)
+    repairMan = models.CharField(max_length=20, verbose_name='上门维修人员',blank=True,null=True)
+    repairManPhone = models.CharField(max_length=20, verbose_name='维修人员电话',blank=True,null=True)
 
     ifOk = models.IntegerField(verbose_name='是否解决',choices=ifSolve,blank=True,null=True)
     ifSatisfied = models.IntegerField(verbose_name='是否满意',choices=ifSatisfied,blank=True,null=True)

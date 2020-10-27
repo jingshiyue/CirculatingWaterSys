@@ -61,7 +61,7 @@ ROOT_URLCONF = 'CirculatingWaterSys.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,15 +77,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'CirculatingWaterSys.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -94,11 +85,7 @@ DATABASES = {
         'PASSWORD': '123456',    #密码
         'HOST': '172.18.0.2',     #docker 内网ip
         'PORT': '3306',          #端口
-        #这里引擎用innodb（默认myisam）
-        #因为后面第三方登录时，要求引擎为INNODB
-        # 'OPTIONS':{'init_command': 'SET storage_engine=INNODB'}, #这样设置会报错，改为
         "OPTIONS":{"init_command":"SET default_storage_engine=INNODB;",
-                #    'charset': 'utf8mb4',
                    'charset': 'utf8',
         }
     }

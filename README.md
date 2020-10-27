@@ -67,3 +67,24 @@ compose文件里的容器间通信，用172.18.0.2，用 docker network inspect 
     docker import tomcat80824.tar
     docker tag 9045 tomcat8-apr:3.0  #修改镜像名字， 9045是镜像id
     
+## URL
+    http://ro.yueshuidz.com/index/index.html  主页
+                                                           主页->设备添加
+        http://ro.yueshuidz.com/index/Equipment/index.html 主页->设备管理
+            http://ro.yueshuidz.com/index/setting/sell/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html  参数设置
+                http://ro.yueshuidz.com/index/setting/recover.html  恢复出厂设置
+            http://ro.yueshuidz.com/index/Equipment/statetu/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html 设备运行状态(列表)
+            http://ro.yueshuidz.com/index/Equipment/edit/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html  修改
+
+        http://ro.yueshuidz.com/index/repairs/index.html  报修
+            http://ro.yueshuidz.com/index/repairs/add.html  一键报修
+            http://ro.yueshuidz.com/index/repairs/addfeedback/id/24.html 报修回复
+        
+        http://ro.yueshuidz.com/index/remind/index.html  售后管理
+        http://ro.yueshuidz.com/index/remind/add.html    
+        http://ro.yueshuidz.com/index/fault/index.html  主页->设备故障列表
+        http://ro.yueshuidz.com/index/index/index.html 更多
+
+    http://ro.yueshuidz.com/index/Equipment/index.html 主页->设备
+    
+    http://ro.yueshuidz.com/index/index/my.html  主页->我的

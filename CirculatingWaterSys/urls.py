@@ -16,19 +16,31 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include,re_path
 from rest_framework.documentation import include_docs_urls
-from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 from django.views.generic import TemplateView
 from django.views.static import serve
+from rest_framework.routers import DefaultRouter
 from device.views import DeviceViewset
+from django.views.generic import TemplateView
 
 
 router = DefaultRouter()
 router.register('device', DeviceViewset,basename='device')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/',include_docs_urls(title='水处理智能控制系统')),
     path('api-auth/',include('rest_framework.urls')),
     path('login/', obtain_jwt_token ),
+    path('index/', TemplateView.as_view(template_name='ro.yueshuidz.com/index/index/index.html'),name='index'), #linux里路径必须是/ 分隔
+
+
+
+
+
     re_path('^', include(router.urls)),
 ]
+
+
+
+# path('index/', DeviceViewset.as_view() ),  as_view({'get': 'list'})
