@@ -88,3 +88,9 @@ compose文件里的容器间通信，用172.18.0.2，用 docker network inspect 
     http://ro.yueshuidz.com/index/Equipment/index.html 主页->设备
     
     http://ro.yueshuidz.com/index/index/my.html  主页->我的
+
+
+### 明日任务-10.28
+    将静态页面里 静态文件引用路径调试正确；
+    login.html 怎么加入用户名、密码？ 怎么用jwt认证；
+    调试drf 数据接口；
