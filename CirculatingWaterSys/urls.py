@@ -35,7 +35,8 @@ urlpatterns = [
     path('jwt_auth/', obtain_jwt_token ),
     path('index/index/login/', TemplateView.as_view(template_name='device/index/index/login.html'),name='login'), #linux里路径必须是/ 分隔
     path('index/index.html/', TemplateView.as_view(template_name='device/index/index/index.html'),name='index'),   #需要加认证
-    path('index/my.html/', TemplateView.as_view(template_name='device/index/index/my.html'),name='my'), 
+    path('index/index/my.html/', TemplateView.as_view(template_name='device/index/index/my.html'),name='my'), 
+    path('index/Equipment/index.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
 
 
     re_path('^', include(router.urls)),

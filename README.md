@@ -94,3 +94,7 @@ compose文件里的容器间通信，用172.18.0.2，用 docker network inspect 
     将静态页面里 静态文件引用路径调试正确；
     login.html 怎么加入用户名、密码？ 怎么用jwt认证；
     调试drf 数据接口；
+
+### notes
+     token储在客户端，例如存在local storage或cookie中
+     headers: {'Authorization': 'JWT ' + token}
