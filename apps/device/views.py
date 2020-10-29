@@ -25,7 +25,7 @@ class Pagination(PageNumberPagination):
 # CacheResponseMixin list和retrieve 才会缓存,需要后台配置
 class DeviceViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    authentication_classes = [JSONWebTokenAuthentication, SessionAuthentication]
+    authentication_classes = [JSONWebTokenAuthentication]
     serializer_class = DeviceSerializer
     lookup_field = "device_id"
 
