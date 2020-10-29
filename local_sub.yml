@@ -1,0 +1,28 @@
+version: "2"
+
+services:
+    db:
+        restart: always
+        image: mysql:5.7
+        container_name: my_mysql
+        command: --default-authentication-plugin=mysql_native_password --innodb-use-native-aio=0
+        ports:
+            - 3306:3306
+        volumes:
+            - ./mysql/db:/var/lib/mysql
+            - ./mysql/conf/my.cnf:/etc/my.cnf
+        environment:
+            - MYSQL_DATABASE=CirculatingWaterSys
+            - MYSQL_ROOT_PASSWORD=123456
+            - "TZ=Asia/Shanghai"
+    web:
+        # command: python manage.py runserver 0.0.0.0:8000
+        image: circulating_water_sys:1.0
+        container_name: circulating_water_sys
+        working_dir: /myapp
+        volumes:
+          - .:/myapp
+        ports:
+          - "8000:8000"
+        depends_on:
+          - db
