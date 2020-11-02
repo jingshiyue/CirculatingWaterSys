@@ -8,6 +8,10 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.authentication import SessionAuthentication
 from .serializers import *
 from .models import Device
+from .permissions import AdminPermission
+from django.http import HttpResponse
+import logging
+logger = logging.getLogger(__name__)
 # Create your views here.
 class Pagination(PageNumberPagination):
     '''
@@ -20,10 +24,21 @@ class Pagination(PageNumberPagination):
     #页码参数
     page_query_param = 'page'
     #最多能显示多少页
-    max_page_size = 100
+    max_page_size = 10
 
 # CacheResponseMixin list和retrieve 才会缓存,需要后台配置
-class DeviceViewset(viewsets.ModelViewSet):
+class DeviceEditViewset(mixins.CreateModelMixin, mixins.UpdateModelMixin,mixins.DestroyModelMixin,viewsets.GenericViewSet):
+    pagination_class = Pagination
+    permission_classes = [IsAuthenticated,AdminPermission]
+    authentication_classes = [JSONWebTokenAuthentication]
+    serializer_class = DeviceSerializer
+    lookup_field = "device_id"
+
+    def get_queryset(self):
+        return Device.objects.all()
+
+class DeviceQueryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+    pagination_class = Pagination
     permission_classes = [IsAuthenticated]
     authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication]
     serializer_class = DeviceSerializer
@@ -31,3 +46,7 @@ class DeviceViewset(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Device.objects.all()
+
+def queryModulars(request):
+    logger.debug("queryModulars")
+    return HttpResponse("modularsStr")
