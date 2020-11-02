@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'device',
     'rest_framework',
+    # 'rest_framework.authtoken',
+    # 'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -111,14 +113,23 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 REST_FRAMEWORK = {
-"DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.AutoSchema",
-'DEFAULT_AUTHENTICATION_CLASSES':(
-    'rest_framework.authentication.BasicAuthentication',
-    'rest_framework.authentication.SessionAuthentication',
-    'rest_framework_jwt.authentication.JSONWebTokenAuthentication', #JWT
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.AutoSchema",  #与drf 的docs 网页的渲染有关
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        ),
+    'DEFAULT_AUTHENTICATION_CLASSES':(
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication', #JWT
     ),
 # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
 # 'PAGE_SIZE': 10,  后头自定义了页分类
+}
+import datetime
+#有效期限,不设置有效期，token默认只能用一次
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=30),    #也可以设置seconds=20 
+    'JWT_AUTH_HEADER_PREFIX': 'JWT',                       #JWT跟前端保持一致，比如“token”这里设置成JWT
 }
 
 # Internationalization
@@ -144,7 +155,7 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'root': {
-        'level': 'INFO',
+        'level': 'DEBUG',
         'handlers': ['console', 'log_file'],
     },
     'formatters': {
@@ -163,7 +174,7 @@ LOGGING = {
     },
     'handlers': {
         'log_file': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': os.path.join("./log/", 'CirculatingWaterSys_{}.log'.format(time.strftime('%Y-%m-%d'))),
             'maxBytes': 1024*1024*100,   #按日志文件大小切割
@@ -187,7 +198,7 @@ LOGGING = {
         }
     },
     'loggers': {
-        'djangoblog': {
+        'CirculatingWaterSys': {
             'handlers': ['log_file', 'console'],
             'level': 'INFO',
             'propagate': True,

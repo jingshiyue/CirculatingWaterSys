@@ -1,6 +1,9 @@
 # CirculatingWaterSys
 
-192.168.99.100:8000/login
+
+http://192.168.99.100:8000/jwt_auth
+http://192.168.99.100:8000/index/index.html/
+http://192.168.99.100:8000/index/index/login/
 
 
 config:
@@ -89,11 +92,15 @@ compose文件里的容器间通信，用172.18.0.2，用 docker network inspect 
     
     http://ro.yueshuidz.com/index/index/my.html  主页->我的
 
+### 已完成任务：
+    token 实现管理员权限问题 done
+    drf 接口区分管理员 done
 
-### 明日任务-10.28
-    将静态页面里 静态文件引用路径调试正确；
-    login.html 怎么加入用户名、密码？ 怎么用jwt认证；
-    调试drf 数据接口；
+### 明日任务-11.2
+    增加add 页面
+    设备查询框 后端接口对应
+    设备列表统计值
+    上一页，总共
 
 ### notes
      token储在客户端，例如存在local storage或cookie中
