@@ -40,7 +40,8 @@ class Device(BaseModel):
 
     class Meta:
         verbose_name = '设备'
-        verbose_name_plural = '设备'
+        verbose_name_plural = '设备'   
+        indexes = [models.Index(fields=['online']),]
 
 class Device_args_set(models.Model):
     """
@@ -113,7 +114,7 @@ class Device_run_state(models.Model):
     class Meta:
         verbose_name = '设备运行状态'
         verbose_name_plural = '设备运行状态'
-
+        indexes = [models.Index(fields=['dev_state']),]
 
 
 class RepairDevice(models.Model):

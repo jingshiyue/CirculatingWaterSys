@@ -139,9 +139,9 @@
  
         <div id="pagination1" class="page fl">
             <div class="ui-pagination-container">
-				                <a href="javascript:void(0);" class="ui-pagination-page-item" data-current="2">第1页</a>
-
-                <a href="javascript:void(0);" class="ui-pagination-page-item" data-current="2">共1页</a>
+                <a id="pre" href="javascript:void(0);" class="ui-pagination-page-item" onclick="queryDevceList" data-current="2">上一页</a>
+                <a id="total" class="ui-pagination-page-item" data-current="2">共 页</a>
+                <a id="next" href="javascript:void(0);" class="ui-pagination-page-item" onclick="queryDevceList;" data-current="2">下一页</a>
             </div>
         </div>            
                 
@@ -205,18 +205,60 @@
             return online;
         }
 
-        $(document).ready(function(){
+        var queryDevceList = function(){
             $.ajax({
 					type:'GET',
-					url:"/deviceQuery/",
+					url: $("#pre").attr('href'),
                     cache: false,
                     beforeSend: function (XMLHttpRequest) {
                         XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
                     },
 					success:function(data){
-						console.log("Equipment/index.html")
-                        console.log(typeof(data))
-                        console.log((data))
+                        console.log("111111")
+                        // console.log($("#pre").attr('href'))
+                        // console.log($(this).attr('href'))
+                        // $("#pre").attr("href",data["previous"]);
+                        // $("#total").html("共"+Math.ceil(data["count"]/10) +"页");
+                        // $("#next").attr("href",data["next"]);
+                        // for (idx in data["results"]){
+                        //     deviceList = String.format(templateStr,
+                        //         data["results"][idx]["device_id"],
+                        //         data["results"][idx]["remarks"],
+                        //         map_whether_online(data["results"][idx]["online"]),
+                        //         data["results"][idx]["temperature"],
+                        //         data["results"][idx]["signal"],
+                        //     )
+                        //     $("#deviceList").append(deviceList)
+                        // }
+					}
+			})
+        }
+
+        $(document).ready(function(){
+            $.ajax({
+                type:'GET',
+                url:"/queryStatistics/",
+                cache: false,
+                beforeSend: function (XMLHttpRequest) {
+                        XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
+                    },
+                success:function(data){
+                    var templateStr = "设备列表（总量:{0}台；在线:{1}台；故障:{2}台）"
+                    $(".ej_cx:first .cx_l").text(
+                        String.format(templateStr,data["total"],data["online"],data["fault"])
+                    );
+                }
+                
+            })
+            
+            $.ajax({
+					type:'GET',
+					url:"/deviceQuery/?page=1&page_size=10/",
+                    cache: false,
+                    beforeSend: function (XMLHttpRequest) {
+                        XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
+                    },
+					success:function(data){
                         var templateStr =`
                         <div class="er_1"> 
                             <dl> 
@@ -241,11 +283,11 @@
                             </ul>
                         </div>
                         `
-                        // var deviceList = String.format(templateStr,k,data[k]["casename"],data[k]["api"],data[k]["user"])
-                        // console.log(templateStr)
-                        console.log(data["count"])
+                          
+                        $("#pre").attr("href",data["previous"]);
+                        $("#total").html("共"+Math.ceil(data["count"]/10) +"页");
+                        $("#next").attr("href",data["next"]);
                         for (idx in data["results"]){
-                            console.log(data["results"][idx]["device_id"])
                             deviceList = String.format(templateStr,
                                 data["results"][idx]["device_id"],
                                 data["results"][idx]["remarks"],
@@ -255,10 +297,11 @@
                             )
                             $("#deviceList").append(deviceList)
                         }
-                        
-						}
-				})
-        })
+					}
+			})
 
+            
+
+        })
     </script>
 </html>

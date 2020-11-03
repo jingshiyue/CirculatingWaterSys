@@ -7,10 +7,14 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.authentication import SessionAuthentication
 from .serializers import *
+from . import models
 from .models import Device
 from .permissions import AdminPermission
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
+
 import logging
+from rest_framework.views import APIView
+
 logger = logging.getLogger(__name__)
 # Create your views here.
 class Pagination(PageNumberPagination):
@@ -29,8 +33,8 @@ class Pagination(PageNumberPagination):
 # CacheResponseMixin list和retrieve 才会缓存,需要后台配置
 class DeviceEditViewset(mixins.CreateModelMixin, mixins.UpdateModelMixin,mixins.DestroyModelMixin,viewsets.GenericViewSet):
     pagination_class = Pagination
-    permission_classes = [IsAuthenticated,AdminPermission]
-    authentication_classes = [JSONWebTokenAuthentication]
+    # permission_classes = [IsAuthenticated,AdminPermission]
+    # authentication_classes = [JSONWebTokenAuthentication]
     serializer_class = DeviceSerializer
     lookup_field = "device_id"
 
@@ -39,8 +43,8 @@ class DeviceEditViewset(mixins.CreateModelMixin, mixins.UpdateModelMixin,mixins.
 
 class DeviceQueryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     pagination_class = Pagination
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication]
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [JSONWebTokenAuthentication]
     serializer_class = DeviceSerializer
     lookup_field = "device_id"
 
@@ -50,3 +54,26 @@ class DeviceQueryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,viewse
 def queryModulars(request):
     logger.debug("queryModulars")
     return HttpResponse("modularsStr")
+
+class QueryStatisticsAPIView(APIView):
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [JSONWebTokenAuthentication]
+
+    def get(self, request):
+        # .Device.objects.all()
+        from django.db import connection, connections
+        dataDict = {}
+        cursor = connection.cursor()
+        cursor.execute("select count(1) from device_device")
+        total = cursor.fetchone()
+        dataDict.setdefault("total",total[0])
+
+        cursor.execute("select count(1) from device_device where online=1")
+        online = cursor.fetchone()
+        dataDict.setdefault("online",online[0])
+
+        # cursor.execute("select count(1) from device_device where online=1")
+        # online = cursor.fetchone()
+        dataDict.setdefault("fault",0)
+        cursor.close()
+        return JsonResponse(dataDict)

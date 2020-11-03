@@ -34,12 +34,11 @@ urlpatterns = [
     path('docs/',include_docs_urls(title='水处理智能控制系统')),
     # path('api-auth/',include('rest_framework.urls')),
     path('jwt_auth/', obtain_jwt_token ),
-    path('queryModulars/', queryModulars ),
     path('index/index/login/', TemplateView.as_view(template_name='device/index/index/login.html'),name='login'), #linux里路径必须是/ 分隔
     path('index/index.html/', TemplateView.as_view(template_name='device/index/index/index.html'),name='index'),   #需要加认证
     path('index/index/my.html/', TemplateView.as_view(template_name='device/index/index/my.html'),name='my'), 
     path('index/Equipment/index.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
-
+    path('queryStatistics/',QueryStatisticsAPIView.as_view()),
 
     re_path('^', include(router.urls)),
 ]+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
