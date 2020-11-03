@@ -139,9 +139,9 @@
  
         <div id="pagination1" class="page fl">
             <div class="ui-pagination-container">
-                <a id="pre" href="javascript:void(0);" class="ui-pagination-page-item" onclick="queryDevceList" data-current="2">上一页</a>
+                <a id="pre" href="#" class="ui-pagination-page-item" onclick="return false;" data-current="2">上一页</a>
                 <a id="total" class="ui-pagination-page-item" data-current="2">共 页</a>
-                <a id="next" href="javascript:void(0);" class="ui-pagination-page-item" onclick="queryDevceList;" data-current="2">下一页</a>
+                <a id="next" href="#" class="ui-pagination-page-item" onclick="return false;" data-current="2">下一页</a>
             </div>
         </div>            
                 
@@ -205,34 +205,65 @@
             return online;
         }
 
-        var queryDevceList = function(){
-            $.ajax({
-					type:'GET',
-					url: $("#pre").attr('href'),
+        $(".ui-pagination-page-item").click(function(){
+            if ($(this).attr('href')){
+                $.ajax({
+                    type:'GET',
+                    url: $(this).attr('href'),
                     cache: false,
                     beforeSend: function (XMLHttpRequest) {
                         XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
                     },
-					success:function(data){
-                        console.log("111111")
+                    success:function(data){
+                        // console.log(data)
+                        
+                        var templateStr =`
+                        <div class="er_1"> 
+                            <dl> 
+                                <dt>设备ID：{0}</dt> 
+                                <dd>备注名称：{1}</dd> 
+                                <div class=" clear"></div>
+                            </dl>
+                            <ul class="er_2">
+                                <li>{2}</li> 
+                                <li></li>     
+                                <li>{3}℃</li>
+                                <li>信号 {4}</li>
+                                <div class=" clear"></div>
+                            </ul>
+                            <ul class="er_3">
+                                <li><button type="button"  onclick="power(2,'f0311c1e-e289-ea11-b0df-87120c3b66e0','关机');" class="kgj">关机</button></li>                                 
+                                <li><a href="/index/setting/sell/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">参数设置</a></li> 
+                                <li><a href="/index/Equipment/statetu/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">设备运行状态</a></li> 
+                                <li><a href="/index/Equipment/edit/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">修改</a></li> 
+                                <li><a href="/index/Equipment/info/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">更多</a></li> 
+                                <div class=" clear"></div>
+                            </ul>
+                        </div>
+                        `
+                        
                         // console.log($("#pre").attr('href'))
                         // console.log($(this).attr('href'))
-                        // $("#pre").attr("href",data["previous"]);
+                        $("#pre").attr("href",data["previous"]);
                         // $("#total").html("共"+Math.ceil(data["count"]/10) +"页");
-                        // $("#next").attr("href",data["next"]);
-                        // for (idx in data["results"]){
-                        //     deviceList = String.format(templateStr,
-                        //         data["results"][idx]["device_id"],
-                        //         data["results"][idx]["remarks"],
-                        //         map_whether_online(data["results"][idx]["online"]),
-                        //         data["results"][idx]["temperature"],
-                        //         data["results"][idx]["signal"],
-                        //     )
-                        //     $("#deviceList").append(deviceList)
-                        // }
-					}
-			})
-        }
+                        $("#next").attr("href",data["next"]);
+                        $("#deviceList").empty()
+                        for (idx in data["results"]){
+                            deviceList = String.format(templateStr,
+                                data["results"][idx]["device_id"],
+                                data["results"][idx]["remarks"],
+                                map_whether_online(data["results"][idx]["online"]),
+                                data["results"][idx]["temperature"],
+                                data["results"][idx]["signal"],
+                            )
+                            $("#deviceList").append(deviceList)
+                        }
+                    }
+                })
+            }
+                
+        })
+        
 
         $(document).ready(function(){
             $.ajax({

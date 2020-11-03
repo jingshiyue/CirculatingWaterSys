@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+    <a href="http://IP/q/1010000000125418" target="_blank" data-id="1010000000125418" onclick="return false;">jQuery112</a>
 <script>
-    var count = Math.ceil(5/2)
-    console.log(count)
+    // console.log($('a').html())
+        $('a').click(function(){
+            console.log($(this).html())
+        });
 </script>
 
 </body>

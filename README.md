@@ -95,12 +95,16 @@ compose文件里的容器间通信，用172.18.0.2，用 docker network inspect 
 ### 已完成任务：
     token 实现管理员权限问题 done
     drf 接口区分管理员 done
+    上一页，总共 done
+    设备列表统计值 done
 
-### 明日任务-11.2
-    增加add 页面
-    设备查询框 后端接口对应
-    设备列表统计值
-    上一页，总共
+### 明日任务-11.4
+    查询界面
+    增加add 页面 
+    设备查询框 后端接口对应 50%
+
+    
+    
 
 ### notes
      token储在客户端，例如存在local storage或cookie中
