@@ -40,7 +40,7 @@ class DeviceEditViewset(mixins.CreateModelMixin, mixins.UpdateModelMixin,mixins.
 class DeviceQueryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     pagination_class = Pagination
     permission_classes = [IsAuthenticated]
-    authentication_classes = [JSONWebTokenAuthentication]
+    authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication]
     serializer_class = DeviceSerializer
     lookup_field = "device_id"
 

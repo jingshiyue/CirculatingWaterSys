@@ -44,8 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'device',
     'rest_framework',
-    # 'rest_framework.authtoken',
-    # 'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -174,6 +172,7 @@ LOGGING = {
     },
     'handlers': {
         'log_file': {
+
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': os.path.join("./log/", 'CirculatingWaterSys_{}.log'.format(time.strftime('%Y-%m-%d'))),
