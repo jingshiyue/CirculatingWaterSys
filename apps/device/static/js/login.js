@@ -18,6 +18,23 @@ $(function () {
               var usernameValue = $("#username").val();
               var password = $("#password");
               var passwordValue = $("#password").val();
+              $.ajax({
+                type:'GET',
+                url:"/queryDeviceAPIView/",
+                cache: false,
+                type:JSON,
+                // data: {
+                //     "records": {"y":JSON.stringify({"x":x"","xx":"xx"})}
+                //   },
+                beforeSend: function (XMLHttpRequest) {
+                    XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
+                },
+                success:function(data){
+                    console.log(data)
+                }
+            })
+
+
             // if(usernameValue == ""){
                 // alert("用户名不能为空");
                 // username.focus();

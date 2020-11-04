@@ -34,6 +34,7 @@ class Device(BaseModel):
     yuanShui = models.IntegerField(verbose_name='原水',default=0,help_text="原水")
     zhiShuiTime = models.IntegerField(verbose_name='制水时间',default=0,help_text="制水时间")  #单位 分钟
     zhiShuiTotalTime = models.IntegerField(verbose_name='制水累计',default=0,help_text="制水累计")  #单位 天
+    MainboardID = models.CharField(max_length=50, verbose_name='主板编号',help_text="主板编号")
    
     def __str__(self):
         return self.device_id

@@ -39,6 +39,8 @@ urlpatterns = [
     path('index/index/my.html/', TemplateView.as_view(template_name='device/index/index/my.html'),name='my'), 
     path('index/Equipment/index.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
     path('queryStatistics/',QueryStatisticsAPIView.as_view()),
+    path('queryDeviceAPIView/',QueryDeviceAPIView.as_view()),
+
 
     re_path('^', include(router.urls)),
 ]+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

@@ -11,9 +11,10 @@ from . import models
 from .models import Device
 from .permissions import AdminPermission
 from django.http import HttpResponse,JsonResponse
-
 import logging
 from rest_framework.views import APIView
+from utils.utils import sqlFetchone,sqlFetchall
+
 
 logger = logging.getLogger(__name__)
 # Create your views here.
@@ -63,17 +64,18 @@ class QueryStatisticsAPIView(APIView):
         # .Device.objects.all()
         from django.db import connection, connections
         dataDict = {}
-        cursor = connection.cursor()
-        cursor.execute("select count(1) from device_device")
-        total = cursor.fetchone()
+        total = sqlFetchone("select count(1) from device_device")
         dataDict.setdefault("total",total[0])
-
-        cursor.execute("select count(1) from device_device where online=1")
-        online = cursor.fetchone()
+        online = sqlFetchone("select count(1) from device_device where online=1")
         dataDict.setdefault("online",online[0])
-
-        # cursor.execute("select count(1) from device_device where online=1")
-        # online = cursor.fetchone()
         dataDict.setdefault("fault",0)
-        cursor.close()
+        logging.debug((dataDict))
         return JsonResponse(dataDict)
+
+class QueryDeviceAPIView(APIView):
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [JSONWebTokenAuthentication]
+    def get(self, request):
+        logger.debug(request.GET)
+        return JsonResponse(request.GET)
+        # product = request.POST.get("products")
