@@ -13,26 +13,12 @@ $(function () {
         });
     };
     H_login.loginForm = function () {
-        $("#login-button-submit").on('click',function(){
-              var username = $("#username");
-              var usernameValue = $("#username").val();
-              var password = $("#password");
-              var passwordValue = $("#password").val();
-              $.ajax({
-                type:'GET',
-                url:"/queryDeviceAPIView/",
-                cache: false,
-                type:JSON,
-                // data: {
-                //     "records": {"y":JSON.stringify({"x":x"","xx":"xx"})}
-                //   },
-                beforeSend: function (XMLHttpRequest) {
-                    XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
-                },
-                success:function(data){
-                    console.log(data)
-                }
-            })
+        // $("#login-button-submit").on('click',function(){
+            //   var username = $("#username");
+            //   var usernameValue = $("#username").val();
+            //   var password = $("#password");
+            //   var passwordValue = $("#password").val();
+            // })
 
 
             // if(usernameValue == ""){
@@ -59,7 +45,6 @@ $(function () {
                     // $('.list-input').val('');
                 // },2000);
             // }
-        });
     };
     H_login.run = function () {
         this.closeLogin();
@@ -67,4 +52,4 @@ $(function () {
         this.loginForm();
     };
     H_login.run();
-});
+})

@@ -54,7 +54,7 @@ compose文件里的容器间通信，用172.18.0.2，用 docker network inspect 
 
 ## 常用到的命令
     pip install -i http://mirrors.aliyun.com/pypi/simple/
-
+    $ docker start $(docker ps -lq)
     save 和 export区别：
         1）save 保存镜像所有的信息-包含历史
         2）export 只导出当前的信息

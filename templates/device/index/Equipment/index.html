@@ -35,7 +35,7 @@
         </div>
         
                 <div class="login">
-				<form method="get" action="/index/equipment/index.html">
+				<form onsubmit="javascript:return submit1();">
                     <div class="login-title"><span><a href="javascript:void(0);" class="close-login">关闭</a></span></div>
                     <div class="login-input-content">
                         <div class="login-input">
@@ -45,8 +45,8 @@
                         
                         <div class="login-input">
                             <label>网络状态：</label>
-                            <span><input name="NetState" type="radio" value="0"  class="zx" style="width:30px;height:30px"/>在线  </span>
-                            <span><input name="NetState" type="radio" value="1" class="zx"  style="width:30px;height:30px"/>离线 </span>
+                            <span><input name="NetState" type="radio" value="1"  class="zx" style="width:30px;height:30px"/>在线  </span>
+                            <span><input name="NetState" type="radio" value="0" class="zx"  style="width:30px;height:30px"/>离线 </span>
                         </div>
                         <div class="login-input">
                             <label>设备状态：</label>
@@ -99,7 +99,8 @@
                     </div>
                     <div class="login-button">
 					
-					 <button  class="btn_confirm" type="submit" id="login-button-submit">查询</button>
+                     <!-- <button  class="btn_confirm" type="submit" id="login-button-submit">查询</button> -->
+                     <input  class="btn_confirm" type="submit" id="login-button-submit" value="查询" />
 					
 					</div>
 					</form>
@@ -260,10 +261,29 @@
                         }
                     }
                 })
-            }
-                
+            }   
         })
         
+        function submit1(){
+            // alert($("#DeviceID").val())
+            // input[name!='keyl']"
+            alert($("input[name='NetState']").text())
+            $.ajax({
+                type:'GET',
+                url:"/queryDeviceAPIView?DeviceID=zhuban&NetState=0&DeviceState=10",
+                cache: false,
+                // type:"json",
+                beforeSend: function (XMLHttpRequest) {
+                    XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
+                },
+                success:function(data){
+                    console.log(data)
+                    alert(2222)
+                }
+            });
+            return false;
+        }
+
 
         $(document).ready(function(){
             $.ajax({
