@@ -62,7 +62,7 @@ class QueryStatisticsAPIView(APIView):
 
     def get(self, request):
         # .Device.objects.all()
-        from django.db import connection, connections
+        # from django.db import connection, connections
         dataDict = {}
         total = sqlFetchone("select count(1) from device_device")
         dataDict.setdefault("total",total[0])
@@ -76,6 +76,15 @@ class QueryDeviceAPIView(APIView):
     # permission_classes = [IsAuthenticated]
     # authentication_classes = [JSONWebTokenAuthentication]
     def get(self, request):
-        logger.debug(request.GET)
+        dateGet = (request.GET) #{"DeviceID": "zhuban", "NetState": "0", "DeviceState": "11"}
+        logger.debug(dateGet)
+        MainboardID = dateGet.get("DeviceID",None)
+        online = dateGet.get("NetState",None)
+        dev_state = dateGet.get("DeviceState",None)
+        # ret = sqlFetchone(f"select * from device_device where DeviceID={MainboardID} and NetState={online} and DeviceState=11")
+        ret = sqlFetchone(f"select * from device_device where DeviceID={MainboardID} and NetState={online}")
+        logger.debug(type(ret))
+        logger.debug(ret)
+
+
         return JsonResponse(request.GET)
-        # product = request.POST.get("products")

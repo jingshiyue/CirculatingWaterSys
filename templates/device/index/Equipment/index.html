@@ -35,7 +35,7 @@
         </div>
         
                 <div class="login">
-				<form onsubmit="javascript:return submit1();">
+				<form onsubmit="javascript:return submit1();" id="queryDevice">
                     <div class="login-title"><span><a href="javascript:void(0);" class="close-login">关闭</a></span></div>
                     <div class="login-input-content">
                         <div class="login-input">
@@ -43,7 +43,7 @@
                             <input type="text" placeholder="请输入主板编号"  name="DeviceID" id="DeviceID" class="list-input"/>
                         </div>
                         
-                        <div class="login-input">
+                        <div class="login-input" id="onlineState">
                             <label>网络状态：</label>
                             <span><input name="NetState" type="radio" value="1"  class="zx" style="width:30px;height:30px"/>在线  </span>
                             <span><input name="NetState" type="radio" value="0" class="zx"  style="width:30px;height:30px"/>离线 </span>
@@ -196,6 +196,48 @@
             });  
         };  
 
+    function getParameter(el){
+        var obj={};
+        $(el).each(function(index,item){
+            // 判断元素的类型
+            alert(el)
+            alert(item.html())
+            if(item.type=="text" || item.type=="password" || item.type=="select-one" || item.type=="tel" || 
+            item.type=="search" || item.type=="range" || item.type=="number" || item.type=="month" || 
+            item.type=="email" || item.type=="datetime-local" || item.type=="datetime" || item.type=="date" || 
+            item.type=="color"){
+            //获取到name的值,name的值就是向后台传递的数据
+            obj[$(this).attr("name")]=$(this).val();
+            alert(2)
+
+            }else if(item.type=="checkbox"){
+            var stamp=false;
+            if($(this).attr("name") && !stamp){
+            stamp=false;
+            // 获取到复选框选中的元素
+            var checkboxEl=$("input[name="+$(item).attr('name')+"]:checked");
+            if(checkboxEl){
+            var checkboxArr=[];
+            // 取出复选框选中的值
+            checkboxEl.each(function(idx,itm){
+                checkboxArr.push($(itm).val());
+            });
+            obj[$(this).attr("name")]=checkboxArr.join(",");
+            }
+            
+            }
+            }else if(item.type=="radio"){
+            // 获取到单选框选中的值
+            var radio_val=$("input[name="+$(item).attr('name')+"]:checked").val();
+            if(radio_val){
+            obj[$(item).attr("name")]=radio_val;
+            }
+            }
+        });
+        return obj;
+    }
+
+
         var map_whether_online = function(arg){
             if (arg == 0) 
                 var online = "离线";
@@ -265,12 +307,19 @@
         })
         
         function submit1(){
-            // alert($("#DeviceID").val())
-            // input[name!='keyl']"
-            alert($("input[name='NetState']").text())
+            var DeviceID = $("#DeviceID").val()
+            var NetState = $('input[name="NetState"]:checked').val()
+            var DeviceState = $('select :selected').val()
+            // console.log(DeviceID)
+            var url = String.format(
+                "/queryDeviceAPIView?DeviceID={0}&NetState={1}&DeviceState={2}",
+                DeviceID,
+                NetState,
+                DeviceState
+            )
             $.ajax({
                 type:'GET',
-                url:"/queryDeviceAPIView?DeviceID=zhuban&NetState=0&DeviceState=10",
+                url:url,
                 cache: false,
                 // type:"json",
                 beforeSend: function (XMLHttpRequest) {
@@ -278,7 +327,6 @@
                 },
                 success:function(data){
                     console.log(data)
-                    alert(2222)
                 }
             });
             return false;
