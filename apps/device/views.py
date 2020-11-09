@@ -11,11 +11,11 @@ from . import models
 from .models import Device
 from .permissions import AdminPermission
 from django.http import HttpResponse,JsonResponse
-import logging
+
 from rest_framework.views import APIView
 from utils.utils import sqlFetchone,sqlFetchall
 
-
+import logging
 logger = logging.getLogger(__name__)
 # Create your views here.
 class Pagination(PageNumberPagination):
@@ -81,10 +81,34 @@ class QueryDeviceAPIView(APIView):
         MainboardID = dateGet.get("DeviceID",None)
         online = dateGet.get("NetState",None)
         dev_state = dateGet.get("DeviceState",None)
-        # ret = sqlFetchone(f"select * from device_device where DeviceID={MainboardID} and NetState={online} and DeviceState=11")
-        ret = sqlFetchone(f"select * from device_device where DeviceID={MainboardID} and NetState={online}")
-        logger.debug(type(ret))
-        logger.debug(ret)
+        logger.debug(online)
+        # ret = sqlFetchone(
+        #     f"SELECT * FROM device_device INNER JOIN device_device_run_state \
+        #      WHERE \
+        #         `MainboardID` = {MainboardID} \
+        #         AND `online` = {online} \
+        #         AND `dev_state` = {dev_state} \
+        #         AND `device_id` = `device_id_id`")
 
+        # conditions ={
+        #     "MainboardID":MainboardID,
+        #     "online":online,
+        #     "deviceState":dev_state
+        # }
 
-        return JsonResponse(request.GET)
+        # obj = models.Device.objects.filter(**conditions)
+        # serislizer=DeviceSerializer(instance=obj,many=True,)
+        
+        conditions ={
+            "MainboardID":MainboardID,
+            "online":online,
+        }
+
+        obj = models.Device.objects.filter(**conditions).filter(
+            device_run_state__dev_state=dev_state)
+
+        serislizer=DeviceSerializer(instance=obj,many=True,)
+        logger.debug(serislizer.data)
+
+        return JsonResponse(serislizer.data,safe=False)
+        # return HttpResponse(obj)

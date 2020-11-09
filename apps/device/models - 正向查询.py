@@ -25,6 +25,8 @@ class Device(BaseModel):
         (2,'未知'),
     )
     device_id = models.CharField(max_length=50, verbose_name='设备ID',help_text="设备ID",primary_key=True)
+    deviceArgs = models.OneToOneField("Device_args_set", on_delete=models.SET_NULL,verbose_name='设备参数',null=True,blank=True)
+    deviceState = models.OneToOneField("Device_run_state", on_delete=models.SET_NULL,verbose_name='设备状态',null=True,blank=True)
     remarks = models.CharField(max_length=50, verbose_name='备注名称',blank=True,null=True,help_text="备注名称")
     online = models.IntegerField(verbose_name='是否离线',choices=lineStates,default=2,help_text="是否离线")
     arg_set_state = models.IntegerField(verbose_name='参数设置是否成功',choices=ifArgsSet,default=2,help_text="参数设置是否成功")
@@ -49,7 +51,7 @@ class Device_args_set(models.Model):
     主页->设备管理->参数设置
     反渗透设备参数设置 页面
     """
-    device_id = models.OneToOneField(Device, on_delete=models.DO_NOTHING,verbose_name='设备ID',related_name="device_args_set",blank=True,null=True)
+    
     _1t = models.IntegerField(verbose_name='开启冲洗阀时间1T(1-240秒)')
     _2t = models.IntegerField(verbose_name='开启制水泵时间2T(1-240秒)')
     _3t = models.IntegerField(verbose_name='循环冲洗时间3T(1-240秒)')
@@ -65,7 +67,7 @@ class Device_args_set(models.Model):
     _4d = models.IntegerField(verbose_name='洗膜方式4D(1低压 2高压)')
 
     def __str__(self):
-        return self.device_id_id
+        return str(self.id)
 
     class Meta:
         verbose_name = '设备参数设置'
@@ -85,7 +87,7 @@ class Device_run_state(models.Model):
         (5,"臭氧"),
         (6,"清洗前置罐"),
         (10,"参数设置失败"),
-        (11,"正常制水_repeat"),
+        (11,"正常制水?重复"),
         (12,"冲洗"),
         (13,"水满"),
         (14,"缺水"),
@@ -97,9 +99,8 @@ class Device_run_state(models.Model):
         (31,"低压"),
     )
     
-    device_id = models.OneToOneField(Device, on_delete=models.DO_NOTHING,verbose_name='设备ID',related_name="device_run_state",blank=True,null=True)
     wenKongSwitch = models.BooleanField(verbose_name='温控开关',default=False)
-    dev_state = models.IntegerField(verbose_name='设备状态',choices=dev_states,blank=True,null=True)
+    dev_state = models.IntegerField(verbose_name='设备状态',choices=dev_states,default=False)
     yuanShuibeng = models.BooleanField(verbose_name='原水泵',default=False)
     jinShuiFa = models.BooleanField(verbose_name='进水阀',default=False)
     diyaSwitch = models.BooleanField(verbose_name='低压开关',default=False)
@@ -108,10 +109,8 @@ class Device_run_state(models.Model):
     chouYangQi = models.BooleanField(verbose_name='臭氧器',default=False)
     remoteSwitch = models.BooleanField(verbose_name='远程开关',default=False)
 
-    # def __str__(self):
-    #     return self.device_id_id
-
-
+    def __str__(self):
+        return str(self.id)
 
     class Meta:
         verbose_name = '设备运行状态'
