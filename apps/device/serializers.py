@@ -4,6 +4,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 class Device_run_stateSerializer(serializers.ModelSerializer):
+    device_id_id = serializers.CharField(max_length=200)
     class Meta:
         model = Device_run_state
         fields = '__all__'
@@ -15,7 +16,7 @@ class RepairDeviceSerializer(serializers.ModelSerializer):
 
 class DeviceSerializer(serializers.ModelSerializer):
     device_run_state = Device_run_stateSerializer()
-    # device_run_state = serializers.PrimaryKeyRelatedField()
+
     class Meta:
         model = Device
         fields = '__all__'
@@ -23,25 +24,16 @@ class DeviceSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         device_run_state_obj =validated_data.pop('device_run_state')
-        logger.debug(device_run_state_obj)
-        # Device_run_state.objects.create(**device_run_state_obj)
-        instance = Device.objects.create(**validated_data)
-        return instance
-
-    # def get_device_run_state(self, obj):
-    #     logger.debug(1111111111)
-    #     logger.debug(obj)
-    #     return Device_run_stateSerializer(obj.device_run_state.all())
+        device = Device.objects.create(**validated_data)
+        Device_run_state.objects.create(device_id=device,**device_run_state_obj)
+        return device
 
     def update(self, instance, validated_data):
-        device_run_state = validated_data.pop('device_run_state')
-        deviceID = validated_data.get("device_id",None)
-        obj = Device.objects.get(device_id=deviceID)
-
-        deviceID = validated_data.get("device_id",None)
-        Device.objects.get(device_id=deviceID )
-
-        instance = super(DeviceSerializer, self, ).update(instance, validated_data)
+        deviceRunStateData = validated_data.pop('device_run_state')
+        instance.__dict__.update(**validated_data)
+        deviceRunState = instance.device_run_state
+        logger.debug(deviceRunStateData)
+        deviceRunState.__dict__.update(**deviceRunStateData)
         return instance
 
 
