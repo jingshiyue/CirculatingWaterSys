@@ -34,8 +34,8 @@ class Pagination(PageNumberPagination):
 # CacheResponseMixin list和retrieve 才会缓存,需要后台配置
 class DeviceEditViewset(mixins.CreateModelMixin, mixins.UpdateModelMixin,mixins.DestroyModelMixin,viewsets.GenericViewSet):
     pagination_class = Pagination
-    # permission_classes = [IsAuthenticated,AdminPermission]
-    # authentication_classes = [JSONWebTokenAuthentication]
+    permission_classes = [IsAuthenticated,AdminPermission]
+    authentication_classes = [JSONWebTokenAuthentication]
     serializer_class = DeviceSerializer
     lookup_field = "device_id"
 
