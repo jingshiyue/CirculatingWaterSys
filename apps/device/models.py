@@ -108,10 +108,8 @@ class Device_run_state(models.Model):
     chouYangQi = models.BooleanField(verbose_name='臭氧器',default=False)
     remoteSwitch = models.BooleanField(verbose_name='远程开关',default=False)
 
-    # def __str__(self):
-    #     return self.device_id_id
-
-
+    def __str__(self):
+        return self.device_id_id
 
     class Meta:
         verbose_name = '设备运行状态'

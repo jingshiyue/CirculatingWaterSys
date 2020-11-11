@@ -24,18 +24,18 @@
         </div>
 
         <div class="ej_cx">
-            <div class="cx_r login-header" style="margin-top: 3%; float: left; margin-left: 25%;">
+            <div id="query-device" class="cx_r login-header" style="margin-top: 3%; float: left; margin-left: 25%;">
                 <a href="javascript:void(0);" >查询<img src="/static/images/x.png" /></a>
             </div>
-            <div class="cx_r login-header" style="margin-top: 3%; float: right; margin-right: 25%;">
+            <div id="add-device" class="cx_r login-header" style="margin-top: 3%; float: right; margin-right: 25%;">
                 <a href="javascript:void(0);" >添加<img src="/static/images/x.png" /></a>
             </div>
             <div class=" clear"></div>
 
         </div>
         
-                <div class="login">
-				<form onsubmit="javascript:return submit1();" id="queryDevice">
+                <div id="query-div-form" class="login">
+				<form onsubmit="javascript:return query_submit();" id="queryDevice">
                     <div class="login-title"><span><a href="javascript:void(0);" class="close-login">关闭</a></span></div>
                     <div class="login-input-content">
                         <div class="login-input">
@@ -106,10 +106,36 @@
 					</form>
                 </div>
 
+                <div id="add-div-form" class="login">
+                    <form onsubmit="javascript:return submit2();" id="queryDevice">
+                        <div class="login-title"><span><a href="javascript:void(0);" class="close-login">关闭</a></span></div>
+                        <div class="login-input-content">                            
+                            <div class="login-input">
+                                <label>设备ID:</label>
+                                <input type="text" placeholder="请输入设备ID"  name="DeviceID" id="DeviceID" class="list-input"/>
+                            </div>
+                            <div class="login-input">
+                                <label>备注名称:</label>
+                                <input type="text" placeholder="请输入备注名称"  name="DeviceID" id="DeviceID" class="list-input"/>
+                            </div>
+
+                            <div class="login-input">
+                                <label>主板编号：</label>
+                                <input type="text" placeholder="请输入主板编号"  name="DeviceID" id="DeviceID" class="list-input"/>
+                            </div>
+
+                        </div>
+                        <div class="login-button">
+                        
+                         <!-- <button  class="btn_confirm" type="submit" id="login-button-submit">查询</button> -->
+                         <input  class="btn_confirm" type="submit" id="login-button-submit" value="查询" />
+                        
+                        </div>
+                        </form>
+                    </div>
 
 
-
-        <div class="login-bg"></div>        
+        <!-- <div class="login-bg"></div>         -->
         <div id="deviceList"  class="er_main">
         	<!-- <div class="er_1">
             	<dl>
@@ -306,7 +332,7 @@
             }   
         })
         
-        function submit1(){
+        function query_submit(){
             var DeviceID = $("#DeviceID").val()
             var NetState = $('input[name="NetState"]:checked').val()
             var DeviceState = $('select :selected').val()
@@ -326,7 +352,50 @@
                     XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
                 },
                 success:function(data){
-                    console.log(data)
+                    var templateStr =`
+                        <div class="er_1"> 
+                            <dl> 
+                                <dt>设备ID：{0}</dt> 
+                                <dd>备注名称：{1}</dd> 
+                                <div class=" clear"></div>
+                            </dl>
+                            <ul class="er_2">
+                                <li>{2}</li> 
+                                <li></li>     
+                                <li>{3}℃</li>
+                                <li>信号 {4}</li>
+                                <div class=" clear"></div>
+                            </ul>
+                            <ul class="er_3">
+                                <li><button type="button"  onclick="power(2,'f0311c1e-e289-ea11-b0df-87120c3b66e0','关机');" class="kgj">关机</button></li>                                 
+                                <li><a href="/index/setting/sell/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">参数设置</a></li> 
+                                <li><a href="/index/Equipment/statetu/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">设备运行状态</a></li> 
+                                <li><a href="/index/Equipment/edit/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">修改</a></li> 
+                                <li><a href="/index/Equipment/info/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">更多</a></li> 
+                                <div class=" clear"></div>
+                            </ul>
+                        </div>
+                        `
+                          
+                    // $("#pre").attr("href",data["previous"]);
+                    // $("#total").html("共"+Math.ceil(data["count"]/10) +"页");
+                    // $("#next").attr("href",data["next"]);
+                    $('.login').hide();
+                    $('.login-bg').hide();
+                    $("#deviceList").empty()
+                    $("#pre").hide()
+                    $("#total").hide()
+                    $("#next").hide()
+                    for (idx in data){
+                        deviceList = String.format(templateStr,
+                            data[idx]["device_id"],
+                            data[idx]["remarks"],
+                            map_whether_online(data[idx]["online"]),
+                            data[idx]["temperature"],
+                            data[idx]["signal"],
+                        )
+                        $("#deviceList").append(deviceList)
+                    }
                 }
             });
             return false;

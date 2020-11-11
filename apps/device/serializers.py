@@ -4,7 +4,9 @@ import logging
 logger = logging.getLogger(__name__)
 
 class Device_run_stateSerializer(serializers.ModelSerializer):
-    device_id_id = serializers.CharField(max_length=200)
+    # device_id_id = serializers.CharField(max_length=200) 
+    #序列化model中没有的字段，前端传入device_id_id字段，serial中的create、update的validated_data
+    # 才会有device_id_id，否则validated_data会过滤掉没serial的字段，前端无法传进来
     class Meta:
         model = Device_run_state
         fields = '__all__'
@@ -32,7 +34,6 @@ class DeviceSerializer(serializers.ModelSerializer):
         deviceRunStateData = validated_data.pop('device_run_state')
         instance.__dict__.update(**validated_data)
         deviceRunState = instance.device_run_state
-        logger.debug(deviceRunStateData)
         deviceRunState.__dict__.update(**deviceRunStateData)
         return instance
 
