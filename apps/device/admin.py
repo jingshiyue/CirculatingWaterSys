@@ -8,13 +8,6 @@ class DeviceAdmin(admin.ModelAdmin):
     list_per_page = 20
     search_fields = ('device_id','remarks',)
 
-
-class Device_args_setAdmin(admin.ModelAdmin):
-    list_per_page = 20
-
-
-class Device_run_stateAdmin(admin.ModelAdmin):
-    list_per_page = 20
     
 class RepairDeviceAddAdmin(admin.ModelAdmin):
     list_per_page = 20
@@ -25,8 +18,6 @@ class AfterSaleManageSetAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Device,DeviceAdmin)
-admin.site.register(Device_args_set,Device_args_setAdmin)
-admin.site.register(Device_run_state,Device_run_stateAdmin)
 admin.site.register(RepairDeviceAdd,RepairDeviceAddAdmin)
 admin.site.register(AfterSaleManageSet,AfterSaleManageSetAdmin)
 

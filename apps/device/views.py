@@ -61,8 +61,6 @@ class QueryStatisticsAPIView(APIView):
     # authentication_classes = [JSONWebTokenAuthentication]
 
     def get(self, request):
-        # .Device.objects.all()
-        # from django.db import connection, connections
         dataDict = {}
         total = sqlFetchone("select count(1) from device_device")
         dataDict.setdefault("total",total[0])
@@ -82,23 +80,6 @@ class QueryDeviceAPIView(APIView):
         online = dateGet.get("NetState",None)
         dev_state = dateGet.get("DeviceState",None)
         logger.debug(online)
-        # ret = sqlFetchone(
-        #     f"SELECT * FROM device_device INNER JOIN device_device_run_state \
-        #      WHERE \
-        #         `MainboardID` = {MainboardID} \
-        #         AND `online` = {online} \
-        #         AND `dev_state` = {dev_state} \
-        #         AND `device_id` = `device_id_id`")
-
-        # conditions ={
-        #     "MainboardID":MainboardID,
-        #     "online":online,
-        #     "deviceState":dev_state
-        # }
-
-        # obj = models.Device.objects.filter(**conditions)
-        # serislizer=DeviceSerializer(instance=obj,many=True,)
-        
         conditions ={
             "MainboardID":MainboardID,
             "online":online,

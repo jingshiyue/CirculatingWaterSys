@@ -24,58 +24,6 @@ class Device(BaseModel):
         (1,'成功'),
         (2,'未知'),
     )
-    device_id = models.CharField(max_length=50, verbose_name='设备ID',help_text="设备ID",primary_key=True)
-    remarks = models.CharField(max_length=50, verbose_name='备注名称',blank=True,null=True,help_text="备注名称")
-    online = models.IntegerField(verbose_name='是否离线',choices=lineStates,default=2,help_text="是否离线")
-    arg_set_state = models.IntegerField(verbose_name='参数设置是否成功',choices=ifArgsSet,default=2,help_text="参数设置是否成功")
-    temperature = models.FloatField(max_length=10, verbose_name='温度',blank=True,null=True,help_text="温度")
-    signal = models.FloatField(max_length=10, verbose_name='信号',blank=True,null=True,help_text="信号")
-    chunShui = models.IntegerField(verbose_name='纯水',default=0,help_text="纯水")
-    yuanShui = models.IntegerField(verbose_name='原水',default=0,help_text="原水")
-    zhiShuiTime = models.IntegerField(verbose_name='制水时间',default=0,help_text="制水时间")  #单位 分钟
-    zhiShuiTotalTime = models.IntegerField(verbose_name='制水累计',default=0,help_text="制水累计")  #单位 天
-    MainboardID = models.CharField(max_length=50, verbose_name='主板编号',help_text="主板编号")
-   
-    def __str__(self):
-        return self.device_id
-
-    class Meta:
-        verbose_name = '设备'
-        verbose_name_plural = '设备'   
-        indexes = [models.Index(fields=['online']),]
-
-class Device_args_set(models.Model):
-    """
-    主页->设备管理->参数设置
-    反渗透设备参数设置 页面
-    """
-    device_id = models.OneToOneField(Device, on_delete=models.DO_NOTHING,verbose_name='设备ID',related_name="device_args_set",blank=True,null=True)
-    _1t = models.IntegerField(verbose_name='开启冲洗阀时间1T(1-240秒)')
-    _2t = models.IntegerField(verbose_name='开启制水泵时间2T(1-240秒)')
-    _3t = models.IntegerField(verbose_name='循环冲洗时间3T(1-240秒)')
-    _4t = models.IntegerField(verbose_name='水满后冲洗时间4T(1-240秒)')
-    _5t = models.IntegerField(verbose_name='冲洗时间间隔5T(1-240分)')
-    _6t = models.IntegerField(verbose_name='水满制水泵停止时间6T(5-240秒)')
-    _7t = models.IntegerField(verbose_name='臭氧杀菌时间7T(5-240秒)')
-    _8t = models.IntegerField(verbose_name='臭氧杀菌间隔8T(10-240分)')
-    _1c = models.IntegerField(verbose_name='温控加热启动温度1C(1-30℃)')
-    _2c = models.IntegerField(verbose_name='温控加热停止温度2C(1-30℃)')
-    _2d = models.IntegerField(verbose_name='电导率显示方式2D(1TDS 2电导率)')
-    _3d = models.IntegerField(verbose_name='TDS修正数据3D(0-255)')
-    _4d = models.IntegerField(verbose_name='洗膜方式4D(1低压 2高压)')
-
-    def __str__(self):
-        return self.device_id_id
-
-    class Meta:
-        verbose_name = '设备参数设置'
-        verbose_name_plural = verbose_name
-    
-class Device_run_state(models.Model):
-    """
-    主页->设备管理->设备运行状态 页面
-    """
-
     dev_states = (
         (0,"出厂"),
         (1,"正常制水"),
@@ -97,7 +45,18 @@ class Device_run_state(models.Model):
         (31,"低压"),
     )
     
-    device_id = models.OneToOneField(Device, on_delete=models.DO_NOTHING,verbose_name='设备ID',related_name="device_run_state",blank=True,null=True)
+    device_id = models.CharField(max_length=50, verbose_name='设备ID',help_text="设备ID",primary_key=True)
+    remarks = models.CharField(max_length=50, verbose_name='备注名称',blank=True,null=True,help_text="备注名称")
+    online = models.IntegerField(verbose_name='是否离线',choices=lineStates,default=2,help_text="是否离线")
+    arg_set_state = models.IntegerField(verbose_name='参数设置是否成功',choices=ifArgsSet,default=2,help_text="参数设置是否成功")
+    temperature = models.FloatField(max_length=10, verbose_name='温度',blank=True,null=True,help_text="温度")
+    signal = models.FloatField(max_length=10, verbose_name='信号',blank=True,null=True,help_text="信号")
+    chunShui = models.IntegerField(verbose_name='纯水',default=0,help_text="纯水")
+    yuanShui = models.IntegerField(verbose_name='原水',default=0,help_text="原水")
+    zhiShuiTime = models.IntegerField(verbose_name='制水时间',default=0,help_text="制水时间")  #单位 分钟
+    zhiShuiTotalTime = models.IntegerField(verbose_name='制水累计',default=0,help_text="制水累计")  #单位 天
+    MainboardID = models.CharField(max_length=50, verbose_name='主板编号',help_text="主板编号")
+        
     wenKongSwitch = models.BooleanField(verbose_name='温控开关',default=False)
     dev_state = models.IntegerField(verbose_name='设备状态',choices=dev_states,blank=True,null=True)
     yuanShuibeng = models.BooleanField(verbose_name='原水泵',default=False)
@@ -108,16 +67,28 @@ class Device_run_state(models.Model):
     chouYangQi = models.BooleanField(verbose_name='臭氧器',default=False)
     remoteSwitch = models.BooleanField(verbose_name='远程开关',default=False)
 
-    # def __str__(self):
-    #     return self.device_id_id
+    _1t = models.IntegerField(verbose_name='开启冲洗阀时间1T(1-240秒)',blank=True,null=True)
+    _2t = models.IntegerField(verbose_name='开启制水泵时间2T(1-240秒)',blank=True,null=True)
+    _3t = models.IntegerField(verbose_name='循环冲洗时间3T(1-240秒)',blank=True,null=True)
+    _4t = models.IntegerField(verbose_name='水满后冲洗时间4T(1-240秒)',blank=True,null=True)
+    _5t = models.IntegerField(verbose_name='冲洗时间间隔5T(1-240分)',blank=True,null=True)
+    _6t = models.IntegerField(verbose_name='水满制水泵停止时间6T(5-240秒)',blank=True,null=True)
+    _7t = models.IntegerField(verbose_name='臭氧杀菌时间7T(5-240秒)',blank=True,null=True)
+    _8t = models.IntegerField(verbose_name='臭氧杀菌间隔8T(10-240分)',blank=True,null=True)
+    _1c = models.IntegerField(verbose_name='温控加热启动温度1C(1-30℃)',blank=True,null=True)
+    _2c = models.IntegerField(verbose_name='温控加热停止温度2C(1-30℃)',blank=True,null=True)
+    _2d = models.IntegerField(verbose_name='电导率显示方式2D(1TDS 2电导率)',blank=True,null=True)
+    _3d = models.IntegerField(verbose_name='TDS修正数据3D(0-255)',blank=True,null=True)
+    _4d = models.IntegerField(verbose_name='洗膜方式4D(1低压 2高压)',blank=True,null=True)
 
-
+   
+    def __str__(self):
+        return self.device_id
 
     class Meta:
-        verbose_name = '设备运行状态'
-        verbose_name_plural = '设备运行状态'
-        indexes = [models.Index(fields=['dev_state']),]
-
+        verbose_name = '设备'
+        verbose_name_plural = '设备'   
+        indexes = [models.Index(fields=['online',"dev_state"]),]
 
 class RepairDevice(models.Model):
     """

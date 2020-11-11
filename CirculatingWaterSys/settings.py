@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'CirculatingWaterSys',        #数据库名字
         'USER': 'root',          #账号
         'PASSWORD': '123456',    #密码
-        'HOST': '172.18.0.2',     #docker 内网ip
+        'HOST': '192.168.99.100',     #docker 内网ip
         'PORT': '3306',          #端口
         "OPTIONS":{"init_command":"SET default_storage_engine=INNODB;",
                    'charset': 'utf8',
