@@ -24,90 +24,116 @@
         </div>
 
         <div class="ej_cx">
-            <div class="cx_r login-header" style="margin-top: 3%; float: left; margin-left: 25%;">
+            <div id="query-device" class="cx_r login-header" style="margin-top: 3%; float: left; margin-left: 25%;">
                 <a href="javascript:void(0);" >查询<img src="/static/images/x.png" /></a>
             </div>
-            <div class="cx_r login-header" style="margin-top: 3%; float: right; margin-right: 25%;">
+            <div id="add-device" class="cx_r login-header" style="margin-top: 3%; float: right; margin-right: 25%;">
                 <a href="javascript:void(0);" >添加<img src="/static/images/x.png" /></a>
             </div>
             <div class=" clear"></div>
 
         </div>
         
-                <div class="login">
-				<form onsubmit="javascript:return submit1();" id="queryDevice">
-                    <div class="login-title"><span><a href="javascript:void(0);" class="close-login">关闭</a></span></div>
-                    <div class="login-input-content">
-                        <div class="login-input">
-                            <label>控制器编号：</label>
-                            <input type="text" placeholder="请输入主板编号"  name="DeviceID" id="DeviceID" class="list-input"/>
-                        </div>
-                        
-                        <div class="login-input" id="onlineState">
-                            <label>网络状态：</label>
-                            <span><input name="NetState" type="radio" value="1"  class="zx" style="width:30px;height:30px"/>在线  </span>
-                            <span><input name="NetState" type="radio" value="0" class="zx"  style="width:30px;height:30px"/>离线 </span>
-                        </div>
-                        <div class="login-input">
-                            <label>设备状态：</label>
-                           
-                         <select style="padding: 5px 10px;width:260px; font-size:2em;" name="DeviceState">
-                                <option></option>
-                                 
-                                <option value="0"  selected>出厂</option> 
-                                 
-                                <option value="1"  >正常制水</option> 
-                                 
-                                <option value="2"  >冲洗</option> 
-                                 
-                                <option value="3"  >水满</option> 
-                                 
-                                <option value="4"  >缺水</option> 
-                                 
-                                <option value="5"  >臭氧</option> 
-                                 
-                                <option value="6"  >清洗前置罐</option> 
-                                 
-                                <option value="10"  >参数设置失败</option> 
-                                 
-                                <option value="11"  >正常制水_repeat?</option> 
-                                 
-                                <option value="12"  >冲洗</option> 
-                                 
-                                <option value="13"  >水满</option> 
-                                 
-                                <option value="14"  >缺水</option> 
-                                 
-                                <option value="15"  >臭氧</option> 
-                                 
-                                <option value="16"  >清洗前置罐</option> 
-                                 
-                                <option value="20"  >无原水</option> 
-                                 
-                                <option value="21"  >低压</option> 
-                                 
-                                <option value="30"  >无原水</option> 
-                                 
-                                <option value="31"  >低压</option> 
-                                                                 <option selected></option>
-                                                                <!-- <option value="" selected>请选择状态</option> -->
-                          
-                            </select>
-                           
-                           
-                        </div>
-                    </div>
-                    <div class="login-button">
-					
-                     <!-- <button  class="btn_confirm" type="submit" id="login-button-submit">查询</button> -->
-                     <input  class="btn_confirm" type="submit" id="login-button-submit" value="查询" />
-					
-					</div>
-					</form>
+        <div id="query-div-form" class="login">
+            <form onsubmit="javascript:return query_submit();" id="queryDevice">
+            <div class="login-title"><span><a href="javascript:void(0);" class="close-login">关闭</a></span></div>
+            <div class="login-input-content">
+                <div class="login-input">
+                    <label>控制器编号：</label>
+                    <input type="text" placeholder="请输入主板编号"  name="ManibordID" class="list-input"/>
                 </div>
+                
+                <div class="login-input" id="onlineState">
+                    <label>网络状态：</label>
+                    <span><input name="NetState" type="radio" value="1"  class="zx" style="width:30px;height:30px"/>在线  </span>
+                    <span><input name="NetState" type="radio" value="0" class="zx"  style="width:30px;height:30px"/>离线 </span>
+                </div>
+                <div class="login-input">
+                    <label>设备状态：</label>
+                    
+                    <select style="padding: 5px 10px;width:260px; font-size:2em;" name="DeviceState">
+                        <option></option>
+                            
+                        <option value="0"  selected>出厂</option> 
+                            
+                        <option value="1"  >正常制水</option> 
+                            
+                        <option value="2"  >冲洗</option> 
+                            
+                        <option value="3"  >水满</option> 
+                            
+                        <option value="4"  >缺水</option> 
+                            
+                        <option value="5"  >臭氧</option> 
+                            
+                        <option value="6"  >清洗前置罐</option> 
+                            
+                        <option value="10"  >参数设置失败</option> 
+                            
+                        <option value="11"  >正常制水_repeat?</option> 
+                            
+                        <option value="12"  >冲洗</option> 
+                            
+                        <option value="13"  >水满</option> 
+                            
+                        <option value="14"  >缺水</option> 
+                            
+                        <option value="15"  >臭氧</option> 
+                            
+                        <option value="16"  >清洗前置罐</option> 
+                            
+                        <option value="20"  >无原水</option> 
+                            
+                        <option value="21"  >低压</option> 
+                            
+                        <option value="30"  >无原水</option> 
+                            
+                        <option value="31"  >低压</option> 
+                                                            <option selected></option>
+                                                        <!-- <option value="" selected>请选择状态</option> -->
+                    
+                    </select>
+                    
+                    
+                </div>
+            </div>
+            <div class="login-button">
+            
+                <!-- <button  class="btn_confirm" type="submit" id="login-button-submit">查询</button> -->
+                <input  class="btn_confirm" type="submit" id="login-button-submit" value="查询" />
+            
+            </div>
+            </form>
+        </div>
 
 
+        <div id="add-div-form" class="login">
+            <form onsubmit="javascript:return add_submit();" id="addDevice">
+                <div class="login-title"><span><a href="javascript:void(0);" class="close-login">关闭</a></span></div>
+                <div class="login-input-content">                            
+                    <div class="login-input">
+                        <label>设备ID:</label>
+                        <input type="text" placeholder="请输入设备ID"  name="deviceID"  class="list-input"/>
+                    </div>
+                    <div class="login-input">
+                        <label>备注名称:</label>
+                        <input type="text" placeholder="请输入备注名称"  name="remarks"  class="list-input"/>
+                    </div>
 
+                    <div class="login-input">
+                        <label>主板编号：</label>
+                        <input type="text" placeholder="请输入主板编号"  name="ManibordID"  class="list-input"/>
+                    </div>
+
+                </div>
+                <div class="login-button">
+
+                 <!-- <button  class="btn_confirm" type="submit" id="login-button-submit">查询</button> -->
+                 <input  class="btn_confirm" type="submit" id="login-button-submit" value="添加" />
+
+                </div>
+            </form>
+        </div>
 
         <div class="login-bg"></div>        
         <div id="deviceList"  class="er_main">
@@ -188,6 +214,10 @@
     }
     </script>
     <script>
+        $.ajaxSetup({
+            data:{csrfmiddlewaretoken:'{{ csrf_token }}'}
+        })
+
         String.format = function(src){  
             if (arguments.length == 0) return null;  
             var args = Array.prototype.slice.call(arguments, 1);  
@@ -195,47 +225,6 @@
                 return args[i];  
             });  
         };  
-
-    function getParameter(el){
-        var obj={};
-        $(el).each(function(index,item){
-            // 判断元素的类型
-            alert(el)
-            alert(item.html())
-            if(item.type=="text" || item.type=="password" || item.type=="select-one" || item.type=="tel" || 
-            item.type=="search" || item.type=="range" || item.type=="number" || item.type=="month" || 
-            item.type=="email" || item.type=="datetime-local" || item.type=="datetime" || item.type=="date" || 
-            item.type=="color"){
-            //获取到name的值,name的值就是向后台传递的数据
-            obj[$(this).attr("name")]=$(this).val();
-            alert(2)
-
-            }else if(item.type=="checkbox"){
-            var stamp=false;
-            if($(this).attr("name") && !stamp){
-            stamp=false;
-            // 获取到复选框选中的元素
-            var checkboxEl=$("input[name="+$(item).attr('name')+"]:checked");
-            if(checkboxEl){
-            var checkboxArr=[];
-            // 取出复选框选中的值
-            checkboxEl.each(function(idx,itm){
-                checkboxArr.push($(itm).val());
-            });
-            obj[$(this).attr("name")]=checkboxArr.join(",");
-            }
-            
-            }
-            }else if(item.type=="radio"){
-            // 获取到单选框选中的值
-            var radio_val=$("input[name="+$(item).attr('name')+"]:checked").val();
-            if(radio_val){
-            obj[$(item).attr("name")]=radio_val;
-            }
-            }
-        });
-        return obj;
-    }
 
 
         var map_whether_online = function(arg){
@@ -247,7 +236,17 @@
                 var online = "未知";
             return online;
         }
+        var map_arg_set = function(arg){
+            if (arg == 0) 
+                var argSet = "参数设置失败";
+            if (arg == 1) 
+                var argSet = "参数设置成功";
+            if (arg == 2) 
+                var argSet = "未知";
+            return argSet;
+        }
 
+        //pre page  next page
         $(".ui-pagination-page-item").click(function(){
             if ($(this).attr('href')){
                 $.ajax({
@@ -269,9 +268,9 @@
                             </dl>
                             <ul class="er_2">
                                 <li>{2}</li> 
-                                <li></li>     
-                                <li>{3}℃</li>
-                                <li>信号 {4}</li>
+                                <li>{3}</li>     
+                                <li>{4}℃</li>
+                                <li>信号 {5}</li>
                                 <div class=" clear"></div>
                             </ul>
                             <ul class="er_3">
@@ -296,6 +295,7 @@
                                 data["results"][idx]["device_id"],
                                 data["results"][idx]["remarks"],
                                 map_whether_online(data["results"][idx]["online"]),
+                                map_arg_set(data["results"][idx]["arg_set_state"]),
                                 data["results"][idx]["temperature"],
                                 data["results"][idx]["signal"],
                             )
@@ -306,14 +306,15 @@
             }   
         })
         
-        function submit1(){
-            var DeviceID = $("#DeviceID").val()
-            var NetState = $('input[name="NetState"]:checked').val()
-            var DeviceState = $('select :selected').val()
+        function query_submit(){
+            // <input type="text" placeholder="请输入主板编号"  name="DeviceID" id="DeviceID" class="list-input"/>
+            var MainboardID = $('#query-div-form input[name="ManibordID"]').val()
+            var NetState = $('#query-div-form input[name="NetState"]:checked').val()
+            var DeviceState = $('#query-div-form select :selected').val()
             // console.log(DeviceID)
             var url = String.format(
-                "/queryDeviceAPIView?DeviceID={0}&NetState={1}&DeviceState={2}",
-                DeviceID,
+                "/queryDeviceAPIView?MainboardID={0}&NetState={1}&DeviceState={2}",
+                MainboardID,
                 NetState,
                 DeviceState
             )
@@ -326,14 +327,85 @@
                     XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
                 },
                 success:function(data){
-                    console.log(data)
+
+                    var templateStr =`
+                        <div class="er_1"> 
+                            <dl> 
+                                <dt>设备ID：{0}</dt> 
+                                <dd>备注名称：{1}</dd> 
+                                <div class=" clear"></div>
+                            </dl>
+                            <ul class="er_2">
+                                <li>{2}</li> 
+                                <li>{3}</li>     
+                                <li>{4}℃</li>
+                                <li>信号 {5}</li>
+                                <div class=" clear"></div>
+                            </ul>
+                            <ul class="er_3">
+                                <li><button type="button"  onclick="power(2,'f0311c1e-e289-ea11-b0df-87120c3b66e0','关机');" class="kgj">关机</button></li>                                 
+                                <li><a href="/index/setting/sell/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">参数设置</a></li> 
+                                <li><a href="/index/Equipment/statetu/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">设备运行状态</a></li> 
+                                <li><a href="/index/Equipment/edit/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">修改</a></li> 
+                                <li><a href="/index/Equipment/info/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">更多</a></li> 
+                                <div class=" clear"></div>
+                            </ul>
+                        </div>
+                        `
+
+                    $('.login').hide();
+                    $('.login-bg').hide();
+                    $("#deviceList").empty()
+                    $("#pre").hide()
+                    $("#total").hide()
+                    $("#next").hide()
+                    for (idx in data){
+                        deviceList = String.format(templateStr,
+                            data[idx]["device_id"],
+                            data[idx]["remarks"],
+                            map_whether_online(data[idx]["online"]),
+                            map_arg_set(data[idx]["arg_set_state"]),
+                            data[idx]["temperature"],
+                            data[idx]["signal"],
+                        )
+                        $("#deviceList").append(deviceList)
+                    }
+
                 }
             });
             return false;
         }
 
 
+        
+        function add_submit(){
+            // <input type="text" placeholder="请输入主板编号"  name="DeviceID" id="DeviceID" class="list-input"/>
+            var deviceID = $('#add-div-form input[name="deviceID"]').val()
+            var remarks = $('#add-div-form input[name="remarks"]').val()
+            var MainboardID = $('#add-div-form input[name="ManibordID"]').val()
+
+            $.ajax({
+                type:'POST',
+                url:"/deviceEdit/",
+                cache: false,
+                type:"json",
+                data: {
+                        "device_id": deviceID, 
+                        "remarks":remarks,
+                        "MainboardID": MainboardID,
+                        },
+                beforeSend: function (XMLHttpRequest) {
+                    XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
+                },
+                success:function(data){
+                    console.log(data)
+                }
+            });
+            return false;
+        }
+        
         $(document).ready(function(){
+            //设备列表（总量:{0}台；在线:{1}台；故障:{2}台）
             $.ajax({
                 type:'GET',
                 url:"/queryStatistics/",
@@ -350,6 +422,7 @@
                 
             })
             
+            //首页设备列表展示
             $.ajax({
 					type:'GET',
 					url:"/deviceQuery/?page=1&page_size=10/",
@@ -367,9 +440,9 @@
                             </dl>
                             <ul class="er_2">
                                 <li>{2}</li> 
-                                <li></li>     
-                                <li>{3}℃</li>
-                                <li>信号 {4}</li>
+                                <li>{3}</li>     
+                                <li>{4}℃</li>
+                                <li>信号 {5}</li>
                                 <div class=" clear"></div>
                             </ul>
                             <ul class="er_3">
@@ -391,6 +464,7 @@
                                 data["results"][idx]["device_id"],
                                 data["results"][idx]["remarks"],
                                 map_whether_online(data["results"][idx]["online"]),
+                                map_arg_set(data["results"][idx]["arg_set_state"]),
                                 data["results"][idx]["temperature"],
                                 data["results"][idx]["signal"],
                             )

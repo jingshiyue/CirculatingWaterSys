@@ -33,7 +33,6 @@ class Pagination(PageNumberPagination):
 
 # CacheResponseMixin list和retrieve 才会缓存,需要后台配置
 class DeviceEditViewset(mixins.CreateModelMixin, mixins.UpdateModelMixin,mixins.DestroyModelMixin,viewsets.GenericViewSet):
-    pagination_class = Pagination
     # permission_classes = [IsAuthenticated,AdminPermission]
     # authentication_classes = [JSONWebTokenAuthentication]
     serializer_class = DeviceSerializer
@@ -75,21 +74,15 @@ class QueryDeviceAPIView(APIView):
     # authentication_classes = [JSONWebTokenAuthentication]
     def get(self, request):
         dateGet = (request.GET) #{"DeviceID": "zhuban", "NetState": "0", "DeviceState": "11"}
-        logger.debug(dateGet)
-        MainboardID = dateGet.get("DeviceID",None)
+        MainboardID = dateGet.get("MainboardID",None)
         online = dateGet.get("NetState",None)
         dev_state = dateGet.get("DeviceState",None)
-        logger.debug(online)
         conditions ={
             "MainboardID":MainboardID,
             "online":online,
+            "dev_state":dev_state
         }
-
-        obj = models.Device.objects.filter(**conditions).filter(
-            device_run_state__dev_state=dev_state)
-
+        obj = models.Device.objects.filter(**conditions)
         serislizer=DeviceSerializer(instance=obj,many=True,)
-        logger.debug(serislizer.data)
-
         return JsonResponse(serislizer.data,safe=False)
         # return HttpResponse(obj)

@@ -25,7 +25,7 @@ def sqlFetchall(sql):
 
 
 if __name__ == "__main__":
-    for i in range(1004,1043):
+    for i in range(1001,1043):
         validated_data = {}
         validated_data.setdefault("device_id",str(i))
         validated_data.setdefault("MainboardID",str(i)+"-编号")

@@ -44,8 +44,8 @@ class Device(BaseModel):
         (30,"无原水"),
         (31,"低压"),
     )
-    
-    device_id = models.CharField(max_length=50, verbose_name='设备ID',help_text="设备ID",primary_key=True)
+    nid = models.AutoField(primary_key=True)
+    device_id = models.CharField(max_length=50, verbose_name='设备ID',help_text="设备ID")
     remarks = models.CharField(max_length=50, verbose_name='备注名称',blank=True,null=True,help_text="备注名称")
     online = models.IntegerField(verbose_name='是否离线',choices=lineStates,default=2,help_text="是否离线")
     arg_set_state = models.IntegerField(verbose_name='参数设置是否成功',choices=ifArgsSet,default=2,help_text="参数设置是否成功")
