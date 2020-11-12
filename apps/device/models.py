@@ -45,7 +45,7 @@ class Device(BaseModel):
         (31,"低压"),
     )
     nid = models.AutoField(primary_key=True)
-    device_id = models.CharField(max_length=50, verbose_name='设备ID',help_text="设备ID")
+    device_id = models.CharField(max_length=50, verbose_name='设备ID',help_text="设备ID",unique=True)
     remarks = models.CharField(max_length=50, verbose_name='备注名称',blank=True,null=True,help_text="备注名称")
     online = models.IntegerField(verbose_name='是否离线',choices=lineStates,default=2,help_text="是否离线")
     arg_set_state = models.IntegerField(verbose_name='参数设置是否成功',choices=ifArgsSet,default=2,help_text="参数设置是否成功")
@@ -89,6 +89,7 @@ class Device(BaseModel):
         verbose_name = '设备'
         verbose_name_plural = '设备'   
         indexes = [models.Index(fields=['online',"dev_state"]),]
+
 
 class RepairDevice(models.Model):
     """

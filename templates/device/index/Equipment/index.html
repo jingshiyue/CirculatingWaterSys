@@ -214,9 +214,32 @@
     }
     </script>
     <script>
-        $.ajaxSetup({
-            data:{csrfmiddlewaretoken:'{{ csrf_token }}'}
-        })
+        
+        var templateStr =`
+                        <div class="er_1"> 
+                            <dl> 
+                                <dt>设备ID：{0}</dt> 
+                                <dd>备注名称：{1}</dd> 
+                                <div class=" clear"></div>
+                            </dl>
+                            <ul class="er_2">
+                                <li>{2}</li> 
+                                <li>{3}</li>     
+                                <li>{4}℃</li>
+                                <li>信号 {5}</li>
+                                <div class=" clear"></div>
+                            </ul>
+                            <ul class="er_3">
+                                <li><button type="button"  onclick="power(2,'f0311c1e-e289-ea11-b0df-87120c3b66e0','关机');" class="kgj">关机</button></li>                                 
+                                <li><a href="/index/setting/sell/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">参数设置</a></li> 
+                                <li><a href="/index/Equipment/statetu/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">设备运行状态</a></li> 
+                                <li><a href="/index/Equipment/edit/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">修改</a></li> 
+                                <li><a href="/index/Equipment/info/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">更多</a></li> 
+                                <div class=" clear"></div>
+                            </ul>
+                        </div>
+                        `
+
 
         String.format = function(src){  
             if (arguments.length == 0) return null;  
@@ -258,32 +281,6 @@
                     },
                     success:function(data){
                         // console.log(data)
-                        
-                        var templateStr =`
-                        <div class="er_1"> 
-                            <dl> 
-                                <dt>设备ID：{0}</dt> 
-                                <dd>备注名称：{1}</dd> 
-                                <div class=" clear"></div>
-                            </dl>
-                            <ul class="er_2">
-                                <li>{2}</li> 
-                                <li>{3}</li>     
-                                <li>{4}℃</li>
-                                <li>信号 {5}</li>
-                                <div class=" clear"></div>
-                            </ul>
-                            <ul class="er_3">
-                                <li><button type="button"  onclick="power(2,'f0311c1e-e289-ea11-b0df-87120c3b66e0','关机');" class="kgj">关机</button></li>                                 
-                                <li><a href="/index/setting/sell/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">参数设置</a></li> 
-                                <li><a href="/index/Equipment/statetu/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">设备运行状态</a></li> 
-                                <li><a href="/index/Equipment/edit/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">修改</a></li> 
-                                <li><a href="/index/Equipment/info/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">更多</a></li> 
-                                <div class=" clear"></div>
-                            </ul>
-                        </div>
-                        `
-                        
                         // console.log($("#pre").attr('href'))
                         // console.log($(this).attr('href'))
                         $("#pre").attr("href",data["previous"]);
@@ -327,32 +324,6 @@
                     XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
                 },
                 success:function(data){
-
-                    var templateStr =`
-                        <div class="er_1"> 
-                            <dl> 
-                                <dt>设备ID：{0}</dt> 
-                                <dd>备注名称：{1}</dd> 
-                                <div class=" clear"></div>
-                            </dl>
-                            <ul class="er_2">
-                                <li>{2}</li> 
-                                <li>{3}</li>     
-                                <li>{4}℃</li>
-                                <li>信号 {5}</li>
-                                <div class=" clear"></div>
-                            </ul>
-                            <ul class="er_3">
-                                <li><button type="button"  onclick="power(2,'f0311c1e-e289-ea11-b0df-87120c3b66e0','关机');" class="kgj">关机</button></li>                                 
-                                <li><a href="/index/setting/sell/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">参数设置</a></li> 
-                                <li><a href="/index/Equipment/statetu/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">设备运行状态</a></li> 
-                                <li><a href="/index/Equipment/edit/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">修改</a></li> 
-                                <li><a href="/index/Equipment/info/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">更多</a></li> 
-                                <div class=" clear"></div>
-                            </ul>
-                        </div>
-                        `
-
                     $('.login').hide();
                     $('.login-bg').hide();
                     $("#deviceList").empty()
@@ -388,17 +359,32 @@
                 type:'POST',
                 url:"/deviceEdit/",
                 cache: false,
-                type:"json",
                 data: {
                         "device_id": deviceID, 
                         "remarks":remarks,
                         "MainboardID": MainboardID,
+                        // "csrfmiddlewaretoken":"4k3TYP9ybseWhZ7APe284jre4sbpYDbdyLNzoETxYAcqEWyvYxnemyv9wn7sV3GR",
                         },
                 beforeSend: function (XMLHttpRequest) {
                     XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
+                    XMLHttpRequest.setRequestHeader("X-CSRFToken","4k3TYP9ybseWhZ7APe284jre4sbpYDbdyLNzoETxYAcqEWyvYxnemyv9wn7sV3GR");
                 },
                 success:function(data){
-                    console.log(data)
+                    // console.log(data)
+
+                    $('.login').hide();
+                    $('.login-bg').hide();
+                    $("#deviceList").empty()
+                    deviceList = String.format(templateStr,
+                            data["device_id"],
+                            data["remarks"],
+                            map_whether_online(data["online"]),
+                            map_arg_set(data["arg_set_state"]),
+                            data["temperature"],
+                            data["signal"],
+                        )
+                        $("#deviceList").append(deviceList)
+
                 }
             });
             return false;
@@ -431,30 +417,6 @@
                         XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
                     },
 					success:function(data){
-                        var templateStr =`
-                        <div class="er_1"> 
-                            <dl> 
-                                <dt>设备ID：{0}</dt> 
-                                <dd>备注名称：{1}</dd> 
-                                <div class=" clear"></div>
-                            </dl>
-                            <ul class="er_2">
-                                <li>{2}</li> 
-                                <li>{3}</li>     
-                                <li>{4}℃</li>
-                                <li>信号 {5}</li>
-                                <div class=" clear"></div>
-                            </ul>
-                            <ul class="er_3">
-                                <li><button type="button"  onclick="power(2,'f0311c1e-e289-ea11-b0df-87120c3b66e0','关机');" class="kgj">关机</button></li>                                 
-                                <li><a href="/index/setting/sell/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">参数设置</a></li> 
-                                <li><a href="/index/Equipment/statetu/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">设备运行状态</a></li> 
-                                <li><a href="/index/Equipment/edit/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">修改</a></li> 
-                                <li><a href="/index/Equipment/info/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">更多</a></li> 
-                                <div class=" clear"></div>
-                            </ul>
-                        </div>
-                        `
                           
                         $("#pre").attr("href",data["previous"]);
                         $("#total").html("共"+Math.ceil(data["count"]/10) +"页");
