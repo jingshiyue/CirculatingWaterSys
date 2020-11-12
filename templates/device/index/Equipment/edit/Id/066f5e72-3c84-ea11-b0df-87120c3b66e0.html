@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+        <meta charset="utf-8" />
+        
+<title>设备编辑-控制器</title>
+
+        <meta name="keywords"  content="" />
+        <meta name="description" content="控制器" />
+        <meta name="author" content="DeathGhost" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name='apple-touch-fullscreen' content='yes'>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="format-detection" content="address=no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="/public/static/css/style.css"/>
+        <script src="/public/static/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+<body>
+    <!--主体-->
+    
+<style type="text/css">
+    .none{display:none;}
+	body{ background:url(/public/static/images/bg.jpg) ;}
+</style>
+        <form id="h-form">
+        <div class="content">
+            <header class="page-header1">
+                <a href="javascript:;" onClick="javascript:history.back(-1);"><img src="/public/static/img/icon_left.png" class="back_img" style="float:left;"/></a>
+                <h3>设备编辑</h3>
+            </header>
+            <div class="equiment_revise">
+                <div class="equiment_revise_list">
+                    <div class="equiment_revise_lists">
+                        <div class="equiment_revise_list_left equiment_revise_id">设备ID</div>
+                        <div class="equiment_revise_list_right equiment_revise_id_inp">
+                            <input type="text" name="DeviceID" value="3000003" placeholder="1432" class="equiment_revise_id_inps" readonly="1" />
+                        </div>
+                    </div>
+                    
+                    <div class="equiment_revise_lists">
+                        <div class="equiment_revise_list_left equiment_revise_name">备注名称</div>
+                        <div class="equiment_revise_list_right equiment_revise_name_inp">
+                            <input type="text" name="Remark" value="测试" placeholder="请输入备注名称" class="equiment_revise_name_inps"/>
+                        </div>
+                    </div>
+                                        
+        
+            <!-- <div class="ascription_details none">
+                <div class="ascription_list">
+                    <div class="ascription_list_left">
+                        <div class="timecar-radio">
+                            <label for="timecar" onselectstart="return false" class="">
+                                <input type="radio" name="time" id="timecar1" value='1'/>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ascription_list_center">测测试试322222222222</div>
+                </div>
+                <div class="ascription_list">
+                    <div class="ascription_list_left">
+                        <div class="timecar-radio">
+                            <label for="timecar" onselectstart="return false" class="timecar-radioed">
+                                <input type="radio" name="time" id="timecar1" value='1'/>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ascription_list_center">测测试试2</div>
+                </div>
+                
+                <div class="ascription_list">
+                    <div class="ascription_list_left">
+                        <div class="timecar-radio">
+                            <label for="timecar" onselectstart="return false" class="timecar-radioed">
+                                <input type="radio" name="time" id="timecar1" value='1'/>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ascription_list_center">测测试试1</div>
+                </div>
+                
+                <div class="ascription_list">
+                    <div class="ascription_list_left">
+                        <div class="timecar-radio">
+                            <label for="timecar" onselectstart="return false" class="timecar-radioed">
+                                <input type="radio" name="time" id="timecar1" value='1'/>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ascription_list_center">测测试试4</div>
+                </div>
+                
+            </div> -->
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="equipment_btn_keep">
+                <input type="hidden" name="Id" value="066f5e72-3c84-ea11-b0df-87120c3b66e0">
+                <button type="button" class="btn_keep" id="h-submit">保存</button>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        </form>
+        
+        
+    <script type="text/javascript">
+        $('.equiment_revise_list_img').on('click',function(e){
+            
+            if($('.ascription_details').css('display') == 'block'){
+                $('.ascription_details').hide();
+            }else{
+                $('.ascription_details').show();
+            }
+            
+            
+        })
+    </script>
+    <script type="text/javascript">
+        $(".timecar-radio label").on('touchstart',function(){
+            if($(this).hasClass('timecar-radioed')){
+                $(".timecar-radio label").addClass("timecar-radioed");
+                $(this).removeClass("timecar-radioed");
+            }
+        })
+    </script>
+    <script type="text/javascript">
+        $(".timecar-radio label").click(function(){
+            var content = $(this).parent().parent().parent().find('.ascription_list_center').html();
+                $('.son').val(content);
+        $('.ascription_details').hide();
+        });
+        
+        
+    </script>
+    <script>
+var SCOPE = {
+  'post_url' : ""
+}
+</script>
+<script src="/public/static/js/layer/mobile/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/static/js/mdialog.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/static/js/mcommon.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+</html>

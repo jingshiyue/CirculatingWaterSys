@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>设备状态图-控制器</title>
+<meta name="Keywords" content="" >
+<meta name="Description" content="" >
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" />
+<style type="text/css">
+
+
+ @charset "utf-8";
+/* CSS Document */
+html,body {margin:0; padding:0; border:0; text-align:left; font-size:12px; line-height:1.8em; font-family: "微软雅黑",Arial, Helvetica, sans-serif; color:#000;}
+html { -webkit-text-size-adjust:none;}
+input,textarea,select { margin:0; padding:0; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000; outline:none;}
+p,img,div,ol,ul,li,dl,dt,dd,table,tr,td,span,em,strong,label,form,h1,h2,h3,h4,h5,h6,iframe,font,b,u,i,del,a { margin:0; padding:0; border:0; list-style-type:none;}
+a { color:#333; text-decoration:none; outline:none;}
+.clear{ clear:both;}
+
+
+.warp
+{transform: rotate(90deg);
+-ms-transform: rotate(90deg);		
+-webkit-transform: rotate(90deg);	
+-o-transform: rotate(90deg);		
+-moz-transform: rotate(90deg);		
+}
+
+.warp{ width:100%; margin:0 auto;margin-top:42%;max-width: 1000px; min-width:650px;padding-top:40%;}
+.tu{ width:100%;}
+.warp .kg dt{width:100%; margin:0 auto; height:126px; min-width:100px; line-height:130px; margin-bottom:10%;}
+.warp dl{  float:left; text-align:center;width:12%; margin-right:2.2%}
+.warp dl dt{width:100%; margin:0 auto; background:url(/public/static/images/tu1.png) no-repeat center; font-size:1.2em; text-align:center; height:26px; min-width:74px; line-height:26px; margin-bottom:15%;}
+.warp dl dd{position: relative;margin: 0 auto; width:100%;}
+.wk{color:#fff; font-size:1.4em; padding:2%; padding-top:1%;}
+.tishi{color:#F00; font-size:1em; margin：0 auto}
+.bd{ float:left ; padding-right:1%}
+.warp dd div {width: 74px;height: 55px;margin: 0 auto}
+.warp dd div  img {	top: 0;left:15px;	z-index: 1;}
+.warp dd div  img.active {z-index:3;}
+.bd2{ float:right ; font-size:1em;padding-right:5%;color:#29FE2A;}
+
+
+
+</style>
+
+</head>
+
+<body style="background-color:#0099f9; overflow:hidden">
+
+    <div class="warp">
+            
+            <div class="wk">
+											<img src="/public/static/images/yuan2.png"  class="bd"/>温控灯开
+						
+			
+			
+			<p  class="bd2"/>								设备状态：正常制水</p>
+			</div>
+
+            <img src="/public/static/images/tu.png"  class="tu">
+
+			
+                    
+              	<dl>
+                	<dt>原水泵</dt>
+                	<dd>
+                        <div id="imageContainer">
+														<img src="/public/static/images/tu4.png"  class="active" alt="02"  />
+										
+						</div>
+                    </dd>
+                       <div class="clear"></div>
+                </dl>
+                
+              	<dl>
+                	<dt>进水阀</dt>
+                	<dd>
+                        <div id="imageContainer1">
+														<img src="/public/static/images/tu4.png"  class="active" alt="02"  />
+							                        </div>
+                    </dd>
+                       <div class="clear"></div>
+                </dl>
+                
+              	<dl>
+                	<dt>低压开关</dt>
+                	<dd>
+                        <div id="imageContainer2">
+                
+														<img src="/public/static/images/tu4.png"  class="active" alt="02"  />
+														
+                        </div>
+                    </dd>
+                       <div class="clear"></div>
+                </dl>
+                
+              	<dl>
+                	<dt>高压泵</dt>
+                	<dd>
+                        <div id="imageContainer3">
+														<img src="/public/static/images/tu4.png"  class="active" alt="02"  />
+							                        </div>
+                    </dd>
+                       <div class="clear"></div>
+                </dl>
+                
+              	<dl>
+                	<dt>冲洗阀</dt>
+                	<dd>
+                        <div id="imageContainer4">
+                            							<img src="/public/static/images/tu3.png"  class="active" alt="01"  />
+							   
+                        </div>
+                    </dd>
+                       <div class="clear"></div>
+                </dl>
+                
+              	<dl>
+                	<dt>臭氧器</dt>
+                	<dd>
+                        <div id="imageContainer5">
+                            							<img src="/public/static/images/tu3.png"  class="active" alt="01"  />
+							                        </div>
+                    </dd>
+                       <div class="clear"></div>
+                </dl>
+											<dl>
+                	<dt style="color:#F00;">远程开关</dt>
+                	<dd>
+                        <div id="imageContainer6" onclick="power2();">
+						<input type="hidden" id="Id" value="47f09cf7-272d-ea11-b0de-fdb4983a349f"/>
+                            <img src="/public/static/images/tu4.png" class="active" alt="01"  />
+                           
+                        </div>
+                    </dd>
+                       <div class="clear"></div>
+                   </dl>	
+								
+                <!--
+              	<dl class="kg">
+	
+                	<dd>
+					 <input type="hidden" id="Id" value="47f09cf7-272d-ea11-b0de-fdb4983a349f"/>
+													<div id="imageContainer6" onclick="power2();">
+						
+								<img src="/public/static/images/tu2.png" class="active" alt="02"  />
+								
+								
+							</div>		
+						                        
+                    </dd>
+                       <div class="clear"></div>
+					   -->
+                </dl>
+                
+        </div>
+<script src="/public/static/js/jquery-1.7.1.min.js"></script>
+    <script src="/public/static/js/layer/mobile/layer.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/static/js/mdialog.js" type="text/javascript" charset="utf-8"></script>
+<script>
+var imageObject = {
+	clickSwap : function(obj) {
+		obj.click(function() {
+			var activeImage = $(this).children('img.active');
+			activeImage.removeClass('active');
+			if (activeImage.next().length > 0) {
+				activeImage.next().addClass('active');
+			} else {
+				$(this).children('img:first-child').addClass('active');
+			}
+			return false;
+		});
+	}
+};
+$(function() {
+	//imageObject.clickSwap($('#imageContainer'));
+	//imageObject.clickSwap($('#imageContainer1'));
+	//imageObject.clickSwap($('#imageContainer2'));
+	//imageObject.clickSwap($('#imageContainer3'));
+	//imageObject.clickSwap($('#imageContainer4'));
+	//imageObject.clickSwap($('#imageContainer5'));
+	imageObject.clickSwap($('#imageContainer6'));
+});
+function power1()
+    {
+        $.ajax({
+            type:'POST',
+            url:"/index/equipment/power",
+            dataType:'JSON',
+            data:{status:1,Id:$("#Id").val()},
+            success:function(data){
+                if(data.status == 1){
+				
+				  var t = setTimeout(function(){window.location.reload();},1000);
+ 
+                }else{
+				
+                  window.location.reload();
+                }
+            }
+        })
+    }
+	function power2()
+    {
+        $.ajax({
+            type:'POST',
+            url:"/index/equipment/power",
+            dataType:'JSON',
+            data:{status:2,Id:$("#Id").val()},
+            success:function(data){
+                if(data.status == 1){
+					var t = setTimeout(function(){window.location.reload();},800);
+                }else{
+				
+                 window.location.reload();
+                }
+            }
+        })
+    }
+function power3(status,title){
+        layer.open({
+            content: ''
+            ,btn: ['确认', '取消']
+            ,yes: function(index){
+                layer.close(index);
+                var url = "/index/equipment/power.html";
+                data = {};
+                data['Id'] = "47f09cf7-272d-ea11-b0de-fdb4983a349f";
+                data['status'] = status;
+                $.post(url,data,function(res){
+                    if (res.status == '1') {
+                        dialog.success(res.message,res.url);
+                    }else if(res.status == '0'){
+                        dialog.error(res.message,res.url);
+                    }
+                },"JSON");
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+        <meta charset="utf-8" />
+        
+<title>修改密码-控制器</title>
+
+        <meta name="keywords"  content="" />
+        <meta name="description" content="控制器" />
+        <meta name="author" content="DeathGhost" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name='apple-touch-fullscreen' content='yes'>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="format-detection" content="address=no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="/public/static/css/style.css"/>
+        <script src="/public/static/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+<body>
+    <!--主体-->
+    
+	<body style="background:#f6f6f6;">
+		<div class="content">
+			<header class="page-header1">
+				<a href="javascript:history.back(-1)"><img src="/public/static/img/icon_left.png" class="back_img" style="float:left;"/></a>
+				<h3>修改密码</h3>
+			</header>
+			<form id="h-form">
+			<div class="cipher_code">
+				<div class="cipher_code_list">
+					<div class="cipher_code_lists">
+						<div class="cipher_code_lists_left">
+							<img src="/public/static/img/icon_passwords.png" style="width:60%;"/>
+						</div>
+						<div class="cipher_code_lists_right">
+							<input type="password" name="password_old" value="" class="original_cipher_inp" placeholder="原始密码"/>
+						</div>
+					</div>
+					
+					<div class="cipher_code_lists">
+						<div class="cipher_code_lists_left">
+							<img src="/public/static/img/icon_passwords.png" style="width:60%;"/>
+						</div>
+						<div class="cipher_code_lists_right">
+							<input type="password" name="password_new" value="" class="new_code_inp" placeholder="新密码"/>
+						</div>
+					</div>
+					
+					<div class="cipher_code_lists">
+						<div class="cipher_code_lists_left">
+							<img src="/public/static/img/icon_passwords.png" style="width:60%;"/>
+						</div>
+						<div class="cipher_code_lists_right">
+							<input type="password" name="re_password_new" value="" class="confirm_pass_inp" placeholder="确认密码"/>
+						</div>
+					</div>
+				</div>
+				<div class="cipher_code_btn">
+					<button type="button" class="btn_save_password" id="h-submit">保存</button>
+				</div>
+			</div>
+			</form>
+			<div style="clear: both;"></div>
+		</div>
+    <script>
+var SCOPE = {
+  'post_url' : ""
+}
+</script>
+<script src="/public/static/js/layer/mobile/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/static/js/mdialog.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/static/js/mcommon.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+</html>

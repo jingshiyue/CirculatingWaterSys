@@ -38,6 +38,16 @@ urlpatterns = [
     path('index/index.html/', TemplateView.as_view(template_name='device/index/index/index.html'),name='index'),   #需要加认证
     path('index/index/my.html/', TemplateView.as_view(template_name='device/index/index/my.html'),name='my'), 
     path('index/Equipment/index.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
+
+    path('index/repairs/index.html/', TemplateView.as_view(template_name='device/index/repairs/index.html')), 
+    path('index/repairs/add.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
+    path('index/repairs/addfeedback/id/24.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
+    path('index/remind/index.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
+    path('index/remind/add.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
+    path('index/fault/index.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
+    path('index/fault/index.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
+
+
     path('queryStatistics/',QueryStatisticsAPIView.as_view()),
     path('queryDeviceAPIView/',QueryDeviceAPIView.as_view()),
 
