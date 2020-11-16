@@ -103,11 +103,11 @@ class RepairDevice(models.Model):
         (4,"非常不满意"),
     )
     repairID = models.CharField(max_length=20, verbose_name='报修编号') #设备号-序号
-    repair = models.CharField(max_length=20, verbose_name='报修状态',blank=True,null=True)
+    repairState = models.CharField(max_length=20, verbose_name='报修状态',blank=True,null=True)
     reportMan = models.CharField(max_length=20, verbose_name='报修人员',blank=True,null=True)
     Phone = models.CharField(max_length=20, verbose_name='联系电话',blank=True,null=True)
     # dev_state = models.ForeignKey(Device, on_delete=models.SET_NULL, null=True,verbose_name='设备号') #一对多关系
-    dev_state = models.CharField(max_length=40,verbose_name='设备号') #一对多关系
+    deviceNum = models.CharField(max_length=40,verbose_name='设备号') #一对多关系
     repairAddr = models.CharField(max_length=20, verbose_name='维修地点',blank=True,null=True)
     descErorr = models.CharField(max_length=20, verbose_name='故障简述',blank=True,null=True)
     runErrorTime = models.DateTimeField(verbose_name='故障日期')
@@ -118,35 +118,16 @@ class RepairDevice(models.Model):
     ifSatisfied = models.IntegerField(verbose_name='是否满意',choices=ifSatisfied,blank=True,null=True)
     comment = models.CharField(max_length=400, verbose_name='评价',blank=True,null=True)
 
+    # reportMan = models.CharField(max_length=20, verbose_name='报修人员名称',blank=True,null=True)
+    # Phone = models.CharField(max_length=20, verbose_name='电话',blank=True,null=True)
+    # repairProf = models.CharField(max_length=20, verbose_name='报修内容描述',blank=True,null=True)
+    # repairAddr = models.CharField(max_length=20, verbose_name='报修地址',blank=True,null=True)
+
     def __str__(self):
         return self.repairID
 
     class Meta:
-        verbose_name = '报修单展示'
-        verbose_name_plural = verbose_name
-
-class RepairDeviceAdd(models.Model):
-    """
-    主页->报修管理-> 一键报修 页面里展示数据
-    """
-    ifSolve = ((1,"已解决"),(2,"未解决"))
-    ifSatisfied = (
-        (1,"非常满意"),
-        (2,"满意"),
-        (3,"不满意"),
-        (4,"非常不满意"),
-    )
-    deviceID = models.CharField(max_length=20, verbose_name='设备号')
-    reportMan = models.CharField(max_length=20, verbose_name='报修人员名称',blank=True,null=True)
-    Phone = models.CharField(max_length=20, verbose_name='电话',blank=True,null=True)
-    repairProf = models.CharField(max_length=20, verbose_name='报修内容描述',blank=True,null=True)
-    repairAddr = models.CharField(max_length=20, verbose_name='报修地址',blank=True,null=True)
-
-    def __str__(self):
-        return self.deviceID
-
-    class Meta:
-        verbose_name = '报修单添加'
+        verbose_name = '报修单'
         verbose_name_plural = verbose_name
 
 

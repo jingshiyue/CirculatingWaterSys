@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+        <meta charset="utf-8" />
+        
+<title>维修回馈-控制器</title>
+
+        <meta name="keywords"  content="" />
+        <meta name="description" content="控制器" />
+        <meta name="author" content="DeathGhost" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name='apple-touch-fullscreen' content='yes'>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="format-detection" content="address=no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+        <script src="/static/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+<body>
+    <!--主体-->
+    
+<style type="text/css">
+    .none{display:none;}
+	body{ background:url(/static/images/bg.jpg) ;}
+</style>
+<div class="content">
+    <header class="page-header1">
+        <a href="javascript:;" onClick="javascript:history.back(-1);"><img src="/static/img/icon_left.png" class="back_img" style="float:left;"/></a>
+        <h3>维修回馈</h3>
+    </header>
+    <form id="h-form">
+    <div class="add_account" style="color: #E5E3E3;">
+            <input type="hidden" name="id" value=""/>
+			<div class="add_account_lists">
+                <div class="add_account_lists_left">是否解决</div>
+                <div class="add_account_lists_right">
+					<input class="radio" type="radio" name="is_ever" value="1" title="已解决" checked>已解决
+					<input type="radio" name="is_ever" value="0" title="未解决">未解决
+                </div>
+            </div>
+			<div class="add_account_lists">
+                <div class="add_account_lists_left">是否满意</div>
+                <div class="add_account_lists_right">
+						<input class="radio" type="radio" name="eval_degree" value="1" title="非常满意" checked>非常满意
+						<input type="radio" name="eval_degree" value="2" title="满意">满意
+						<input type="radio" name="eval_degree" value="3" title="不满意">不满意
+						<input type="radio" name="eval_degree" value="4" title="非常不满意">非常不满意
+            
+                </div>
+            </div>	
+			<div class="add_account_lists">
+                <div class="add_account_lists_left">评价</div>
+                <div class="add_account_lists_right">
+                    <input type="text" name="eval_cont" value="" placeholder="请输入评价内容" class="add_account_inp add_account_name_inp"/>
+                </div>
+            </div>			
+        </div>
+        
+        <div class="add_account_btn">
+            <button type="button" class="btn_add" id="h-submit">添加</button>
+        </div>
+    </div>
+    </form>
+	
+    <!--点击查询出现弹框-->
+    <script type="text/javascript">
+        $('.card_management').on('click',function(e){
+            $('.pop-panel2').show();
+            e.stopPropagation();
+        })
+        $('.query_btn_cancel').on('click',function(){
+            $('.pop-panel2').hide();
+        })
+        $('.btn_confirm').on('click',function(){
+            $('.pop-panel2').hide();
+        })
+    </script>
+    
+    <script type="text/javascript">
+        $(".timecar-radio label").on('touchstart',function(){
+            if($(this).hasClass('timecar-radioed')){
+                $(".timecar-radio label").addClass("timecar-radioed");
+                $(this).removeClass("timecar-radioed");
+                //$(this).("radio").attr("checked","checked");
+            }
+        })
+    </script>
+    
+    <script type="text/javascript">
+        $(".timecar_radio label").on('touchstart',function(){
+            if($(this).hasClass('timecar_radioed')){
+                $(".timecar_radio label").addClass("timecar_radioed");
+                $(this).removeClass("timecar_radioed");
+            }
+        })
+    </script>
+    
+    <script type="text/javascript">
+        $('.device_status_list_img').on('click',function(e){
+            
+            if($('.device_status_details').css('display') == 'block'){
+                $('.device_status_details').hide();
+            }else{
+                $('.device_status_details').show();
+            }
+            
+            
+        })
+    </script>
+    <script type="text/javascript">
+        $(".timecar_radio label").click(function(){
+            var content = $(this).parent().parent().parent().find('.device_status_list_center').html();
+                $('.status').val(content);
+        $('.device_status_details').hide();
+        });
+        
+        
+    </script>
+    <div style="clear: both;"></div>
+</div>
+<script>
+var SCOPE = {
+  'post_url' : ""
+}
+</script>
+<script src="/static/js/layer/mobile/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/mdialog.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/mcommon.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+</html>

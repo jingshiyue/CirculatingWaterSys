@@ -1,4 +1,4 @@
-# CirculatingWaterSys
+## CirculatingWaterSys
 
 
 http://192.168.99.100:8000/jwt_auth
@@ -34,14 +34,14 @@ http://ro.yueshuidz.com/Index/index/index.html
 	pip freeze > requirements.txt
 	pip install -r requirements.txt
 
-export COMPOSE_TLS_VERSION=TLSv1_2
-http://192.168.99.100:8000/
+    export COMPOSE_TLS_VERSION=TLSv1_2
+    http://192.168.99.100:8000/
 
-调试时候不要用 【容器的日志】命令查看日志，不会更新，要重启容器，容器里的修改才会生效，而且有些日志，这里看不到
-调试进入到容器，用python manage.py runserver xxx,查看日志，修改会动态生效
+    调试时候不要用 【容器的日志】命令查看日志，不会更新，要重启容器，容器里的修改才会生效，而且有些日志，这里看不到
+    调试进入到容器，用python manage.py runserver xxx,查看日志，修改会动态生效
 
-compose文件里的容器间通信，用172.18.0.2，用 docker network inspect xxx 查看容器“内网ip”
-容器与宿主机通讯用 192.168.99.100 通讯，用“外网ip”通讯
+    compose文件里的容器间通信，用172.18.0.2，用 docker network inspect xxx 查看容器“内网ip”
+    容器与宿主机通讯用 192.168.99.100 通讯，用“外网ip”通讯
 
 ## 管理员用户
    root 
@@ -101,17 +101,34 @@ compose文件里的容器间通信，用172.18.0.2，用 docker network inspect 
     查询界面 done
     增加add 页面 done
     设备查询框 后端接口对应 done
-
-### 明日任务-11.12
     主页-》我的-》修改密码  前端
     主页-》我的-》退出登录 前端
     主页-》报修管理 前端
     主页-》售后管理 前端
     主页-》故障管理 前端
-    
 
+### 明日任务-11.12
+    设备列表下几个连接生成方式
     
-    
+    <button type="button" onclick="power(2,'f0311c1e-e289-ea11-b0df-87120c3b66e0','关机');" class="kgj">关机</button>
+    <button type="button" onclick="power(2,'975efb4b-c689-ea11-b0df-87120c3b66e0','关机');" class="kgj">关机</button>
+
+
+    <a href="/index/setting/sell/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">参数设置</a>
+    <a href="/index/setting/sell/Id/975efb4b-c689-ea11-b0df-87120c3b66e0.html">参数设置</a>
+    <a href="/index/setting/sell/Id/a706fc26-e289-ea11-b0df-87120c3b66e0.html">参数设置</a>
+    <a href="/index/setting/sell/Id/24af3680-c486-ea11-b0df-87120c3b66e0.html">参数设置</a>
+
+    <a href="/index/Equipment/statetu/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">设备运行状态</a>
+    <a href="/index/Equipment/statetu/Id/975efb4b-c689-ea11-b0df-87120c3b66e0.html">设备运行状态</a>
+    <a href="/index/Equipment/statetu/Id/a706fc26-e289-ea11-b0df-87120c3b66e0.html">设备运行状态</a>
+
+
+    <a href="/index/Equipment/edit/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">修改</a>
+
+    <a href="/index/Equipment/info/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html">更多</a>
+
+                            
 
 ### notes
      token储在客户端，例如存在local storage或cookie中

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+        <meta charset="utf-8" />
+        
+<title>报修添加-控制器</title>
+
+        <meta name="keywords"  content="" />
+        <meta name="description" content="控制器" />
+        <meta name="author" content="DeathGhost" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name='apple-touch-fullscreen' content='yes'>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="format-detection" content="address=no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+        <script src="/static/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+<body>
+    <!--主体-->
+    
+<style type="text/css">
+    .none{display:none;}
+	body{ background:url(/static/images/bg.jpg) ;}
+</style>
+<div class="content">
+    <header class="page-header1">
+        <a href="javascript:;" onClick="javascript:history.back(-1);"><img src="/static/img/icon_left.png" class="back_img" style="float:left;"/></a>
+        <h3>报修添加</h3>
+    </header>
+    <form id="h-form" action="/index/repairs/add.html">
+    <div class="add_account">
+			<div class="add_account_list">
+		            <div class="add_account_lists">
+                <div class="add_account_lists_left">设备号</div>
+                <div class="add_account_lists_right">
+                    <input type="text" name="device_id" value="" placeholder="请输入设备号" class="add_account_inp add_account_name_inp"/>
+                </div>
+            </div>
+			<div class="add_account_lists">
+                <div class="add_account_lists_left">报修人名称</div>
+                <div class="add_account_lists_right">
+                    <input type="text" name="name" value="" placeholder="请输入报修人名称" class="add_account_inp add_account_name_inp"/>
+                </div>
+            </div>
+			<div class="add_account_lists">
+                <div class="add_account_lists_left">电话号码</div>
+                <div class="add_account_lists_right">
+                    <input type="text" name="mobile" value="" placeholder="请输入电话" class="add_account_inp add_account_phone_inp"/>
+                </div>
+            </div>
+			<div class="add_account_lists">
+                <div class="add_account_lists_left">报修内容描述</div>
+                <div class="add_account_lists_right">
+                    <input type="text" name="cont" value="" placeholder="请输入报修内容描述" class="add_account_inp add_account_name_inp"/>
+                </div>
+            </div>
+		   <div class="add_account_lists">
+                <div class="add_account_lists_left">报修地址</div>
+                <div class="add_account_lists_right">
+                    <input type="text" name="address" value="" placeholder="请输入报修地址" class="add_account_inp add_account_name_inp"/>
+                </div>
+            </div>
+			      
+
+        </div>
+        
+        <div class="add_account_btn">
+            <button type="button" class="btn_add" id="h-submit">添加</button>
+        </div>
+    </div>
+    </form>
+    <div style="clear: both;"></div>
+</div>
+<script>
+var SCOPE = {
+  'post_url' : ""
+}
+</script>
+<script src="/static/js/layer/mobile/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/mdialog.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/mcommon.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+</html>

@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 class RepairDeviceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Device
+        model = RepairDevice
         fields = '__all__'
 
 class DeviceSerializer(serializers.ModelSerializer):
@@ -35,11 +35,6 @@ class DeviceSerializer(serializers.ModelSerializer):
     #     deviceRunState.__dict__.update(**deviceRunStateData)
     #     return instance
 
-
-class RepairDeviceAddSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = RepairDeviceAdd
-        fields = '__all__'
 
 class AfterSaleManageSerializer(serializers.ModelSerializer):
     class Meta:

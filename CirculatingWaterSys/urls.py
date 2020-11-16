@@ -26,8 +26,9 @@ from django.conf import settings
 from django.conf.urls.static import static 
 
 router = DefaultRouter()
-router.register('deviceEdit', DeviceEditViewset,basename='device')
-router.register('deviceQuery', DeviceQueryViewSet,basename='device')
+router.register('deviceEdit', DeviceEditViewset,basename='deviceEdit')
+router.register('deviceQuery', DeviceQueryViewSet,basename='deviceQuery')
+router.register('RepairDeviceViewset', RepairDeviceViewset,basename='RepairDeviceViewset')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,19 +39,22 @@ urlpatterns = [
     path('index/index.html/', TemplateView.as_view(template_name='device/index/index/index.html'),name='index'),   #需要加认证
     path('index/index/my.html/', TemplateView.as_view(template_name='device/index/index/my.html'),name='my'), 
     path('index/Equipment/index.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
+    re_path('index/Equipment/pclist.html/?maxDeviceID=3999999&page=1', TemplateView.as_view(template_name='device/index/Equipment/index.html')),   #大屏展示
+    path('index/setting/sell/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html/', TemplateView.as_view(template_name='device/index/setting/sell/Id/066f5e72-3c84-ea11-b0df-87120c3b66e0.html')), 
+                                                                                                    
+    path('index/repairs/index.html/', TemplateView.as_view(template_name='device/index/repairs/index.html')),
+    path('index/repairs/add.html/', TemplateView.as_view(template_name='device/index/repairs/add.html')), 
+    path('index/repairs/addfeedback/id/24.html/', TemplateView.as_view(template_name='device/index/repairs/addfeedback/id/24.html')), #
+    path('index/remind/index.html/', TemplateView.as_view(template_name='device/index/remind/index.html')),
+    path('index/remind/add.html/', TemplateView.as_view(template_name='device/index/remind/add.html')),
+    path('index/fault/index.html/', TemplateView.as_view(template_name='device/index/fault/index.html')), 
 
-    path('index/repairs/index.html/', TemplateView.as_view(template_name='device/index/repairs/index.html')), 
-    path('index/repairs/add.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
-    path('index/repairs/addfeedback/id/24.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
-    path('index/remind/index.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
-    path('index/remind/add.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
-    path('index/fault/index.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
-    path('index/fault/index.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
-
+    path('index/index/login.html/', TemplateView.as_view(template_name='device/index/index/login.html')),
+    path('index/user/changePwd.html/', TemplateView.as_view(template_name='device/index/user/changePwd.html')),
+    path('index/index/logout.html/', TemplateView.as_view(template_name='device/index/index/logout.html')),
 
     path('queryStatistics/',QueryStatisticsAPIView.as_view()),
     path('queryDeviceAPIView/',QueryDeviceAPIView.as_view()),
-
 
     re_path('^', include(router.urls)),
 ]+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

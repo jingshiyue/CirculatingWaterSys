@@ -9,7 +9,7 @@ class DeviceAdmin(admin.ModelAdmin):
     search_fields = ('device_id','remarks',)
 
     
-class RepairDeviceAddAdmin(admin.ModelAdmin):
+class RepairDeviceAdmin(admin.ModelAdmin):
     list_per_page = 20
 
 class AfterSaleManageSetAdmin(admin.ModelAdmin):
@@ -18,7 +18,7 @@ class AfterSaleManageSetAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Device,DeviceAdmin)
-admin.site.register(RepairDeviceAdd,RepairDeviceAddAdmin)
+admin.site.register(RepairDevice,RepairDeviceAdmin)
 admin.site.register(AfterSaleManageSet,AfterSaleManageSetAdmin)
 
 

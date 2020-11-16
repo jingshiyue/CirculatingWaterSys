@@ -135,21 +135,7 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': '报修单展示',
             },
         ),
-        migrations.CreateModel(
-            name='RepairDeviceAdd',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('deviceID', models.CharField(max_length=20, verbose_name='设备号')),
-                ('reportMan', models.CharField(blank=True, max_length=20, null=True, verbose_name='报修人员名称')),
-                ('Phone', models.CharField(blank=True, max_length=20, null=True, verbose_name='电话')),
-                ('repairProf', models.CharField(blank=True, max_length=20, null=True, verbose_name='报修内容描述')),
-                ('repairAddr', models.CharField(blank=True, max_length=20, null=True, verbose_name='报修地址')),
-            ],
-            options={
-                'verbose_name': '报修单添加',
-                'verbose_name_plural': '报修单添加',
-            },
-        ),
+
         migrations.AddIndex(
             model_name='device',
             index=models.Index(fields=['online', 'dev_state'], name='device_devi_online_a3b08a_idx'),

@@ -86,3 +86,13 @@ class QueryDeviceAPIView(APIView):
         serislizer=DeviceSerializer(instance=obj,many=True,)
         return JsonResponse(serislizer.data,safe=False)
         # return HttpResponse(obj)
+
+
+class RepairDeviceViewset(viewsets.ModelViewSet):
+    # permission_classes = [IsAuthenticated,AdminPermission]
+    # authentication_classes = [JSONWebTokenAuthentication]
+    serializer_class = RepairDeviceSerializer
+    lookup_field = "repairID"
+
+    def get_queryset(self):
+        return RepairDevice.objects.all()
