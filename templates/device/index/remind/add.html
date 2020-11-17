@@ -33,7 +33,7 @@
         <a href="javascript:;" onClick="javascript:history.back(-1);"><img src="/static/img/icon_left.png" class="back_img" style="float:left;"/></a>
         <h3>设置</h3>
     </header>
-    <form id="h-form">
+    <form id="h-form" onsubmit="javascript:return add_afterSale_submit();">
     <div class="add_account">
 			<div class="add_account_list">
 			 <div class="add_account_lists">
@@ -137,7 +137,8 @@
         </div>
         
         <div class="add_account_btn">
-            <button type="button" class="btn_add" id="h-submit">设置</button>
+            <!-- <input  class="btn_add" type="submit" id="h-submit" value="设置" /> -->
+            <button  class="btn_add" type="submit" id="h-submit" >设置 </button>
         </div>
     </div>
     </form>
@@ -155,7 +156,40 @@ var SCOPE = {
 </script>
 <script src="/static/js/layer/mobile/layer.js" type="text/javascript" charset="utf-8"></script>
 <script src="/static/js/mdialog.js" type="text/javascript" charset="utf-8"></script>
-<script src="/static/js/mcommon.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="/static/js/mcommon.js" type="text/javascript" charset="utf-8"></script> -->
+<script>
+    var paramDict = {};
+    $("#h-form input").each(function(){
+        paramDict[$(this).attr("name")] = $(this).attr("value")
+        // console.log(paramDict)
+    });
 
+        
+    function add_afterSale_submit(){
+        
+        var paramDict = {};
+        $("#h-form input").each(function(){
+        paramDict[$(this).attr("name")] = $(this).attr("value")
+        });
+        var paramJson = JSON.stringify(paramDict)
+        console.log(paramJson)
+        alert(1)
+        $.ajax({
+            type:'POST',
+            url:"/AfterSaleManageViewset/",
+            cache: false,
+            data: paramJson,
+            beforeSend: function (XMLHttpRequest) {
+                XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
+                XMLHttpRequest.setRequestHeader("X-CSRFToken","4k3TYP9ybseWhZ7APe284jre4sbpYDbdyLNzoETxYAcqEWyvYxnemyv9wn7sV3GR");
+            },
+            success:function(data){
+                console.log(data)
+            }
+        });
+        return false;
+    }                   
+    
+</script>
 </body>
 </html>

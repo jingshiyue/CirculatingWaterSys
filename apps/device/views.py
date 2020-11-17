@@ -93,6 +93,18 @@ class RepairDeviceViewset(viewsets.ModelViewSet):
     # authentication_classes = [JSONWebTokenAuthentication]
     serializer_class = RepairDeviceSerializer
     lookup_field = "repairID"
+    # pagination_class = Pagination
 
     def get_queryset(self):
-        return RepairDevice.objects.all()
+        return RepairDevice.objects.all().order_by("-runErrorTime")
+
+
+class AfterSaleManageViewset(viewsets.ModelViewSet):
+    # permission_classes = [IsAuthenticated,AdminPermission]
+    # authentication_classes = [JSONWebTokenAuthentication]
+    serializer_class = AfterSaleManageSerializer
+    lookup_field = "notifyID"
+    # pagination_class = Pagination
+
+    def get_queryset(self):
+        return AfterSaleManage.objects.all()

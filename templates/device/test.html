@@ -11,18 +11,96 @@
 <body>
     <a href="http://IP/q/1010000000125418" target="_blank" data-id="1010000000125418" onclick="return false;">jQuery112</a>
     <span no="" type="0">取消</span>
-    <input name="NetState" type="radio" value="1"  class="zx" style="width:30px;height:30px"/>
+    <!-- <input name="NetState" type="radio" value="1"  class="zx" style="width:30px;height:30px"/> -->
+    <form id="h-form" onsubmit="javascript:return add_submit();">
+      <div  class="add_account">
+        <div class="add_account_list">
+                  <div class="add_account_lists">
+                  <div class="add_account_lists_left">设备号</div>
+                  <div class="add_account_lists_right">
+                      <input type="text" name="deviceNum" value="" placeholder="请输入设备号" class="add_account_inp add_account_name_inp"/>
+                  </div>
+              </div>
+        <div class="add_account_lists">
+                  <div class="add_account_lists_left">报修人名称</div>
+                  <div class="add_account_lists_right">
+                      <input type="text" name="reportMan" value="" placeholder="请输入报修人名称" class="add_account_inp add_account_name_inp"/>
+                  </div>
+              </div>
+        <div class="add_account_lists">
+                  <div class="add_account_lists_left">电话号码</div>
+                  <div class="add_account_lists_right">
+                      <input type="text" name="Phone" value="" placeholder="请输入电话" class="add_account_inp add_account_phone_inp"/>
+                  </div>
+              </div>
+        <div class="add_account_lists">
+                  <div class="add_account_lists_left">报修内容描述</div>
+                  <div class="add_account_lists_right">
+                      <input type="text" name="descErorr" value="" placeholder="请输入报修内容描述" class="add_account_inp add_account_name_inp"/>
+                  </div>
+              </div>
+         <div class="add_account_lists">
+                  <div class="add_account_lists_left">报修地址</div>
+                  <div class="add_account_lists_right">
+                      <input type="text" name="repairAddr" value="" placeholder="请输入报修地址" class="add_account_inp add_account_name_inp"/>
+                  </div>
+              </div>
+              
+  
+          </div>
+          
+          <div class="add_account_btn">
+              <input type="submit" class="btn_add" id="h-submit" value="添加" />
+  
+          </div>
+      </div>
+      </form>
 
     <script>
-
-      // $(function(){
-      //   alert($('input').html())
-      // })
-
-      // $(document).ready(function(){
-        alert($('input[name="NetState"]').val())
-
-      // });
-    </script>
+      function add_submit(){
+          alert(111111111)
+          var deviceNum = $('#h-form input[name="deviceNum"]').val()
+          var reportMan = $('#h-form input[name="reportMan"]').val()
+          var Phone = $('#h-form input[name="Phone"]').val() 
+          var descErorr = $('#h-form input[name="descErorr"]').val()
+          var repairAddr = $('#h-form input[name="repairAddr"]').val()
+          $.ajax({
+              type:'POST',
+              url:"/RepairDeviceViewset/",
+              cache: false,
+              data: {
+                      "deviceNum": deviceNum, 
+                      "reportMan": reportMan, 
+                      "Phone":Phone,
+                      "descErorr": descErorr,
+                      "repairAddr": repairAddr,
+                      // "csrfmiddlewaretoken":"4k3TYP9ybseWhZ7APe284jre4sbpYDbdyLNzoETxYAcqEWyvYxnemyv9wn7sV3GR",
+                      },
+              beforeSend: function (XMLHttpRequest) {
+                  XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
+                  XMLHttpRequest.setRequestHeader("X-CSRFToken","4k3TYP9ybseWhZ7APe284jre4sbpYDbdyLNzoETxYAcqEWyvYxnemyv9wn7sV3GR");
+              },
+              success:function(data){
+                  console.log(data)
+  
+                  // $('.login').hide();
+                  // $('.login-bg').hide();
+                  // $("#deviceList").empty()
+                  // deviceList = String.format(templateStr,
+                  //         data["device_id"],
+                  //         data["remarks"],
+                  //         map_whether_online(data["online"]),
+                  //         map_arg_set(data["arg_set_state"]),
+                  //         data["temperature"],
+                  //         data["signal"],
+                  //     )
+                  //     $("#deviceList").append(deviceList)
+  
+              }
+          });
+          return false;
+      }
+  
+  </script>
 </body>
 </html>

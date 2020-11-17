@@ -19,6 +19,6 @@ class AfterSaleManageSetAdmin(admin.ModelAdmin):
 
 admin.site.register(Device,DeviceAdmin)
 admin.site.register(RepairDevice,RepairDeviceAdmin)
-admin.site.register(AfterSaleManageSet,AfterSaleManageSetAdmin)
+admin.site.register(AfterSaleManage,AfterSaleManageSetAdmin)
 
 

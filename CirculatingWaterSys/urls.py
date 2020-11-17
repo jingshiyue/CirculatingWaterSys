@@ -29,6 +29,8 @@ router = DefaultRouter()
 router.register('deviceEdit', DeviceEditViewset,basename='deviceEdit')
 router.register('deviceQuery', DeviceQueryViewSet,basename='deviceQuery')
 router.register('RepairDeviceViewset', RepairDeviceViewset,basename='RepairDeviceViewset')
+router.register('AfterSaleManageViewset', AfterSaleManageViewset,basename='AfterSaleManageViewset')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

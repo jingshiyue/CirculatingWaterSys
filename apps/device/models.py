@@ -102,15 +102,15 @@ class RepairDevice(models.Model):
         (3,"不满意"),
         (4,"非常不满意"),
     )
-    repairID = models.CharField(max_length=20, verbose_name='报修编号') #设备号-序号
+    repairID = models.CharField(max_length=20, verbose_name='报修编号',blank=True,null=True) #设备号-序号
     repairState = models.CharField(max_length=20, verbose_name='报修状态',blank=True,null=True)
-    reportMan = models.CharField(max_length=20, verbose_name='报修人员',blank=True,null=True)
-    Phone = models.CharField(max_length=20, verbose_name='联系电话',blank=True,null=True)
+    reportMan = models.CharField(max_length=20, verbose_name='报修人员')
+    Phone = models.CharField(max_length=20, verbose_name='联系电话')
     # dev_state = models.ForeignKey(Device, on_delete=models.SET_NULL, null=True,verbose_name='设备号') #一对多关系
     deviceNum = models.CharField(max_length=40,verbose_name='设备号') #一对多关系
-    repairAddr = models.CharField(max_length=20, verbose_name='维修地点',blank=True,null=True)
-    descErorr = models.CharField(max_length=20, verbose_name='故障简述',blank=True,null=True)
-    runErrorTime = models.DateTimeField(verbose_name='故障日期')
+    repairAddr = models.CharField(max_length=20, verbose_name='维修地点')
+    descErorr = models.CharField(max_length=20, verbose_name='故障简述')
+    runErrorTime = models.DateTimeField(verbose_name='故障日期',auto_now_add=True)
     repairMan = models.CharField(max_length=20, verbose_name='上门维修人员',blank=True,null=True)
     repairManPhone = models.CharField(max_length=20, verbose_name='维修人员电话',blank=True,null=True)
 
@@ -136,7 +136,7 @@ class AfterSaleManage(BaseModel):
     主页->售后管理 页面里展示数据
     """
     notifyID = models.CharField(max_length=40, verbose_name='提醒编号')   #设备号-序号
-    SGName = models.CharField(max_length=20, verbose_name='砂罐名称') 
+    SGName = models.CharField(max_length=20, verbose_name='砂罐名称') #
     SGcycleTime = models.IntegerField(verbose_name='砂罐周期')
     SGprotectTime = models.DateField(verbose_name='砂罐保养开始时间')
 
@@ -155,21 +155,8 @@ class AfterSaleManage(BaseModel):
     ROName = models.CharField(max_length=20, verbose_name='RO膜名称')
     ROcycleTime = models.IntegerField(verbose_name='RO膜周期')
     ROprotectTime = models.DateField(verbose_name='RO膜保养开始时间')
-
-    def __str__(self):
-        return self.notifyID
-
-    class Meta:
-        verbose_name = '售后提醒单'
-        verbose_name_plural = '售后提醒单'
-
-
-class AfterSaleManageSet(BaseModel):
-    """
-    主页->售后管理->设置 页面里展示数据
-    """
-
-    deviceID = models.ForeignKey(Device, on_delete=models.SET_NULL,verbose_name='设备号',null=True)
+    # deviceID = models.ForeignKey(Device, on_delete=models.SET_NULL,verbose_name='设备号',null=True)
+    deviceID = models.CharField(max_length=40, verbose_name='设备号') #
     SGName = models.CharField(max_length=40, verbose_name='砂罐名称')
     SGUseTime = models.DateTimeField(max_length=40, verbose_name='砂罐使用时间')
     SGSetCycle = models.IntegerField(verbose_name='砂罐设置周期')
@@ -189,10 +176,11 @@ class AfterSaleManageSet(BaseModel):
     ROName = models.CharField(max_length=40, verbose_name='RO膜名称')
     ROUseTime = models.DateTimeField(max_length=40, verbose_name='RO膜使用时间')
     ROSetCycle = models.IntegerField(verbose_name='RO膜设置周期')
-
     def __str__(self):
-        return self.deviceID
+        return self.notifyID
 
     class Meta:
-        verbose_name = '售后提醒单添加'
-        verbose_name_plural = verbose_name
+        verbose_name = '售后提醒单'
+        verbose_name_plural = '售后提醒单'
+
+

@@ -41,8 +41,4 @@ class AfterSaleManageSerializer(serializers.ModelSerializer):
         model = AfterSaleManage
         fields = '__all__'
 
-class AfterSaleManageSetSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AfterSaleManageSet
-        fields = '__all__'
 
