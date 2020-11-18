@@ -91,7 +91,7 @@ class Device(BaseModel):
         indexes = [models.Index(fields=['online',"dev_state"]),]
 
 
-class RepairDevice(models.Model):
+class RepairDevice(BaseModel):
     """
     主页->报修管理 页面里展示数据
     """

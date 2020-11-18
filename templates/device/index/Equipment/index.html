@@ -360,11 +360,11 @@
                         "device_id": deviceID, 
                         "remarks":remarks,
                         "MainboardID": MainboardID,
-                        // "csrfmiddlewaretoken":"4k3TYP9ybseWhZ7APe284jre4sbpYDbdyLNzoETxYAcqEWyvYxnemyv9wn7sV3GR",
+                        // "csrfmiddlewaretoken":"",
                         },
                 beforeSend: function (XMLHttpRequest) {
                     XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
-                    XMLHttpRequest.setRequestHeader("X-CSRFToken","4k3TYP9ybseWhZ7APe284jre4sbpYDbdyLNzoETxYAcqEWyvYxnemyv9wn7sV3GR");
+                    XMLHttpRequest.setRequestHeader("X-CSRFToken",$.cookie("csrftoken"));
                 },
                 success:function(data){
                     // console.log(data)

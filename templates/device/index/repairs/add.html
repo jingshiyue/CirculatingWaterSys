@@ -94,11 +94,10 @@
                     "Phone":Phone,
                     "descErorr": descErorr,
                     "repairAddr": repairAddr
-                    // "csrfmiddlewaretoken":"4k3TYP9ybseWhZ7APe284jre4sbpYDbdyLNzoETxYAcqEWyvYxnemyv9wn7sV3GR",
                     },
             beforeSend: function (XMLHttpRequest) {
                 XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
-                XMLHttpRequest.setRequestHeader("X-CSRFToken","4k3TYP9ybseWhZ7APe284jre4sbpYDbdyLNzoETxYAcqEWyvYxnemyv9wn7sV3GR");
+                XMLHttpRequest.setRequestHeader("X-CSRFToken",$.cookie("csrftoken"));
             },
             success:function(data){
                 window.location.href="/index/repairs/index.html/"

@@ -29,7 +29,7 @@ router = DefaultRouter()
 router.register('deviceEdit', DeviceEditViewset,basename='deviceEdit')
 router.register('deviceQuery', DeviceQueryViewSet,basename='deviceQuery')
 router.register('RepairDeviceViewset', RepairDeviceViewset,basename='RepairDeviceViewset')
-router.register('AfterSaleManageViewset', AfterSaleManageViewset,basename='AfterSaleManageViewset')
+router.register('afterSaleManageViewset', AfterSaleManageViewset,basename='AfterSaleManageViewset')
 
 
 urlpatterns = [
@@ -46,7 +46,7 @@ urlpatterns = [
                                                                                                     
     path('index/repairs/index.html/', TemplateView.as_view(template_name='device/index/repairs/index.html')),
     path('index/repairs/add.html/', TemplateView.as_view(template_name='device/index/repairs/add.html')), 
-    path('index/repairs/addfeedback/id/24.html/', TemplateView.as_view(template_name='device/index/repairs/addfeedback/id/24.html')), #
+    re_path('index/repairs/addfeedback/(?P<file>\w+)/', TemplateView.as_view(template_name='device/index/repairs/addfeedback.html')), #
     path('index/remind/index.html/', TemplateView.as_view(template_name='device/index/remind/index.html')),
     path('index/remind/add.html/', TemplateView.as_view(template_name='device/index/remind/add.html')),
     path('index/fault/index.html/', TemplateView.as_view(template_name='device/index/fault/index.html')), 

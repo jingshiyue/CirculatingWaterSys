@@ -49,7 +49,7 @@ class DeviceQueryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,viewse
     lookup_field = "device_id"
 
     def get_queryset(self):
-        return Device.objects.all()
+        return Device.objects.all().order_by("-create_time")
 
 def queryModulars(request):
     logger.debug("queryModulars")
@@ -96,7 +96,7 @@ class RepairDeviceViewset(viewsets.ModelViewSet):
     # pagination_class = Pagination
 
     def get_queryset(self):
-        return RepairDevice.objects.all().order_by("-runErrorTime")
+        return RepairDevice.objects.all().order_by("-create_time")
 
 
 class AfterSaleManageViewset(viewsets.ModelViewSet):
