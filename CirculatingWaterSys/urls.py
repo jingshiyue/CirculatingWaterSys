@@ -25,7 +25,7 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static 
 
-router = DefaultRouter()
+router = DefaultRouter()  #建议不用这个，会暴露很多接口出去
 router.register('deviceEdit', DeviceEditViewset,basename='deviceEdit')
 router.register('deviceQuery', DeviceQueryViewSet,basename='deviceQuery')
 router.register('RepairDeviceViewset', RepairDeviceViewset,basename='RepairDeviceViewset')
@@ -46,9 +46,11 @@ urlpatterns = [
                                                                                                     
     path('index/repairs/index.html/', TemplateView.as_view(template_name='device/index/repairs/index.html')),
     path('index/repairs/add.html/', TemplateView.as_view(template_name='device/index/repairs/add.html')), 
-    re_path('index/repairs/addfeedback/(?P<file>\w+)/', TemplateView.as_view(template_name='device/index/repairs/addfeedback.html')), #
-    path('index/remind/index.html/', TemplateView.as_view(template_name='device/index/remind/index.html')),
-    path('index/remind/add.html/', TemplateView.as_view(template_name='device/index/remind/add.html')),
+    # re_path('index/repairs/addfeedback/', AddFeedbackAPIView.as_view()),
+    re_path('index/repairs/addfeedback/(?P<repairID>\S+)/', AddFeedbackAPIView.as_view()),  #(?P<id>\d+)/
+    
+    path('index/remind/index.html/',TemplateView.as_view(template_name='device/index/remind/index.html')), 
+    path('index/remind/add.html/',AddAfterSaleAPIView.as_view() ), #TemplateView.as_view(template_name='device/index/remind/add.html')
     path('index/fault/index.html/', TemplateView.as_view(template_name='device/index/fault/index.html')), 
 
     path('index/index/login.html/', TemplateView.as_view(template_name='device/index/index/login.html')),
@@ -61,6 +63,8 @@ urlpatterns = [
     re_path('^', include(router.urls)),
 ]+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
 
+# url(r"bookset/$",views.BookSet.as_view({'get': 'list', 'post': 'create'})),
+# url(r"bookset/(?P<pk>\d+)/$",views.BookSet.as_view({'get': 'retrieve', 'put': 'update','delete': 'destroy'})),
 
 
 # path('index/', DeviceViewset.as_view() ),  as_view({'get': 'list'})

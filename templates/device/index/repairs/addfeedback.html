@@ -16,6 +16,7 @@
         <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
         <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
         <script src="/static/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/static/js/jquery.cookie.js"></script>
     </head>
 <body>
     <!--主体-->
@@ -29,9 +30,9 @@
         <a href="javascript:;" onClick="javascript:history.back(-1);"><img src="/static/img/icon_left.png" class="back_img" style="float:left;"/></a>
         <h3>维修回馈</h3>
     </header>
-    <form id="h-form">
+    <form id="h-form" onsubmit="javascript:return add_submit();">
     <div class="add_account" style="color: #E5E3E3;">
-            <input type="hidden" name="id" value=""/>
+            <!-- <input type="hidden" name="id" value=""/> -->
 			<div class="add_account_lists">
                 <div class="add_account_lists_left">是否解决</div>
                 <div class="add_account_lists_right">
@@ -46,9 +47,8 @@
 						<input type="radio" name="eval_degree" value="2" title="满意">满意
 						<input type="radio" name="eval_degree" value="3" title="不满意">不满意
 						<input type="radio" name="eval_degree" value="4" title="非常不满意">非常不满意
-            
                 </div>
-            </div>	
+            </div>
 			<div class="add_account_lists">
                 <div class="add_account_lists_left">评价</div>
                 <div class="add_account_lists_right">
@@ -58,7 +58,7 @@
         </div>
         
         <div class="add_account_btn">
-            <button type="button" class="btn_add" id="h-submit">添加</button>
+            <button type="submit" class="btn_add" id="h-submit">添加</button>
         </div>
     </div>
     </form>
@@ -119,16 +119,42 @@
     </script>
     <div style="clear: both;"></div>
 </div>
+
 <script>
-var SCOPE = {
-  'post_url' : ""
-}
+    function add_submit(){
+        var is_ever = $('#h-form input[name="is_ever"]:checked').val()
+        var eval_degree = $('#h-form input[name="eval_degree"]:checked').val()
+        var eval_cont = $('#h-form input[name="eval_cont"]').val()
+
+        var form = $("#h-submit")
+        console.log(is_ever)
+        console.log(eval_degree)
+        console.log(window.location.href)
+        $.ajax({
+            type:'PUT',
+            url:window.location.href,
+            cache: false,
+            data: {
+                    "ifOk": is_ever, 
+                    "ifSatisfied":eval_degree,
+                    "comment": eval_cont,
+                    // "csrfmiddlewaretoken":"",
+                    },
+            beforeSend: function (XMLHttpRequest) {
+                XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
+                XMLHttpRequest.setRequestHeader("X-CSRFToken",$.cookie("csrftoken"));
+            },
+            success:function(data){
+                console.log(data)
+            }
+        });
+        return false;
+    }
+    
 </script>
 <script src="/static/js/layer/mobile/layer.js" type="text/javascript" charset="utf-8"></script>
 <script src="/static/js/mdialog.js" type="text/javascript" charset="utf-8"></script>
-<script src="/static/js/mcommon.js" type="text/javascript" charset="utf-8"></script>
-<script>
-    console.log
-</script>
+<!-- <script src="/static/js/mcommon.js" type="text/javascript" charset="utf-8"></script> -->
+
 </body>
 </html>

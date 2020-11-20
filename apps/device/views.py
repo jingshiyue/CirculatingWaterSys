@@ -11,7 +11,7 @@ from . import models
 from .models import Device
 from .permissions import AdminPermission
 from django.http import HttpResponse,JsonResponse
-
+from django.shortcuts import render
 from rest_framework.views import APIView
 from utils.utils import sqlFetchone,sqlFetchall
 
@@ -99,12 +99,38 @@ class RepairDeviceViewset(viewsets.ModelViewSet):
         return RepairDevice.objects.all().order_by("-create_time")
 
 
+
+class AddFeedbackAPIView(APIView):
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [JSONWebTokenAuthentication]
+    def get(self, request,repairID):
+        return render(request,'device/index/repairs/addfeedback.html')
+
+    def put(self,request,repairID,*args,**kwargs):  #
+        logger.debug(repairID)
+        dateGet = request.GET 
+        logger.debug(dateGet)  # {'deviceNum': ['1022']}>
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
 class AfterSaleManageViewset(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated,AdminPermission]
     # authentication_classes = [JSONWebTokenAuthentication]
     serializer_class = AfterSaleManageSerializer
-    lookup_field = "notifyID"
+    lookup_field = "id"
     # pagination_class = Pagination
 
     def get_queryset(self):
         return AfterSaleManage.objects.all()
+
+
+class AddAfterSaleAPIView(APIView):
+     def get(self, request):
+        dateGet = request.GET
+        logger.debug(dateGet) 
+        logger.debug(id)
+        return render(request,'device/index/remind/add.html')
+        

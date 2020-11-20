@@ -102,7 +102,7 @@ class RepairDevice(BaseModel):
         (3,"不满意"),
         (4,"非常不满意"),
     )
-    repairID = models.CharField(max_length=20, verbose_name='报修编号',blank=True,null=True) #设备号-序号
+    repairID = models.CharField(max_length=20, verbose_name='报修编号',blank=True,null=True,unique=True) #设备号-序号
     repairState = models.CharField(max_length=20, verbose_name='报修状态',blank=True,null=True)
     reportMan = models.CharField(max_length=20, verbose_name='报修人员')
     Phone = models.CharField(max_length=20, verbose_name='联系电话')

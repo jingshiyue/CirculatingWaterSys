@@ -36,14 +36,14 @@ if __name__ == "__main__":
     for i in range(1001,1023):
         dict = {
             "repairID":f"{i}-1",
-            "repairState":" 报修",
-            "reportMan":" zcl",
-            "Phone":" 153",
-            "deviceNum":" 1002",
-            "repairAddr":" 重庆",
-            "descErorr":" 烂了",
-            "repairMan":" 老师傅",
-            "repairManPhone":" 119",
+            "repairState":"报修",
+            "reportMan":"zcl",
+            "Phone":"153",
+            "deviceNum":f"{i}",
+            "repairAddr":"重庆",
+            "descErorr":"烂了",
+            "repairMan":"老师傅",
+            "repairManPhone":"119",
         }
         RepairDevice.objects.create(**dict)
         print(f"add RepairDevice {i} suc ..")
