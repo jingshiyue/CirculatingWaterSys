@@ -11,6 +11,7 @@ from . import models
 from .models import Device
 from .permissions import AdminPermission
 from django.http import HttpResponse,JsonResponse
+from rest_framework.response import Response
 from django.shortcuts import render
 from rest_framework.views import APIView
 from utils.utils import sqlFetchone,sqlFetchall
@@ -66,7 +67,6 @@ class QueryStatisticsAPIView(APIView):
         online = sqlFetchone("select count(1) from device_device where online=1")
         dataDict.setdefault("online",online[0])
         dataDict.setdefault("fault",0)
-        logging.debug((dataDict))
         return JsonResponse(dataDict)
 
 class QueryDeviceAPIView(APIView):
@@ -106,15 +106,18 @@ class AddFeedbackAPIView(APIView):
     def get(self, request,repairID):
         return render(request,'device/index/repairs/addfeedback.html')
 
-    def put(self,request,repairID,*args,**kwargs):  #
-        logger.debug(repairID)
-        dateGet = request.GET 
-        logger.debug(dateGet)  # {'deviceNum': ['1022']}>
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    def put(self,request,repairID):
+        obj = RepairDevice.objects.get(repairID=repairID)
+        logger.debug(request.data)
+        validated_data = RepairDeviceSerializer(instance=obj,data=request.data,partial=True)
+        logger.debug(validated_data)
+        if validated_data.is_valid():
+            validated_data.save()
+            return Response(validated_data.data)
+        else:
+            return Response(validated_data.errors)
+
+
 
 class AfterSaleManageViewset(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated,AdminPermission]

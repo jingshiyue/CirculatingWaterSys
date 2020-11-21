@@ -14,6 +14,18 @@ class RepairDeviceSerializer(serializers.ModelSerializer):
         model = RepairDevice
         fields = '__all__'
 
+    def update(self, instance, validated_data):
+        ifOk = validated_data['ifOk']
+        ifSatisfied = validated_data['ifSatisfied']
+        comment = validated_data['comment']
+        instance.ifOk = ifOk
+        instance.ifSatisfied = ifSatisfied
+        instance.comment = comment
+        instance.save()
+        return instance
+
+
+
 class DeviceSerializer(serializers.ModelSerializer):
     # device_run_state = Device_run_stateSerializer()
     class Meta:

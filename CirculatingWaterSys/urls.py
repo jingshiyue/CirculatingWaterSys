@@ -50,7 +50,7 @@ urlpatterns = [
     re_path('index/repairs/addfeedback/(?P<repairID>\S+)/', AddFeedbackAPIView.as_view()),  #(?P<id>\d+)/
     
     path('index/remind/index.html/',TemplateView.as_view(template_name='device/index/remind/index.html')), 
-    path('index/remind/add.html/',AddAfterSaleAPIView.as_view() ), #TemplateView.as_view(template_name='device/index/remind/add.html')
+    path('index/remind/add.html/',AddAfterSaleAPIView.as_view()), #TemplateView.as_view(template_name='device/index/remind/add.html')
     path('index/fault/index.html/', TemplateView.as_view(template_name='device/index/fault/index.html')), 
 
     path('index/index/login.html/', TemplateView.as_view(template_name='device/index/index/login.html')),
