@@ -54,12 +54,12 @@ urlpatterns = [
     path('index/fault/index.html/', TemplateView.as_view(template_name='device/index/fault/index.html')), 
 
     path('index/index/login.html/', TemplateView.as_view(template_name='device/index/index/login.html')),
-    path('index/user/changePwd.html/', TemplateView.as_view(template_name='device/index/user/changePwd.html')),
+    path('index/user/changePwd.html/',ChangePwdAPIView.as_view()),
     path('index/index/logout.html/', TemplateView.as_view(template_name='device/index/index/logout.html')),
 
     path('queryStatistics/',QueryStatisticsAPIView.as_view()),
     path('queryDeviceAPIView/',QueryDeviceAPIView.as_view()),
-
+    path('get_user/',get_user),
     re_path('^', include(router.urls)),
 ]+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
 

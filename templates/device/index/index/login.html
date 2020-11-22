@@ -45,7 +45,7 @@
 					dataType:'JSON',
 					data:{username:$("#username").val(),password:$("#password").val()},
 					success:function(data){
-						$.cookie('token',data.token,{expires:7,path:'/',domain:'192.168.99.100'});
+						$.cookie('token',data.token,{expires:7,path:'/'});
 						window.location.href = "/index/index.html/";
 						}
 				})

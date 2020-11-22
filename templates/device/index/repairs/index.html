@@ -81,6 +81,7 @@
 		`
 		$(document).ready(function(){
 					//首页设备列表展示
+					console.log($.cookie('token'))
 					$.ajax({
 							type:'GET',
 							url:"/RepairDeviceViewset/",

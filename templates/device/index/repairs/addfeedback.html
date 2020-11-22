@@ -145,8 +145,10 @@
                 XMLHttpRequest.setRequestHeader("X-CSRFToken",$.cookie("csrftoken"));
             },
             success:function(data){
-                console.log(data)
+                console.log(data);
+                dialog.success("添加回复成功");
             }
+            
         });
         return false;
     }

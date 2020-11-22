@@ -61,8 +61,24 @@
                     <input type="text" name="repairAddr" value="" placeholder="请输入报修地址" class="add_account_inp add_account_name_inp"/>
                 </div>
             </div>
-			      
-
+            <div class="add_account_lists">
+                <div class="add_account_lists_left">报修状态</div>
+                <div class="add_account_lists_right">
+                    <input type="text" name="repairState" value="" placeholder="报修状态" class="add_account_inp add_account_name_inp"/>
+                </div>
+            </div>			      
+            <div class="add_account_lists">
+                <div class="add_account_lists_left">上门维修人员</div>
+                <div class="add_account_lists_right">
+                    <input type="text" name="repairMan" value="" placeholder="上门维修人员" class="add_account_inp add_account_name_inp"/>
+                </div>
+            </div>
+            <div class="add_account_lists">
+                <div class="add_account_lists_left">维修人员电话</div>
+                <div class="add_account_lists_right">
+                    <input type="text" name="repairManPhone" value="" placeholder="维修人员电话" class="add_account_inp add_account_name_inp"/>
+                </div>
+            </div>            
         </div>
         
         <div class="add_account_btn">
@@ -84,6 +100,9 @@
         var Phone = $('#h-form input[name="Phone"]').val() 
         var descErorr = $('#h-form input[name="descErorr"]').val()
         var repairAddr = $('#h-form input[name="repairAddr"]').val()
+        var repairState = $('#h-form input[name="repairState"]').val()
+        var repairMan = $('#h-form input[name="repairMan"]').val()
+        var repairManPhone = $('#h-form input[name="repairManPhone"]').val()
         $.ajax({
             type:'POST',
             url:"/RepairDeviceViewset/",
@@ -93,7 +112,10 @@
                     "reportMan": reportMan, 
                     "Phone":Phone,
                     "descErorr": descErorr,
-                    "repairAddr": repairAddr
+                    "repairAddr": repairAddr,
+                    "repairState":repairState,
+                    "repairMan":repairMan,
+                    "repairManPhone":repairManPhone
                     },
             beforeSend: function (XMLHttpRequest) {
                 XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));

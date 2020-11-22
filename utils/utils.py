@@ -47,4 +47,7 @@ if __name__ == "__main__":
         }
         RepairDevice.objects.create(**dict)
         print(f"add RepairDevice {i} suc ..")
+
+    one = sqlFetchone("SELECT * FROM `device_repairdevice` WHERE deviceNum= 1021")
+    print(one)
         

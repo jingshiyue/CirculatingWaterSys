@@ -15,7 +15,10 @@ from rest_framework.response import Response
 from django.shortcuts import render
 from rest_framework.views import APIView
 from utils.utils import sqlFetchone,sqlFetchall
-
+from rest_framework import status
+from rest_framework.views import exception_handler
+from rest_framework_jwt.utils import jwt_decode_handler
+from django.contrib.auth.models import User
 import logging
 logger = logging.getLogger(__name__)
 # Create your views here.
@@ -52,9 +55,6 @@ class DeviceQueryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,viewse
     def get_queryset(self):
         return Device.objects.all().order_by("-create_time")
 
-def queryModulars(request):
-    logger.debug("queryModulars")
-    return HttpResponse("modularsStr")
 
 class QueryStatisticsAPIView(APIView):
     # permission_classes = [IsAuthenticated]
@@ -98,6 +98,21 @@ class RepairDeviceViewset(viewsets.ModelViewSet):
     def get_queryset(self):
         return RepairDevice.objects.all().order_by("-create_time")
 
+    def create(self, request, *args, **kwargs):
+        deviceNum = request.data.get("deviceNum")
+        # n = models.RepairDevice.objects.filter(deviceNum=" 1021").count()
+        sql = f"SELECT count(*) FROM `device_repairdevice` WHERE deviceNum= {deviceNum}"
+        n = sqlFetchone(sql)[0]
+        repairID = deviceNum + "-" + str(n+1)
+        queryDict = request.data.copy()
+        queryDict.setdefault("repairID",repairID)
+        serializer = self.get_serializer(data=queryDict)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(serializer.data, status=status.HTTP_201_CREATED,)
+
+    def perform_create(self, serializer):
+        serializer.save()
 
 
 class AddFeedbackAPIView(APIView):
@@ -108,9 +123,7 @@ class AddFeedbackAPIView(APIView):
 
     def put(self,request,repairID):
         obj = RepairDevice.objects.get(repairID=repairID)
-        logger.debug(request.data)
         validated_data = RepairDeviceSerializer(instance=obj,data=request.data,partial=True)
-        logger.debug(validated_data)
         if validated_data.is_valid():
             validated_data.save()
             return Response(validated_data.data)
@@ -137,3 +150,46 @@ class AddAfterSaleAPIView(APIView):
         logger.debug(id)
         return render(request,'device/index/remind/add.html')
         
+
+def get_user(request):
+    from rest_framework_jwt.authentication import JSONWebTokenAuthentication 
+    from rest_framework.views import exception_handler
+    from rest_framework_jwt.utils import jwt_decode_handler
+    # 获取登陆的用户
+    token = request.META.get('HTTP_AUTHORIZATION')[4:]
+    logger.debug(token)
+    token_user = jwt_decode_handler(token)
+
+    user_id = token_user['user_id']  # 获取用户id
+    # sql = f"SELECT username FROM `auth_user` WHERE id= {user_id}"
+    # username = sqlFetchone(sql)[0]
+    return HttpResponse(user_id)
+
+class ChangePwdAPIView(APIView):
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [JSONWebTokenAuthentication]
+    def get(self, request):
+        return render(request,'device/index/user/changePwd.html')
+
+    def post(self,request):
+        # 获取登陆的用户
+        request_data = request.data
+        # return JsonResponse({"msg":"密码更改成功"})
+
+        cookies = request.COOKIES
+        token_user = jwt_decode_handler(cookies["token"])
+        user_id = token_user['user_id']  # 获取用户id
+        user = User.objects.get(id=user_id)
+        old_password = request_data.get("password_old")
+        new_password = request_data.get("password_new")
+        re_password_new = request_data.get("re_password_new")
+        if new_password != re_password_new:
+            logger.debug({"msg":"重设的两次密码输入不一致"})
+            return JsonResponse({"msg":"重设的两次密码输入不一致"})
+        if user.check_password(old_password):
+            user.set_password(new_password)
+            user.save()
+            logger.debug({"msg":"密码更改成功"})
+            return JsonResponse({"msg":"密码更改成功"})
+        logger.debug({"msg":"输入的原始密码不正确"})
+        return JsonResponse({"msg":"输入的原始密码不正确"})
