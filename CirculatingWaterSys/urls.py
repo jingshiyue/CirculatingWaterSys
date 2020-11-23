@@ -42,12 +42,10 @@ urlpatterns = [
     path('index/index/my.html/', TemplateView.as_view(template_name='device/index/index/my.html'),name='my'), 
     path('index/Equipment/index.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
     re_path('index/Equipment/pclist.html/?maxDeviceID=3999999&page=1', TemplateView.as_view(template_name='device/index/Equipment/index.html')),   #大屏展示
-    path('index/setting/sell/Id/f0311c1e-e289-ea11-b0df-87120c3b66e0.html/', TemplateView.as_view(template_name='device/index/setting/sell/Id/066f5e72-3c84-ea11-b0df-87120c3b66e0.html')), 
-                                                                                                    
+    re_path('index/setting/sell/Id/paramset/(?P<device_id>\S+)/',ParamSetAPIView.as_view()),                                                                                     
     path('index/repairs/index.html/', TemplateView.as_view(template_name='device/index/repairs/index.html')),
     path('index/repairs/add.html/', TemplateView.as_view(template_name='device/index/repairs/add.html')), 
-    # re_path('index/repairs/addfeedback/', AddFeedbackAPIView.as_view()),
-    re_path('index/repairs/addfeedback/(?P<repairID>\S+)/', AddFeedbackAPIView.as_view()),  #(?P<id>\d+)/
+    re_path('index/repairs/addfeedback/(?P<repairID>\S+)/', AddFeedbackAPIView.as_view()),
     
     path('index/remind/index.html/',TemplateView.as_view(template_name='device/index/remind/index.html')), 
     path('index/remind/add.html/',AddAfterSaleAPIView.as_view()), #TemplateView.as_view(template_name='device/index/remind/add.html')
@@ -59,7 +57,7 @@ urlpatterns = [
 
     path('queryStatistics/',QueryStatisticsAPIView.as_view()),
     path('queryDeviceAPIView/',QueryDeviceAPIView.as_view()),
-    path('get_user/',get_user),
+    # path('get_user/',get_user),
     re_path('^', include(router.urls)),
 ]+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
 

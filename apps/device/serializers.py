@@ -40,11 +40,7 @@ class DeviceSerializer(serializers.ModelSerializer):
     #     return device
 
     # def update(self, instance, validated_data):
-    #     deviceRunStateData = validated_data.pop('device_run_state')
     #     instance.__dict__.update(**validated_data)
-    #     deviceRunState = instance.device_run_state
-    #     logger.debug(deviceRunStateData)
-    #     deviceRunState.__dict__.update(**deviceRunStateData)
     #     return instance
 
 

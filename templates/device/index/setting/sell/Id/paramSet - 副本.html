@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>设备管理</title>
+<meta name="Keywords" content="设备管理" >
+<meta name="Description" content="设备管理" >
+<link href="/static/css/style2/style.css" rel="stylesheet" type="text/css">
+<script src="/static/js/jquery.min.js" type="text/javascript"></script>
+<script src="/static/js/login.js" type="text/javascript"></script>
+<script src="/static/js/honeySwitch.js" type="text/javascript"></script>
+
+<style type="text/css">
+.weui-switch {
+  -webkit-appearance: none;
+          appearance: none;
+}
+.weui-switch {
+  position: relative;
+  width: 52px;
+  height: 32px;
+  border: 1px solid #DFDFDF;
+  outline: 0;
+  border-radius: 16px;
+  box-sizing: border-box;
+  background-color: #DFDFDF;
+  -webkit-transition: background-color 0.1s, border 0.1s;
+  transition: background-color 0.1s, border 0.1s;
+}
+.weui-switch:before{
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #FDFDFD;
+  -webkit-transition: -webkit-transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
+  transition: -webkit-transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
+  transition: transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
+  transition: transform 0.35s cubic-bezier(0.45, 1, 0.4, 1),-webkit-transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
+}
+.weui-switch:after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  -webkit-transition: -webkit-transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);
+  transition: -webkit-transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);
+  transition: transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);
+  transition: transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35), -webkit-transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);
+}
+.weui-switch:checked{
+  border-color: #04BE02;
+  background-color: #04BE02;
+}
+.weui-switch:checked:before {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+.weui-switch:checked:after {
+  -webkit-transform: translateX(20px);
+          transform: translateX(20px);
+}
+</style>
+</head>
+
+<body>
+
+    <div class="warp">
+	 <form id="h-form">
+        <div class="ej_bt">反渗透设备参数设置<a href="javascript:history.back(-1)" class="fh"><img src="/static/images/fanhui.png" /></a></div>
+         
+        <dl class="sbcs sbcs1">
+        	<dt><strong>设备ID</strong></dt>
+            <dd><strong> 3000003</strong></dd>
+            <div class="clear"></div>
+        </dl>
+         
+        <dl class="sbcs">
+        	<dt>开启冲洗阀时间1T(1-240秒)</dt>
+            <dd class="cssz"><input type="number" placeholder="0" name="yukoufeicanshu" value="10" class="water_sales deducting_fee_inp"></dd>
+            <div class="clear"></div>
+        </dl>
+         
+        <dl class="sbcs" style="line-height: 42px;">
+        	<dt>开启制水泵时间2T(1-240秒) <br />高压洗膜2T参数不用</dt>
+            <dd class="cssz"><input type="number" placeholder="0"  name="liuliangjimaichongshu" value="30"  class="water_sales deducting_fee_inp"></dd>
+            <div class="clear"></div>
+        </dl>
+        
+        <dl class="sbcs">
+        	<dt>循环冲洗时间3T(1-240秒)</dt>
+            <dd class="cssz"><input type="number" placeholder="0" name="shuakadashuishijian" value="15" class="water_sales deducting_fee_inp"></dd>
+            <div class="clear"></div>
+        </dl>
+		
+		 <dl class="sbcs">
+        	<dt>水满后冲洗时间4T(1-240秒)</dt>
+            <dd class="cssz"><input type="number" placeholder="0" name="toubidashuishijian" value="15" class="water_sales deducting_fee_inp"></dd>
+            <div class="clear"></div>
+        </dl>
+		
+		 <dl class="sbcs">
+        	<dt>冲洗时间间隔5T(1-240分)</dt>
+            <dd class="cssz"><input type="number" placeholder="0" name="maimaichongshuiliang" value="120" class="water_sales deducting_fee_inp"></dd>
+            <div class="clear"></div>
+        </dl>
+		
+		 <dl class="sbcs">
+        	<dt>水满制水泵停止时间6T(5-240秒)</dt>
+            <dd class="cssz"><input type="number" placeholder="0" name="qianshuhuishoushijian" value="5" class="water_sales deducting_fee_inp"></dd>
+            <div class="clear"></div>
+        </dl>
+		
+		 <dl class="sbcs">
+        	<dt>臭氧杀菌时间7T(5-240秒)</dt>
+            <dd class="cssz"><input type="number" placeholder="0" name="chouyangshajunshijian" value="10" class="water_sales deducting_fee_inp"></dd>
+            <div class="clear"></div>
+        </dl>
+		
+		
+		 <dl class="sbcs">
+        	<dt>臭氧杀菌间隔8T(10-240分)</dt>
+            <dd class="cssz"><input type="number" placeholder="0" name="chouyangshajunjiange" value="180" class="water_sales deducting_fee_inp"></dd>
+            <div class="clear"></div>
+        </dl>
+		
+		
+		 <dl class="sbcs">
+        	<dt>温控加热启动温度1C(1-30℃)</dt>
+            <dd class="cssz"><input type="number" placeholder="0" name="jiarewenduxiaxian" value="5" class="water_sales deducting_fee_inp"></dd>
+            <div class="clear"></div>
+        </dl>
+		
+		 <dl class="sbcs">
+        	<dt>温控加热停止温度2C(1-30℃)</dt>
+            <dd class="cssz"><input type="number" placeholder="0" name="jiarewendushangxian" value="10" class="water_sales deducting_fee_inp"></dd>
+            <div class="clear"></div>
+        </dl>
+         
+       <!-- 系统参数设置 -->
+        
+        <dl class="sbcs">
+        	<dt>电导率显示方式2D(1TDS 2电导率)</dt>
+				<input type="hidden" id="cs1" class="weui-switch" placeholder="0" name="toubiqileixing"  value="1"  >
+            <dd class="cssz">
+				                <div class="cell-right"><span class="switch-on" id="wifi" onclick="delete_tag1()"></span></div>
+				            </dd>
+		   </dd>
+            <div class="clear"></div>
+        </dl>
+		
+		 <dl class="sbcs">
+        	<dt>TDS修正数据3D(0-255)</dt>
+            <dd class="cssz"><input type="number" placeholder="0" name="xunhuanchongxishijian" value="0" class="water_sales deducting_fee_inp"></dd>
+            <div class="clear"></div>
+        </dl>
+        
+        <dl class="sbcs">
+        	<dt>洗膜方式4D(1低压 2高压)</dt>
+            <dd class="cssz">
+			<input type="hidden" id="cs2" class="weui-switch" placeholder="0" name="yuyinyinliangtiaojie"  value="1"  >
+			
+			                <div class="cell-right"><span class="switch-on" id="wifi" onclick="delete_tag3()"></span></div>
+							</dd>
+            <div class="clear"></div>
+        </dl>
+        
+            <div class="hfcc">
+				<input type="hidden" name="Id" value="066f5e72-3c84-ea11-b0df-87120c3b66e0">
+				<button class="btn_recovery" id="recovery" type="button">恢复出厂设置</button>
+				<button type="button" id="h-submit" class="queding" >确定</button>
+
+                <div class="clear"></div>
+            </div>
+        </form> 
+		<div style="clear: both;"></div>
+            <div class="footer">山东跃水电子科技有限公司</div>
+    </div><!--warp-->
+<script>
+var SCOPE = {
+  'post_url' : ""
+}
+</script>
+<script src="/static/js/layer/mobile/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/mdialog.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/mcommon.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+function delete_tag1(){
+    //阻止冒泡上层click
+    event.stopPropagation();
+	document.getElementById('cs1').value='2';
+}
+ 
+function delete_tag2(){
+    //阻止冒泡上层click
+    event.stopPropagation();
+	document.getElementById('cs1').value='1';
+}
+function delete_tag3(){
+    //阻止冒泡上层click
+    event.stopPropagation();
+	document.getElementById('cs2').value='2';
+}
+ 
+function delete_tag4(){
+    //阻止冒泡上层click
+    event.stopPropagation();
+	document.getElementById('cs2').value='1';
+}
+
+$("#recovery").click(function(){
+    var Id = "066f5e72-3c84-ea11-b0df-87120c3b66e0";
+    url = "/index/setting/recover.html";
+    data = {};
+    data['Id'] = Id;
+    $.post(url,data,function(res){
+        if (res.status == '1') {
+            dialog.success(res.message,res.url);
+        }else if(res.status == '0'){
+            dialog.error(res.message,res.url);
+        }
+    },"JSON");
+});
+</script>
+</body>
+</html>

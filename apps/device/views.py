@@ -151,21 +151,22 @@ class AddAfterSaleAPIView(APIView):
         return render(request,'device/index/remind/add.html')
         
 
-def get_user(request):
-    from rest_framework_jwt.authentication import JSONWebTokenAuthentication 
-    from rest_framework.views import exception_handler
-    from rest_framework_jwt.utils import jwt_decode_handler
-    # 获取登陆的用户
-    token = request.META.get('HTTP_AUTHORIZATION')[4:]
-    logger.debug(token)
-    token_user = jwt_decode_handler(token)
+# def get_user(request):
+#     from rest_framework_jwt.authentication import JSONWebTokenAuthentication 
+#     from rest_framework.views import exception_handler
+#     from rest_framework_jwt.utils import jwt_decode_handler
+#     # 获取登陆的用户
+#     token = request.META.get('HTTP_AUTHORIZATION')[4:]
+#     logger.debug(token)
+#     token_user = jwt_decode_handler(token)
 
-    user_id = token_user['user_id']  # 获取用户id
-    # sql = f"SELECT username FROM `auth_user` WHERE id= {user_id}"
-    # username = sqlFetchone(sql)[0]
-    return HttpResponse(user_id)
+#     user_id = token_user['user_id']  # 获取用户id
+#     # sql = f"SELECT username FROM `auth_user` WHERE id= {user_id}"
+#     # username = sqlFetchone(sql)[0]
+#     return HttpResponse(user_id)
 
 class ChangePwdAPIView(APIView):
+
     # permission_classes = [IsAuthenticated]
     # authentication_classes = [JSONWebTokenAuthentication]
     def get(self, request):
@@ -193,3 +194,20 @@ class ChangePwdAPIView(APIView):
             return JsonResponse({"msg":"密码更改成功"})
         logger.debug({"msg":"输入的原始密码不正确"})
         return JsonResponse({"msg":"输入的原始密码不正确"})
+
+
+
+class ParamSetAPIView(APIView):
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [JSONWebTokenAuthentication]
+    def get(self, request,device_id):
+        return render(request,'device/index/setting/sell/Id/paramSet.html')
+
+    def put(self,request,device_id):
+        obj = Device.objects.get(device_id=device_id)
+        validated_data = DeviceSerializer(instance=obj,data=request.data,partial=True)
+        if validated_data.is_valid():
+            validated_data.save()
+            return Response(validated_data.data)
+        else:
+            return Response(validated_data.errors)
