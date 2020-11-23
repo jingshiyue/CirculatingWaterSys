@@ -4,7 +4,7 @@
 http://192.168.99.100:8000/jwt_auth
 http://192.168.99.100:8000/index/index.html/
 http://192.168.99.100:8000/index/index/login/
-
+http://localhost:8000/index/index/login/
 
 config:
     https://www.cnblogs.com/xueweihan/p/11649630.html

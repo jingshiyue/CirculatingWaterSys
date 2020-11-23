@@ -231,5 +231,22 @@ $("#recovery").click(function(){
     },"JSON");
 });
 </script>
+
+<script>
+    console.log($(".warp #h-form"))
+    console.log($("#h-form").html())
+
+    console.log($(".warp #h-form"));
+    // $("#h-submit").attr("disabled",true);
+    var data = $(".warp #h-form").serializeArray();
+    console.log(data)
+    postData = {};
+    $(data).each(function(i){
+    postData[this.name] = this.value;
+    console.log(this.name)
+    console.log(this.value)
+    });
+    console.log(postData)
+</script>
 </body>
 </html>

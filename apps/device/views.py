@@ -211,3 +211,23 @@ class ParamSetAPIView(APIView):
             return Response(validated_data.data)
         else:
             return Response(validated_data.errors)
+
+
+class RunStatusAPIView(APIView):
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [JSONWebTokenAuthentication]
+    def get(self, request,device_id):
+        return render(request,'device/index/Equipment/statetu/Id/runStatus.html')
+
+    def put(self,request,device_id):
+        obj = Device.objects.get(device_id=device_id)
+        validated_data = DeviceSerializer(instance=obj,data=request.data,partial=True)
+        if validated_data.is_valid():
+            validated_data.save()
+            return Response(validated_data.data)
+        else:
+            return Response(validated_data.errors)
+
+
+
+            

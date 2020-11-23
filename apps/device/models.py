@@ -77,9 +77,9 @@ class Device(BaseModel):
     _8t = models.IntegerField(verbose_name='臭氧杀菌间隔8T(10-240分)',blank=True,null=True)
     _1c = models.IntegerField(verbose_name='温控加热启动温度1C(1-30℃)',blank=True,null=True)
     _2c = models.IntegerField(verbose_name='温控加热停止温度2C(1-30℃)',blank=True,null=True)
-    _2d = models.IntegerField(verbose_name='电导率显示方式2D(1TDS 2电导率)',blank=True,null=True)
+    _2d = models.CharField(max_length=20,verbose_name='电导率显示方式2D(1TDS 2电导率)',blank=True,null=True)
     _3d = models.IntegerField(verbose_name='TDS修正数据3D(0-255)',blank=True,null=True)
-    _4d = models.IntegerField(verbose_name='洗膜方式4D(1低压 2高压)',blank=True,null=True)
+    _4d = models.CharField(max_length=20,verbose_name='洗膜方式4D(1低压 2高压)',blank=True,null=True)
 
    
     def __str__(self):

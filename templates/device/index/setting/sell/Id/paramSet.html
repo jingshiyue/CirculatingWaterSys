@@ -75,7 +75,7 @@
 <body>
 
     <div class="warp">
-
+        <form id="h-form" onsubmit="javascript:return add_submit();"></form>
 		<div style="clear: both;"></div>
             <div class="footer">山东跃水电子科技有限公司</div>
     </div><!--warp-->
@@ -89,7 +89,6 @@ var SCOPE = {
 <script src="/static/js/mcommon.js" type="text/javascript" charset="utf-8"></script>
 <script>
     tmpStr = `
-    <form id="h-form">
         <div class="ej_bt">反渗透设备参数设置<a href="javascript:history.back(-1)" class="fh"><img src="/static/images/fanhui.png" /></a></div>
          
         <dl class="sbcs sbcs1">
@@ -100,63 +99,63 @@ var SCOPE = {
          
         <dl class="sbcs">
         	<dt>开启冲洗阀时间1T(1-240秒)</dt>
-            <dd class="cssz"><input type="number" placeholder="0" name="yukoufeicanshu" value="{1}" class="water_sales deducting_fee_inp"></dd>
+            <dd class="cssz"><input type="number"  name="yukoufeicanshu" value="{1}" class="water_sales deducting_fee_inp"></dd>
             <div class="clear"></div>
         </dl>
          
         <dl class="sbcs" style="line-height: 42px;">
         	<dt>开启制水泵时间2T(1-240秒) <br />高压洗膜2T参数不用</dt>
-            <dd class="cssz"><input type="number" placeholder="0"  name="liuliangjimaichongshu" value="{2}"  class="water_sales deducting_fee_inp"></dd>
+            <dd class="cssz"><input type="number"   name="liuliangjimaichongshu" value="{2}"  class="water_sales deducting_fee_inp"></dd>
             <div class="clear"></div>
         </dl>
         
         <dl class="sbcs">
         	<dt>循环冲洗时间3T(1-240秒)</dt>
-            <dd class="cssz"><input type="number" placeholder="0" name="shuakadashuishijian" value="{3}" class="water_sales deducting_fee_inp"></dd>
+            <dd class="cssz"><input type="number"  name="shuakadashuishijian" value="{3}" class="water_sales deducting_fee_inp"></dd>
             <div class="clear"></div>
         </dl>
 		
 		 <dl class="sbcs">
         	<dt>水满后冲洗时间4T(1-240秒)</dt>
-            <dd class="cssz"><input type="number" placeholder="0" name="toubidashuishijian" value="{4}" class="water_sales deducting_fee_inp"></dd>
+            <dd class="cssz"><input type="number"  name="toubidashuishijian" value="{4}" class="water_sales deducting_fee_inp"></dd>
             <div class="clear"></div>
         </dl>
 		
 		 <dl class="sbcs">
         	<dt>冲洗时间间隔5T(1-240分)</dt>
-            <dd class="cssz"><input type="number" placeholder="0" name="maimaichongshuiliang" value="{5}" class="water_sales deducting_fee_inp"></dd>
+            <dd class="cssz"><input type="number"  name="maimaichongshuiliang" value="{5}" class="water_sales deducting_fee_inp"></dd>
             <div class="clear"></div>
         </dl>
 		
 		 <dl class="sbcs">
         	<dt>水满制水泵停止时间6T(5-240秒)</dt>
-            <dd class="cssz"><input type="number" placeholder="0" name="qianshuhuishoushijian" value="{6}" class="water_sales deducting_fee_inp"></dd>
+            <dd class="cssz"><input type="number"  name="qianshuhuishoushijian" value="{6}" class="water_sales deducting_fee_inp"></dd>
             <div class="clear"></div>
         </dl>
 		
 		 <dl class="sbcs">
         	<dt>臭氧杀菌时间7T(5-240秒)</dt>
-            <dd class="cssz"><input type="number" placeholder="0" name="chouyangshajunshijian" value="{7}" class="water_sales deducting_fee_inp"></dd>
+            <dd class="cssz"><input type="number"  name="chouyangshajunshijian" value="{7}" class="water_sales deducting_fee_inp"></dd>
             <div class="clear"></div>
         </dl>
 		
 		
 		 <dl class="sbcs">
         	<dt>臭氧杀菌间隔8T(10-240分)</dt>
-            <dd class="cssz"><input type="number" placeholder="0" name="chouyangshajunjiange" value="{8}" class="water_sales deducting_fee_inp"></dd>
+            <dd class="cssz"><input type="number"  name="chouyangshajunjiange" value="{8}" class="water_sales deducting_fee_inp"></dd>
             <div class="clear"></div>
         </dl>
 		
 		
 		 <dl class="sbcs">
         	<dt>温控加热启动温度1C(1-30℃)</dt>
-            <dd class="cssz"><input type="number" placeholder="0" name="jiarewenduxiaxian" value="{9}" class="water_sales deducting_fee_inp"></dd>
+            <dd class="cssz"><input type="number"  name="jiarewenduxiaxian" value="{9}" class="water_sales deducting_fee_inp"></dd>
             <div class="clear"></div>
         </dl>
 		
 		 <dl class="sbcs">
         	<dt>温控加热停止温度2C(1-30℃)</dt>
-            <dd class="cssz"><input type="number" placeholder="0" name="jiarewendushangxian" value="{10}" class="water_sales deducting_fee_inp"></dd>
+            <dd class="cssz"><input type="number"  name="jiarewendushangxian" value="{10}" class="water_sales deducting_fee_inp"></dd>
             <div class="clear"></div>
         </dl>
          
@@ -164,7 +163,7 @@ var SCOPE = {
         
         <dl class="sbcs">
         	<dt>电导率显示方式2D(1TDS 2电导率)</dt>
-				<input type="hidden" id="cs1" class="weui-switch" placeholder="0" name="toubiqileixing"  value="{11}"  >
+				<input type="hidden" id="cs1" class="weui-switch"  name="toubiqileixing"  value="{11}"  >
             <dd class="cssz">
 				                <div class="cell-right"><span class="switch-on" id="wifi" onclick="delete_tag1()"></span></div>
 				            </dd>
@@ -174,14 +173,13 @@ var SCOPE = {
 		
 		 <dl class="sbcs">
         	<dt>TDS修正数据3D(0-255)</dt>
-            <dd class="cssz"><input type="number" placeholder="0" name="xunhuanchongxishijian" value="{12}" class="water_sales deducting_fee_inp"></dd>
+            <dd class="cssz"><input type="number"  name="xunhuanchongxishijian" value="{12}" class="water_sales deducting_fee_inp"></dd>
             <div class="clear"></div>
         </dl>
-        
         <dl class="sbcs">
         	<dt>洗膜方式4D(1低压 2高压)</dt>
             <dd class="cssz">
-			<input type="hidden" id="cs2" class="weui-switch" placeholder="0" name="yuyinyinliangtiaojie"  value="{13}"  >
+			<input type="hidden" id="cs2" class="weui-switch"  name="yuyinyinliangtiaojie"  value="{13}"  >
 			
 			                <div class="cell-right"><span class="switch-on" id="wifi" onclick="delete_tag3()"></span></div>
 							</dd>
@@ -191,11 +189,10 @@ var SCOPE = {
             <div class="hfcc">
 				<input type="hidden" name="Id" value="066f5e72-3c84-ea11-b0df-87120c3b66e0">
 				<button class="btn_recovery" id="recovery" type="button">恢复出厂设置</button>
-				<button type="button" id="h-submit" class="queding" >确定</button>
+				<button type="submit" id="h-submit" class="queding" >确定</button>
 
                 <div class="clear"></div>
             </div>
-        </form> 
     `
     
     String.format = function(src){  
@@ -206,12 +203,8 @@ var SCOPE = {
             });  
         };  
 
-    console.log($(".warp"))
-    
 
-        
     $(document).ready(function(){
-        //首页设备列表展示
         var id = window.location.href.split("/")[8]
         var url = "/deviceQuery/" + id + "/"
         $.ajax({
@@ -222,7 +215,7 @@ var SCOPE = {
                     XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
                 },
                 success:function(data){
-                    console.log(data)
+                    // console.log(data)
                     tmpStr = String.format(tmpStr,
                         data["device_id"],
                         data["_1t"],
@@ -239,11 +232,54 @@ var SCOPE = {
                         data["_3d"],
                         data["_4d"],
                     )
-                    $(".warp").append(tmpStr)
+                    $("#h-form").append(tmpStr)
                         
                 }
         })
     })
+
+    function add_submit(){
+            var data = $(".warp #h-form").serializeArray();
+            Data = {};
+            patchData = {};
+            $(data).each(function(i){
+                Data[this.name] = this.value;
+            });
+            console.log(Data)
+            patchData["_1t"]=Data["yukoufeicanshu"]
+            patchData["_2t"]=Data["liuliangjimaichongshu"]
+            patchData["_3t"]=Data["shuakadashuishijian"]
+            patchData["_4t"]=Data["toubidashuishijian"]
+            patchData["_5t"]=Data["maimaichongshuiliang"]
+            patchData["_6t"]=Data["qianshuhuishoushijian"]
+            patchData["_7t"]=Data["chouyangshajunshijian"]
+            patchData["_8t"]=Data["chouyangshajunjiange"]
+            patchData["_1c"]=Data["jiarewenduxiaxian"]
+            patchData["_2c"]=Data["jiarewendushangxian"]
+            patchData["_2d"]=Data["toubiqileixing"]
+            patchData["_3d"]=Data["xunhuanchongxishijian"]
+            patchData["_4d"]=Data["yuyinyinliangtiaojie"]
+            console.log(patchData)
+
+            var id = window.location.href.split("/")[8]
+            url = "/deviceEdit/" + id + "/"
+            $.ajax({
+                type:'PATCH',
+                url:url,
+                cache: false,
+                data: patchData,
+                beforeSend: function (XMLHttpRequest) {
+                    XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
+                    XMLHttpRequest.setRequestHeader("X-CSRFToken",$.cookie("csrftoken"));
+                },
+                success:function(data){
+                    console.log(data)
+                    dialog.success("参数设置成功")
+                }
+            });
+            return false;
+    }
+        
 
 </script>
 <script type="text/javascript">
@@ -284,6 +320,8 @@ $("#recovery").click(function(){
         }
     },"JSON");
 });
+
 </script>
+
 </body>
 </html>
