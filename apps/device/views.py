@@ -37,8 +37,8 @@ class Pagination(PageNumberPagination):
 
 # CacheResponseMixin list和retrieve 才会缓存,需要后台配置
 class DeviceEditViewset(mixins.CreateModelMixin, mixins.UpdateModelMixin,mixins.DestroyModelMixin,viewsets.GenericViewSet):
-    # permission_classes = [IsAuthenticated,AdminPermission]
-    # authentication_classes = [JSONWebTokenAuthentication]
+    permission_classes = [IsAuthenticated,AdminPermission]
+    authentication_classes = [JSONWebTokenAuthentication]
     serializer_class = DeviceSerializer
     lookup_field = "device_id"
 
@@ -47,8 +47,8 @@ class DeviceEditViewset(mixins.CreateModelMixin, mixins.UpdateModelMixin,mixins.
 
 class DeviceQueryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     pagination_class = Pagination
-    # permission_classes = [IsAuthenticated]
-    # authentication_classes = [JSONWebTokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication]
     serializer_class = DeviceSerializer
     lookup_field = "device_id"
 
@@ -57,8 +57,8 @@ class DeviceQueryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,viewse
 
 
 class QueryStatisticsAPIView(APIView):
-    # permission_classes = [IsAuthenticated]
-    # authentication_classes = [JSONWebTokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication]
 
     def get(self, request):
         dataDict = {}
@@ -70,8 +70,8 @@ class QueryStatisticsAPIView(APIView):
         return JsonResponse(dataDict)
 
 class QueryDeviceAPIView(APIView):
-    # permission_classes = [IsAuthenticated]
-    # authentication_classes = [JSONWebTokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication]
     def get(self, request):
         dateGet = (request.GET) #{"DeviceID": "zhuban", "NetState": "0", "DeviceState": "11"}
         MainboardID = dateGet.get("MainboardID",None)
@@ -89,11 +89,11 @@ class QueryDeviceAPIView(APIView):
 
 
 class RepairDeviceViewset(viewsets.ModelViewSet):
-    # permission_classes = [IsAuthenticated,AdminPermission]
-    # authentication_classes = [JSONWebTokenAuthentication]
+    permission_classes = [IsAuthenticated,AdminPermission]
+    authentication_classes = [JSONWebTokenAuthentication]
     serializer_class = RepairDeviceSerializer
     lookup_field = "repairID"
-    # pagination_class = Pagination
+    pagination_class = Pagination
 
     def get_queryset(self):
         return RepairDevice.objects.all().order_by("-create_time")
@@ -196,10 +196,10 @@ class ChangePwdAPIView(APIView):
         return JsonResponse({"msg":"输入的原始密码不正确"})
 
 
-
 class ParamSetAPIView(APIView):
     # permission_classes = [IsAuthenticated]
     # authentication_classes = [JSONWebTokenAuthentication]
+
     def get(self, request,device_id):
         return render(request,'device/index/setting/sell/Id/paramSet.html')
 
