@@ -43,7 +43,11 @@ urlpatterns = [
     path('index/Equipment/index.html/', TemplateView.as_view(template_name='device/index/Equipment/index.html')), 
     re_path('index/Equipment/pclist.html/?maxDeviceID=3999999&page=1', TemplateView.as_view(template_name='device/index/Equipment/index.html')),   #大屏展示
     re_path('index/setting/sell/Id/paramset/(?P<device_id>\S+)/',ParamSetAPIView.as_view()),                                                                                 
-    re_path('index/Equipment/statetu/Id/runstatus/(?P<device_id>\S+)/',RunStatusAPIView.as_view()),                                                                                 
+    re_path('index/Equipment/statetu/Id/runstatus/(?P<device_id>\S+)/',RunStatusAPIView.as_view()),   
+    re_path('index/Equipment/edit/Id/modify/(?P<device_id>\S+)/',ModifyAPIView.as_view()),   
+    re_path('index/Equipment/info/Id/more/(?P<device_id>\S+)/',moreAPIView.as_view()),   
+
+                                                                                 
     path('index/repairs/index.html/', TemplateView.as_view(template_name='device/index/repairs/index.html')),
     path('index/repairs/add.html/', TemplateView.as_view(template_name='device/index/repairs/add.html')), 
     re_path('index/repairs/addfeedback/(?P<repairID>\S+)/', AddFeedbackAPIView.as_view()),

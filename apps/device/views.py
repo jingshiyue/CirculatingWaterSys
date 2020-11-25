@@ -212,6 +212,25 @@ class ParamSetAPIView(APIView):
         else:
             return Response(validated_data.errors)
 
+class ModifyAPIView(APIView):
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [JSONWebTokenAuthentication]
+    def get(self, request,device_id):
+        return render(request,'device/index/Equipment/edit/Id/modify.html')
+    def put(self,request,device_id):
+        obj = Device.objects.get(device_id=device_id)
+        validated_data = DeviceSerializer(instance=obj,data=request.data,partial=True)
+        if validated_data.is_valid():
+            validated_data.save()
+            return Response(validated_data.data)
+        else:
+            return Response(validated_data.errors)
+
+class moreAPIView(APIView):
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [JSONWebTokenAuthentication]
+    def get(self, request,device_id):
+        return render(request,'device/index/Equipment/info/Id/more.html')
 
 class RunStatusAPIView(APIView):
     # permission_classes = [IsAuthenticated]

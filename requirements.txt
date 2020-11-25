@@ -1,24 +1,24 @@
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   certifi==2020.6.20
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   chardet==3.0.4
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   coreapi==2.3.3
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   coreschema==0.0.4
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   Django==2.2
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   django-filter==2.4.0
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   django-guardian==2.3.0
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   djangorestframework==3.12.1
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   djangorestframework-jwt==1.11.0
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   idna==2.10
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   itypes==1.2.0
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   Jinja2==2.11.2
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   MarkupSafe==1.1.1
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   mysql-connector==2.2.9
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   mysqlclient==2.0.1
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   PyJWT==1.7.1
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   PyMySQL==0.10.1
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   pytz==2020.1
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   requests==2.24.0
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   sqlparse==0.4.1
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   uritemplate==3.0.1
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple   urllib3==1.25.11
+certifi==2020.6.20
+chardet==3.0.4
+coreapi==2.3.3
+coreschema==0.0.4
+Django==2.2
+django-filter==2.4.0
+django-guardian==2.3.0
+djangorestframework==3.12.1
+djangorestframework-jwt==1.11.0
+idna==2.10
+itypes==1.2.0
+Jinja2==2.11.2
+MarkupSafe==1.1.1
+mysql-connector==2.2.9
+mysqlclient==2.0.1
+PyJWT==1.7.1
+PyMySQL==0.10.1
+pytz==2020.1
+requests==2.24.0
+sqlparse==0.4.1
+uritemplate==3.0.1
+urllib3==1.25.11
 
 

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+        <meta charset="utf-8" />
+        
+<title>设备信息-控制器</title>
+
+        <meta name="keywords"  content="" />
+        <meta name="description" content="控制器" />
+        <meta name="author" content="DeathGhost" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name='apple-touch-fullscreen' content='yes'>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="format-detection" content="address=no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+        <script src="/static/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+<body>
+    <!--主体-->
+    
+
+<style type="text/css">
+    .none{display:none;}
+    .new_l_l{width: 33.33%;}
+    .content{margin-bottom:50px;}
+	body{ background:url(/static/images/bg.jpg) ;}
+	
+	
+.main_top{ width:95%; margin:0 auto; font-size:2.4em; margin-bottom:2%; margin-top:5%;}
+.main_left{ width:40%; float:left; background-color: rgba(131,131,131,0.2);border-radius:20px; padding:3%;padding-bottom: 7%;font-size: 16px;}
+.color1{ color:#A2A2AA; float:left; width:28%}
+.color2{ color:#fff; float:left; text-align:center;  width:42%;}
+.color3{ color:#A2A2AA; float:right; width:30%; text-align:right}
+.ys{color:#0036ff; font-size:2em; text-align:center; margin:0 auto; height:60px; line-height:60px; margin-top:25%; margin-bottom:10%; background-color:#fff;border-radius: 20px;}
+.ys1{color:#FF0000; font-size:2em; text-align:center; margin:0 auto;height:60px; line-height:60px; margin-top:23%; margin-bottom:10%;background-color:#fff;border-radius: 20px;}
+.yy{ color:#ADADB3; font-size:1em; text-align:center;  padding-top:6%}
+.barbox{height:16px;line-height:16px;overflow:hidden;}
+.barbox dt a{color:#0048CC;}
+.barbox dd{float:left;}
+.barbox dd.last{color:#999;}
+.barbox dd.barline{width:389px;background:url(/static/images/jdtbg.png) left center no-repeat;height:16px;overflow:hidden;display:inline;}
+.barbox dd.barline div.charts{height:16px;overflow:hidden;background:url(/static/images/jdtbg1.png) right center repeat-x;border-radius:8px;}
+.votebox{ margin-top:20%; padding-bottom:5%}
+.main_right{ width:45%; float:right;background-color: rgba(131,131,131,0.2);border-radius:20px; padding:3%;font-size: 16px;}
+.lv_xq{ font-size:1em; color:#ADADB3; margin-bottom:8%;padding-top: 3%;text-align:center; }
+	
+	
+	
+</style>
+        <div class="content">
+            <header class="page-header1">
+                <a href="javascript:;" onClick="javascript:history.back(-1);"><img src="/static/img/icon_left.png" class="back_img" style="float:left;"/></a>
+                <h3>设备详情</h3>
+            </header>
+        
+        <div class="sidenav">
+            <div class="equipment_details">
+                <div class="new_l_l active">设备信息</div>
+
+                <div class="new_l_l">设备状态</div>
+				
+				<div class="new_l_l"><a href="javascript:;" id="export_all" class="coolbg" style="color:#fff">TDS导出excel</a></div>
+               
+            </div>
+        </div>
+       
+		<script>
+			//导出数据
+			$('#export_all').click(function(){
+				window.open("/index/equipment/export?id="+3000012);
+			});
+		</script>
+	   
+        <div class="scd_r" >
+            
+			    <div class="main_top">
+        	<div class="main_left">
+            	<span class="color1">Us/cm</span>
+            	<span class="color2">纯水</span>
+            	<span class="color3">优</span>
+                <div class="clear"></div>
+				
+                <div class="ys" >0</div>
+                
+                <div class="votebox">
+                    <dl class="barbox">
+                        <dd class="barline">
+                            <div w="100" style="width:0px;" class="charts"></div>
+                        </dd>
+                    </dl>
+                </div>
+                    
+                <div class="yy">可直接使用</div>
+                    
+				<script language="javascript">
+                function animate(){
+                    $(".charts").each(function(i,item){
+                        var a=parseInt($(item).attr("w"));
+                        $(item).animate({
+                            width: a+"%"
+                        },1000);
+                    });
+                }
+                animate();
+                </script>
+                
+            </div>
+        	<div class="main_right">
+            	<span class="color1">Us/cm</span>
+            	<span class="color2">原水</span>
+            	<span class="color3">水质差</span>
+                <div class="clear"></div>
+                
+                <div class="ys1">0</div>
+                   <div class="lvxin">
+                   <div class="lv_xq"><span class="le">制水时间0（分钟）</span><div class="clear"></div></div>
+				   <div class="lv_xq"><span class="le">制水累计0（天）</span><div class="clear"></div></div>
+    
+                     <div class="clear"></div>
+                   </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        
+			
+			
+			
+        </div>
+        <div class="scd_r none">
+            <div class="equipments_list">
+                <div class="equipments_lists">
+                    <div class="equipments_lists_d">
+                        <div class="equipment_details_list equipment_device_status">设备状态</div>
+                        <div class="equipment_details_list equipment_device_status_number">参数设置失败</div>
+                    </div>
+                                        <div class="equipment_btn_keep" >
+                        <button type="button" class="btn_keep" onclick="power(2,'关机');" style="background:#ebebeb;color:#646464;"> 关机</button>
+                    </div>
+                                    </div>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+        </div>
+
+    
+    <script type="text/javascript">
+        $('.sidenav .new_l_l').click(function(){
+            var _index=$(this).index();
+            $('.scd_r').addClass('none').eq(_index).removeClass('none');
+        });
+        $('.sidenav .new_l_l').bind('click', function(){
+            $(this).addClass('active').siblings().removeClass('active');
+        });
+    </script>
+    <script src="/static/js/layer/mobile/layer.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/mdialog.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    function power(status,title){
+        layer.open({
+            content: '您确定要'+title+'吗？'
+            ,btn: ['确认', '取消']
+            ,yes: function(index){
+                layer.close(index);
+                var url = "/index/equipment/power.html";
+                data = {};
+                data['Id'] = "f0311c1e-e289-ea11-b0df-87120c3b66e0";
+                data['status'] = status;
+                $.post(url,data,function(res){
+                    if (res.status == '1') {
+                        dialog.success(res.message,res.url);
+                    }else if(res.status == '0'){
+                        dialog.error(res.message,res.url);
+                    }
+                },"JSON");
+            }
+        });
+    }
+    </script>
+    <script type="text/javascript">
+    function switchGoods(status,GoodsId,title){
+        layer.open({
+            content: '您确定要'+title+'吗？'
+            ,btn: ['确认', '取消']
+            ,yes: function(index){
+                layer.close(index);
+                var url = "/index/equipment/switchgoods.html";
+                data = {};
+                data['Id'] = "f0311c1e-e289-ea11-b0df-87120c3b66e0";
+                data['GoodsId'] = GoodsId;
+                data['status'] = status;
+                $.post(url,data,function(res){
+                    if (res.status == '1') {
+                        dialog.success(res.message,res.url);
+                    }else if(res.status == '0'){
+                        dialog.error(res.message,res.url);
+                    }
+                },"JSON");
+            } 
+        });
+    }
+    </script>
+
+</body>
+</html>
