@@ -93,7 +93,9 @@ class RepairDeviceViewset(viewsets.ModelViewSet):
     authentication_classes = [JSONWebTokenAuthentication]
     serializer_class = RepairDeviceSerializer
     lookup_field = "repairID"
-    pagination_class = Pagination
+    Pagination1 = Pagination
+    Pagination1.page_size = 100
+    pagination_class = Pagination1
 
     def get_queryset(self):
         return RepairDevice.objects.all().order_by("-create_time")
@@ -116,12 +118,12 @@ class RepairDeviceViewset(viewsets.ModelViewSet):
 
 
 class AddFeedbackAPIView(APIView):
-    # permission_classes = [IsAuthenticated]
-    # authentication_classes = [JSONWebTokenAuthentication]
     def get(self, request,repairID):
         return render(request,'device/index/repairs/addfeedback.html')
 
     def put(self,request,repairID):
+        if not request.META.get('HTTP_AUTHORIZATION'):
+            return Response("身份未认证",status=400)
         obj = RepairDevice.objects.get(repairID=repairID)
         validated_data = RepairDeviceSerializer(instance=obj,data=request.data,partial=True)
         if validated_data.is_valid():
@@ -166,9 +168,6 @@ class AddAfterSaleAPIView(APIView):
 #     return HttpResponse(user_id)
 
 class ChangePwdAPIView(APIView):
-
-    # permission_classes = [IsAuthenticated]
-    # authentication_classes = [JSONWebTokenAuthentication]
     def get(self, request):
         return render(request,'device/index/user/changePwd.html')
 
@@ -197,55 +196,48 @@ class ChangePwdAPIView(APIView):
 
 
 class ParamSetAPIView(APIView):
-    # permission_classes = [IsAuthenticated]
-    # authentication_classes = [JSONWebTokenAuthentication]
-
     def get(self, request,device_id):
         return render(request,'device/index/setting/sell/Id/paramSet.html')
 
-    def put(self,request,device_id):
-        obj = Device.objects.get(device_id=device_id)
-        validated_data = DeviceSerializer(instance=obj,data=request.data,partial=True)
-        if validated_data.is_valid():
-            validated_data.save()
-            return Response(validated_data.data)
-        else:
-            return Response(validated_data.errors)
+    # def put(self,request,device_id):
+    #     if not request.META.get('HTTP_AUTHORIZATION'):
+    #         return Response(status=400)
+    #     obj = Device.objects.get(device_id=device_id)
+    #     validated_data = DeviceSerializer(instance=obj,data=request.data,partial=True)
+    #     if validated_data.is_valid():
+    #         validated_data.save()
+    #         return Response(validated_data.data)
+    #     else:
+    #         return Response(validated_data.errors)
 
 class ModifyAPIView(APIView):
-    # permission_classes = [IsAuthenticated]
-    # authentication_classes = [JSONWebTokenAuthentication]
     def get(self, request,device_id):
         return render(request,'device/index/Equipment/edit/Id/modify.html')
-    def put(self,request,device_id):
-        obj = Device.objects.get(device_id=device_id)
-        validated_data = DeviceSerializer(instance=obj,data=request.data,partial=True)
-        if validated_data.is_valid():
-            validated_data.save()
-            return Response(validated_data.data)
-        else:
-            return Response(validated_data.errors)
+    # def put(self,request,device_id):
+    #     obj = Device.objects.get(device_id=device_id)
+    #     validated_data = DeviceSerializer(instance=obj,data=request.data,partial=True)
+    #     if validated_data.is_valid():
+    #         validated_data.save()
+    #         return Response(validated_data.data)
+    #     else:
+    #         return Response(validated_data.errors)
 
 class moreAPIView(APIView):
-    # permission_classes = [IsAuthenticated]
-    # authentication_classes = [JSONWebTokenAuthentication]
     def get(self, request,device_id):
         return render(request,'device/index/Equipment/info/Id/more.html')
 
 class RunStatusAPIView(APIView):
-    # permission_classes = [IsAuthenticated]
-    # authentication_classes = [JSONWebTokenAuthentication]
     def get(self, request,device_id):
         return render(request,'device/index/Equipment/statetu/Id/runStatus.html')
 
-    def put(self,request,device_id):
-        obj = Device.objects.get(device_id=device_id)
-        validated_data = DeviceSerializer(instance=obj,data=request.data,partial=True)
-        if validated_data.is_valid():
-            validated_data.save()
-            return Response(validated_data.data)
-        else:
-            return Response(validated_data.errors)
+    # def put(self,request,device_id):
+    #     obj = Device.objects.get(device_id=device_id)
+    #     validated_data = DeviceSerializer(instance=obj,data=request.data,partial=True)
+    #     if validated_data.is_valid():
+    #         validated_data.save()
+    #         return Response(validated_data.data)
+    #     else:
+    #         return Response(validated_data.errors)
 
 
 
