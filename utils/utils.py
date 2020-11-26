@@ -1,6 +1,6 @@
 from django.db import connection, connections
 import os,django,sys
-sys.path.append(sys.path[0]+"\\..")
+sys.path.append(sys.path[0]+"/..")
 print(sys.path)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CirculatingWaterSys.settings')
 django.setup()
@@ -25,13 +25,13 @@ def sqlFetchall(sql):
 
 
 if __name__ == "__main__":
-    # for i in range(1001,1043):
-    #     validated_data = {}
-    #     validated_data.setdefault("device_id",str(i))
-    #     validated_data.setdefault("MainboardID",str(i)+"-编号")
-    #     validated_data.setdefault("remarks",str(i)+"-备注")
-    #     Device.objects.create(**validated_data)
-    #     print(f"add Device {i} suc ..")
+    for i in range(1001,1043):
+        validated_data = {}
+        validated_data.setdefault("device_id",str(i))
+        validated_data.setdefault("MainboardID",str(i)+"-编号")
+        validated_data.setdefault("remarks",str(i)+"-备注")
+        Device.objects.create(**validated_data)
+        print(f"add Device {i} suc ..")
 
     for i in range(1001,1023):
         dict = {
@@ -48,6 +48,5 @@ if __name__ == "__main__":
         RepairDevice.objects.create(**dict)
         print(f"add RepairDevice {i} suc ..")
 
-    one = sqlFetchone("SELECT * FROM `device_repairdevice` WHERE deviceNum= 1021")
-    print(one)
+
         

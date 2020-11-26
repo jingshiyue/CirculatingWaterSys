@@ -29,7 +29,7 @@ SECRET_KEY = 'mfg_baq)zv_@n90a#@j!-0+no6r4*izt!*wib&u!a_&ky$#zia'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost","192.168.99.100"]
+ALLOWED_HOSTS = ["localhost","192.168.99.100","*"]
 # ALLOWED_HOSTS = ["*"]
 
 
@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'CirculatingWaterSys',        #数据库名字
         'USER': 'root',          #账号
         'PASSWORD': '123456',    #密码
-        'HOST': '192.168.99.100',     #docker 内网ip
+        'HOST': '203.176.75.1',     #docker 内网ip
         'PORT': '3306',          #端口
         "OPTIONS":{"init_command":"SET default_storage_engine=INNODB;",
                    'charset': 'utf8',

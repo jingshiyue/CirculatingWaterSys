@@ -91,18 +91,18 @@
 							},
 							success:function(data){
 								console.log(data)
-								for (idx in data){
+								for (idx in data["results"]){
 									deviceList = String.format(templateStr,
-										data[idx]["repairID"],
-										data[idx]["repairState"],
-										data[idx]["reportMan"],
-										data[idx]["Phone"],
-										data[idx]["deviceNum"],
-										data[idx]["repairAddr"],
-										data[idx]["descErorr"],
-										data[idx]["create_time"],
-										data[idx]["repairMan"],
-										data[idx]["repairManPhone"],
+										data["results"][idx]["repairID"],
+										data["results"][idx]["repairState"],
+										data["results"][idx]["reportMan"],
+										data["results"][idx]["Phone"],
+										data["results"][idx]["deviceNum"],
+										data["results"][idx]["repairAddr"],
+										data["results"][idx]["descErorr"],
+										data["results"][idx]["create_time"],
+										data["results"][idx]["repairMan"],
+										data["results"][idx]["repairManPhone"],
 									)
 									$("#repairiList").append(deviceList)
 								}

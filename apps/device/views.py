@@ -133,11 +133,11 @@ class AddFeedbackAPIView(APIView):
 
 
 class AfterSaleManageViewset(viewsets.ModelViewSet):
-    # permission_classes = [IsAuthenticated,AdminPermission]
-    # authentication_classes = [JSONWebTokenAuthentication]
+    permission_classes = [IsAuthenticated,AdminPermission]
+    authentication_classes = [JSONWebTokenAuthentication]
     serializer_class = AfterSaleManageSerializer
     lookup_field = "id"
-    # pagination_class = Pagination
+    pagination_class = Pagination
 
     def get_queryset(self):
         return AfterSaleManage.objects.all()
