@@ -29,7 +29,7 @@ SECRET_KEY = 'mfg_baq)zv_@n90a#@j!-0+no6r4*izt!*wib&u!a_&ky$#zia'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost","192.168.99.100","*"]
+ALLOWED_HOSTS = ["*","192.168.99.100"]
 # ALLOWED_HOSTS = ["*"]
 
 
@@ -112,14 +112,17 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.AutoSchema",  #与drf 的docs 网页的渲染有关
+
     # 'DEFAULT_PERMISSION_CLASSES': (
     #     'rest_framework.permissions.IsAuthenticated',
     #     ),
+
     # 'DEFAULT_AUTHENTICATION_CLASSES':(
     #     'rest_framework.authentication.BasicAuthentication',
     #     'rest_framework.authentication.SessionAuthentication',
     #     'rest_framework_jwt.authentication.JSONWebTokenAuthentication', #JWT
     # ),
+
 # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
 # 'PAGE_SIZE': 10,  后头自定义了页分类
 }
@@ -148,7 +151,6 @@ STATIC_URL = '/static/'
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, "static"),
 # )
-
 
 LOGGING = {
     'version': 1,
