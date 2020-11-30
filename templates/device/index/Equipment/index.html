@@ -9,7 +9,8 @@
 <script src="/static/js/jquery.min.js" type="text/javascript"></script>
 <script src="/static/js/jquery.cookie.js"></script>
 <script src="/static/js/login.js" type="text/javascript"></script>
-
+<script src="/static/js/layer/mobile/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/mdialog.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 
@@ -184,8 +185,6 @@
     </div><!--warp-->
     
 </body>
-    <script src="/static/js/layer/mobile/layer.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/static/js/mdialog.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
     function power(status,id,title){
         layer.open({
@@ -368,7 +367,7 @@
                     XMLHttpRequest.setRequestHeader("X-CSRFToken",$.cookie("csrftoken"));
                 },
                 success:function(data){
-                    // console.log(data)
+                    console.log(data.status)
 
                     $('.login').hide();
                     $('.login-bg').hide();
@@ -380,10 +379,15 @@
                             map_arg_set(data["arg_set_state"]),
                             data["temperature"],
                             data["signal"],
-                        )
-                        $("#deviceList").append(deviceList)
+                    )
+                    $("#deviceList").append(deviceList)
+                },
+                error:function(data){
+                console.log("error ..")
+				// dialog.error("err: 当前用户不是管理员用户，无法添加设备");
+                dialog.success("err: 当前用户不是管理员用户，无法添加设备");
+			}
 
-                }
             });
             return false;
         }

@@ -89,7 +89,7 @@ class QueryDeviceAPIView(APIView):
 
 
 class RepairDeviceViewset(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated,AdminPermission]
+    permission_classes = [IsAuthenticated]
     authentication_classes = [JSONWebTokenAuthentication]
     serializer_class = RepairDeviceSerializer
     lookup_field = "repairID"
