@@ -11,7 +11,6 @@
 <script src="/static/js/jquery.cookie.js"></script>
 </head>
 <body style="background-color:#070922">
-
 <div class="wrapper">
 	<ul class="wall">
 		<li class="article">
@@ -167,7 +166,8 @@
             
             
             
-		</li>
+        </li>
+        
 		<li class="article">
 		<a href="/index/Equipment/info/Id/a706fc26-e289-ea11-b0df-87120c3b66e0.html">
           <div style="color:#FFF; font-size:18px; line-height:2em; text-align:center">ID：3000007-a&nbsp;&nbsp;&nbsp;&nbsp;备注：</div>
@@ -1400,25 +1400,6 @@
 
 <script src="/static/js/pcjs/jaliswall.js" type="text/javascript"></script>
 <script type="text/javascript">
-    console.log(window.screen.width)
-    console.log(window.screen.height)
-    window.screen.width = window.screen.height
-    window.screen.height = window.screen.width
-
-
-    function browserRedirect() {
-        var sUserAgent = navigator.userAgent.toLowerCase();
-        if (/ipad|iphone|midp|rv:1.2.3.4|ucweb|android|windows ce|windows mobile/.test(sUserAgent)) {
-            console.log("shouji")
-
-        } else {
-        //跳转pc端页面
-            console.log("pc")
-        }
-    }
-    browserRedirect(); 
-
-
     $(window).bind("load", function() { 
         var footerHeight = 0, 
         footerTop = 0, 
@@ -1442,8 +1423,8 @@
         　　　　 $footer.css({ 
             　　 position: "static" 
         　　　　}); 
-    　　　　} 
- 　　   } 
+    　　　　}
+ 　　   }
         $(window).scroll(positionFooter).resize(positionFooter); 
         });
 
