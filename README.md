@@ -1,8 +1,31 @@
-## CirculatingWaterSys
-
+## CirculatingWaterSys windows上docker环境搭建
+    1、启动docker，导入两个镜像
+        a. docker load < mysql_5.7_save.tar 导入mysql镜像；
+        b. docker load < circulating_water_sys_save.tar，导入CirculatingWaterSys镜像；
+        
+    2、进入到项目路径下，生成2个容器
+        a. docker-compose -f mysql.yml up 
+        b. docker-compose -f web.yml up 
+        
+    3、用workbench登录mysql服务，修改数据库的编码格式为utf-8
+    
+    4、进入到导入CirculatingWaterSys容器，安装所需要的第三方包
+        a. docker -it 容器ID bash            (进入容器)
+        b. pip install -r requirements.txt   (安装所需要的第三方包，如果这部执行反复失败，可以c替代b)
+        c. 复制requirements - 副本.txt内容，粘贴到控制窗口 
+        d.替换needReplaceFile里的文件，替换步骤参照needReplaceFile里的“操作说明.txt”
+        
+    5、进入到导入CirculatingWaterSys容器，启动项目 
+        a. docker -it 容器ID bash                         (进入容器)
+        b. python manage.py makemigrations
+        c. python manage.py migrate                       (生成数据库对应的数据)
+        d. python manage.py createsuperuser               (创建管理员账户)
+        e. python manage.py runserver 0.0.0.0:8000        (启动项目)
+        f. 浏览器访问http://192.168.99.100:8000/index/index/login/  ，用"d"中创建的管理账号登录
 
 http://192.168.99.100:8000/jwt_auth
 http://192.168.99.100:8000/index/index.html/
+http://192.168.99.100:8000/index/index/my.html/
 http://192.168.99.100:8000/index/index/login/
 http://localhost:8000/index/index/login/
 http://203.176.75.1:8000/index/index/login/
@@ -66,9 +89,11 @@ http://ro.yueshuidz.com/Index/index/index.html
 
     
     docker save 9045 > tomcat8-apr.tar
-    docker export 7ec802bdcfe3> mysql.tar  #7ec802bdcfe3 容器id
     docker load < tomcat8-apr.tar
+    
+    docker export 7ec802bdcfe3> mysql.tar  #7ec802bdcfe3 容器id
     docker import tomcat80824.tar
+    
     docker tag 9045 tomcat8-apr:3.0  #修改镜像名字， 9045是镜像id
     
 ## URL

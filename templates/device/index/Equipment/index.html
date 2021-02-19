@@ -413,7 +413,7 @@
             //首页设备列表展示
             $.ajax({
 					type:'GET',
-					url:"/deviceQuery/?page=1&page_size=10/",
+					url:"/deviceQuery/?page=1&page_size=10",
                     cache: false,
                     beforeSend: function (XMLHttpRequest) {
                         XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));

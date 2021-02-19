@@ -38,7 +38,7 @@ class Pagination(PageNumberPagination):
 # CacheResponseMixin list和retrieve 才会缓存,需要后台配置
 class DeviceEditViewset(mixins.CreateModelMixin, mixins.UpdateModelMixin,mixins.DestroyModelMixin,viewsets.GenericViewSet):
     permission_classes = [IsAuthenticated,AdminPermission]
-    authentication_classes = [JSONWebTokenAuthentication]
+    authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication]
     serializer_class = DeviceSerializer
     lookup_field = "device_id"
 
@@ -48,7 +48,7 @@ class DeviceEditViewset(mixins.CreateModelMixin, mixins.UpdateModelMixin,mixins.
 class DeviceQueryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     pagination_class = Pagination
     permission_classes = [IsAuthenticated]
-    authentication_classes = [JSONWebTokenAuthentication]
+    authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication] 
     serializer_class = DeviceSerializer
     lookup_field = "device_id"
 
@@ -58,7 +58,7 @@ class DeviceQueryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,viewse
 
 class QueryStatisticsAPIView(APIView):
     permission_classes = [IsAuthenticated]
-    authentication_classes = [JSONWebTokenAuthentication]
+    authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication]
 
     def get(self, request):
         dataDict = {}
@@ -71,7 +71,7 @@ class QueryStatisticsAPIView(APIView):
 
 class QueryDeviceAPIView(APIView):
     permission_classes = [IsAuthenticated]
-    authentication_classes = [JSONWebTokenAuthentication]
+    authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication]
     def get(self, request):
         dateGet = (request.GET) #{"DeviceID": "zhuban", "NetState": "0", "DeviceState": "11"}
         MainboardID = dateGet.get("MainboardID",None)
@@ -90,7 +90,7 @@ class QueryDeviceAPIView(APIView):
 
 class RepairDeviceViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    authentication_classes = [JSONWebTokenAuthentication]
+    authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication]
     serializer_class = RepairDeviceSerializer
     lookup_field = "repairID"
     Pagination1 = Pagination
@@ -136,7 +136,7 @@ class AddFeedbackAPIView(APIView):
 
 class AfterSaleManageViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated,AdminPermission]
-    authentication_classes = [JSONWebTokenAuthentication]
+    authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication]
     serializer_class = AfterSaleManageSerializer
     lookup_field = "id"
     pagination_class = Pagination
@@ -168,6 +168,9 @@ class AddAfterSaleAPIView(APIView):
 #     return HttpResponse(user_id)
 
 class ChangePwdAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication]
+
     def get(self, request):
         return render(request,'device/index/user/changePwd.html')
 
@@ -194,8 +197,23 @@ class ChangePwdAPIView(APIView):
         logger.debug({"msg":"输入的原始密码不正确"})
         return JsonResponse({"msg":"输入的原始密码不正确"})
 
+class GetUserAPIView(APIView):
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication]
+
+    def get(self, request):
+        request_data = request.data
+        logger.debug(1111111111111111111)
+        cookies = request.COOKIES
+        token_user = jwt_decode_handler(cookies["token"])
+        user_id = token_user['user_id']  # 获取用户id
+        user = User.objects.get(id=user_id)
+        return JsonResponse({'username':user.username})
 
 class ParamSetAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication]
+
     def get(self, request,device_id):
         return render(request,'device/index/setting/sell/Id/paramSet.html')
 
@@ -211,6 +229,9 @@ class ParamSetAPIView(APIView):
     #         return Response(validated_data.errors)
 
 class ModifyAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication]
+
     def get(self, request,device_id):
         return render(request,'device/index/Equipment/edit/Id/modify.html')
     # def put(self,request,device_id):
@@ -223,10 +244,16 @@ class ModifyAPIView(APIView):
     #         return Response(validated_data.errors)
 
 class moreAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication]
+
     def get(self, request,device_id):
         return render(request,'device/index/Equipment/info/Id/more.html')
 
 class RunStatusAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication,SessionAuthentication]
+
     def get(self, request,device_id):
         return render(request,'device/index/Equipment/statetu/Id/runStatus.html')
 

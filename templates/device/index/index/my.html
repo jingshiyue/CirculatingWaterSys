@@ -6,6 +6,8 @@
 <meta name="Keywords" content="" >
 <meta name="Description" content="" >
 <link href="/static/css/style/style.css" rel="stylesheet" type="text/css">
+<script src="/static/js/jquery.min.js" type="text/javascript"></script>
+<script src="/static/js/jquery.cookie.js"></script>
 
 <style>
 body{ background:url(/static/images/bg_bot.png) ;}
@@ -42,8 +44,8 @@ form .xgys {border-bottom: 0px solid #F0F0F0;}
             <div class="wd_le">
             	<div class="txtp"><img src="/static/images/tx.jpg" /></div>
                 <div class="wd_wz">
-				                     <div class="wd_bt1">智跃测试</div>
-					                 </div>
+                    <div class="wd_bt1">智跃测试</div>
+                </div>
                 <div class="clear"></div>
             </div>
             <!--
@@ -91,13 +93,30 @@ form .xgys {border-bottom: 0px solid #F0F0F0;}
                 <li  class="list"><a href="/index/index/my.html"><div class="tp3"></div><div class="tp4">我的</div><div class="clear"></div></a></li>
                 <div class="clear"></div>
             </ul>
-        </div>
+    </div>
             
     
 
     </div><!--warp-->
     
-    
+<script>
+    $(document).ready(function(){
+            //用户名字
+            console.log($.cookie('token'))
+            $.ajax({
+                    type:'GET',
+                    url:"/getuser/",
+                    cache: false,
+                    beforeSend: function (XMLHttpRequest) {
+                        XMLHttpRequest.setRequestHeader("Authorization","JWT "+$.cookie('token'));
+                    },
+                    success:function(data){
+                        $(".wd_bt1").text(data["username"])
+
+                    }
+            })
+        })
+</script>
     
 </body>
 </html>

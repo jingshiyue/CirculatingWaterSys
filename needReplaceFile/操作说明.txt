@@ -1,0 +1,6 @@
+1、
+    docker exec -it 容器id bash     （进入项目的docker环境）
+2、
+    root@3da5c4a99702:/myapp# cd needReplaceFile/
+3、
+    root@3da5c4a99702:/myapp/needReplaceFile# cp operations.py /usr/local/lib/python3.7/site-packages/django/db/backends/mysql/operations.py  

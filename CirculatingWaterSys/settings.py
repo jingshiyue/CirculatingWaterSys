@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'CirculatingWaterSys',        #数据库名字
         'USER': 'root',          #账号
         'PASSWORD': '123456',    #密码
-        'HOST': '203.176.75.1',     #docker 内网ip
+        'HOST': '192.168.99.100',     #docker 内网ip
         'PORT': '3306',          #端口
         "OPTIONS":{"init_command":"SET default_storage_engine=INNODB;",
                    'charset': 'utf8',
@@ -161,8 +161,7 @@ LOGGING = {
     },
     'formatters': {
         'verbose': {
-            # 'format': '[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d %(module)s] %(message)s',
-            'format': '[%(asctime)s] %(levelname)s [%(name)s:%(lineno)d] %(message)s',
+            'format': '[%(asctime)s] %(levelname)s [%(name)s:%(lineno)d] %(message)s'
         }
     },
     'filters': {
