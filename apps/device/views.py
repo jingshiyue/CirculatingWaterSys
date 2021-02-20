@@ -203,7 +203,6 @@ class GetUserAPIView(APIView):
 
     def get(self, request):
         request_data = request.data
-        logger.debug(1111111111111111111)
         cookies = request.COOKIES
         token_user = jwt_decode_handler(cookies["token"])
         user_id = token_user['user_id']  # 获取用户id
